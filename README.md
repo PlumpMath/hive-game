@@ -1,1 +1,1 @@
-Hive Game
+Hive Game something less stupid
