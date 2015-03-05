@@ -17,7 +17,6 @@ cdef extern from "include_glew.h":
   ctypedef double          GLdouble
   ctypedef double          GLclampd
   ctypedef char           GLchar
-  ctypedef unsigned int   GLhandleARB
   
   int GL_FALSE
   int GL_TRUE
@@ -1136,7 +1135,7 @@ cdef extern from "include_glew.h":
   cdef void glGetConvolutionParameteriv(GLenum target, GLenum pname, GLint *params)
   cdef void glSeparableFilter2D(GLenum target, GLenum internalformat, GLsizei width, GLsizei height, GLenum format, GLenum type, GLvoid *row, GLvoid *column)
   cdef void glGetSeparableFilter(GLenum target, GLenum format, GLenum type, GLvoid *row, GLvoid *column, GLvoid *span)
-  cdef void glActiveTextureARB(GLenum texture)
+  cdef void glActiveTexture(GLenum texture)
   cdef void glClientActiveTexture(GLenum texture)
   cdef void glCompressedTexImage1D(GLenum target, GLint level, GLenum internalformat, GLsizei width, GLint border, GLsizei imageSize, GLvoid *data)
   cdef void glCompressedTexImage2D(GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLint border, GLsizei imageSize, GLvoid *data)
@@ -1145,38 +1144,38 @@ cdef extern from "include_glew.h":
   cdef void glCompressedTexSubImage2D(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLsizei imageSize, GLvoid *data)
   cdef void glCompressedTexSubImage3D(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLsizei imageSize, GLvoid *data)
   cdef void glGetCompressedTexImage(GLenum target, GLint lod, GLvoid *img)
-  cdef void glMultiTexCoord1dARB(GLenum target, GLdouble s)
-  cdef void glMultiTexCoord1dvARB(GLenum target, GLdouble *v)
-  cdef void glMultiTexCoord1fARB(GLenum target, GLfloat s)
-  cdef void glMultiTexCoord1fvARB(GLenum target, GLfloat *v)
-  cdef void glMultiTexCoord1iARB(GLenum target, GLint s)
-  cdef void glMultiTexCoord1ivARB(GLenum target, GLint *v)
-  cdef void glMultiTexCoord1sARB(GLenum target, GLshort s)
-  cdef void glMultiTexCoord1svARB(GLenum target, GLshort *v)
-  cdef void glMultiTexCoord2dARB(GLenum target, GLdouble s, GLdouble t)
-  cdef void glMultiTexCoord2dvARB(GLenum target, GLdouble *v)
-  cdef void glMultiTexCoord2fARB(GLenum target, GLfloat s, GLfloat t)
-  cdef void glMultiTexCoord2fvARB(GLenum target, GLfloat *v)
-  cdef void glMultiTexCoord2iARB(GLenum target, GLint s, GLint t)
-  cdef void glMultiTexCoord2ivARB(GLenum target, GLint *v)
-  cdef void glMultiTexCoord2sARB(GLenum target, GLshort s, GLshort t)
-  cdef void glMultiTexCoord2svARB(GLenum target, GLshort *v)
-  cdef void glMultiTexCoord3dARB(GLenum target, GLdouble s, GLdouble t, GLdouble r)
-  cdef void glMultiTexCoord3dvARB(GLenum target, GLdouble *v)
-  cdef void glMultiTexCoord3fARB(GLenum target, GLfloat s, GLfloat t, GLfloat r)
-  cdef void glMultiTexCoord3fvARB(GLenum target, GLfloat *v)
-  cdef void glMultiTexCoord3iARB(GLenum target, GLint s, GLint t, GLint r)
-  cdef void glMultiTexCoord3ivARB(GLenum target, GLint *v)
-  cdef void glMultiTexCoord3sARB(GLenum target, GLshort s, GLshort t, GLshort r)
-  cdef void glMultiTexCoord3svARB(GLenum target, GLshort *v)
-  cdef void glMultiTexCoord4dARB(GLenum target, GLdouble s, GLdouble t, GLdouble r, GLdouble q)
-  cdef void glMultiTexCoord4dvARB(GLenum target, GLdouble *v)
-  cdef void glMultiTexCoord4fARB(GLenum target, GLfloat s, GLfloat t, GLfloat r, GLfloat q)
-  cdef void glMultiTexCoord4fvARB(GLenum target, GLfloat *v)
-  cdef void glMultiTexCoord4iARB(GLenum target, GLint s, GLint t, GLint r, GLint q)
-  cdef void glMultiTexCoord4ivARB(GLenum target, GLint *v)
-  cdef void glMultiTexCoord4sARB(GLenum target, GLshort s, GLshort t, GLshort r, GLshort q)
-  cdef void glMultiTexCoord4svARB(GLenum target, GLshort *v)
+  cdef void glMultiTexCoord1d(GLenum target, GLdouble s)
+  cdef void glMultiTexCoord1dv(GLenum target, GLdouble *v)
+  cdef void glMultiTexCoord1f(GLenum target, GLfloat s)
+  cdef void glMultiTexCoord1fv(GLenum target, GLfloat *v)
+  cdef void glMultiTexCoord1i(GLenum target, GLint s)
+  cdef void glMultiTexCoord1iv(GLenum target, GLint *v)
+  cdef void glMultiTexCoord1s(GLenum target, GLshort s)
+  cdef void glMultiTexCoord1sv(GLenum target, GLshort *v)
+  cdef void glMultiTexCoord2d(GLenum target, GLdouble s, GLdouble t)
+  cdef void glMultiTexCoord2dv(GLenum target, GLdouble *v)
+  cdef void glMultiTexCoord2f(GLenum target, GLfloat s, GLfloat t)
+  cdef void glMultiTexCoord2fv(GLenum target, GLfloat *v)
+  cdef void glMultiTexCoord2i(GLenum target, GLint s, GLint t)
+  cdef void glMultiTexCoord2iv(GLenum target, GLint *v)
+  cdef void glMultiTexCoord2s(GLenum target, GLshort s, GLshort t)
+  cdef void glMultiTexCoord2sv(GLenum target, GLshort *v)
+  cdef void glMultiTexCoord3d(GLenum target, GLdouble s, GLdouble t, GLdouble r)
+  cdef void glMultiTexCoord3dv(GLenum target, GLdouble *v)
+  cdef void glMultiTexCoord3f(GLenum target, GLfloat s, GLfloat t, GLfloat r)
+  cdef void glMultiTexCoord3fv(GLenum target, GLfloat *v)
+  cdef void glMultiTexCoord3i(GLenum target, GLint s, GLint t, GLint r)
+  cdef void glMultiTexCoord3iv(GLenum target, GLint *v)
+  cdef void glMultiTexCoord3s(GLenum target, GLshort s, GLshort t, GLshort r)
+  cdef void glMultiTexCoord3sv(GLenum target, GLshort *v)
+  cdef void glMultiTexCoord4d(GLenum target, GLdouble s, GLdouble t, GLdouble r, GLdouble q)
+  cdef void glMultiTexCoord4dv(GLenum target, GLdouble *v)
+  cdef void glMultiTexCoord4f(GLenum target, GLfloat s, GLfloat t, GLfloat r, GLfloat q)
+  cdef void glMultiTexCoord4fv(GLenum target, GLfloat *v)
+  cdef void glMultiTexCoord4i(GLenum target, GLint s, GLint t, GLint r, GLint q)
+  cdef void glMultiTexCoord4iv(GLenum target, GLint *v)
+  cdef void glMultiTexCoord4s(GLenum target, GLshort s, GLshort t, GLshort r, GLshort q)
+  cdef void glMultiTexCoord4sv(GLenum target, GLshort *v)
   cdef void glLoadTransposeMatrixd(GLdouble m[16])
   cdef void glLoadTransposeMatrixf(GLfloat m[16])
   cdef void glMultTransposeMatrixd(GLdouble m[16])
@@ -1410,71 +1409,67 @@ cdef extern from "include_glew.h":
   cdef GLboolean glewGetExtension(char* name)
   cdef GLboolean glewIsSupported(char* name)
   
-  # Shaders
-  int GLEW_ARB_vertex_program
-  int GLEW_ARB_fragment_program
-  
-  int GL_PROGRAM_STRING_ARB
-  int GL_PROGRAM_ERROR_STRING_ARB
-  int GL_PROGRAM_ERROR_POSITION_ARB
-  int GL_PROGRAM_FORMAT_ASCII_ARB
-  int GL_PROGRAM_OBJECT_ARB
-  int GL_SHADER_OBJECT_ARB
-  int GL_OBJECT_TYPE_ARB
-  int GL_OBJECT_SUBTYPE_ARB
-  int GL_FLOAT_VEC2_ARB
-  int GL_FLOAT_VEC3_ARB
-  int GL_FLOAT_VEC4_ARB
-  int GL_INT_VEC2_ARB
-  int GL_INT_VEC3_ARB
-  int GL_INT_VEC4_ARB
-  int GL_BOOL_ARB
-  int GL_BOOL_VEC2_ARB
-  int GL_BOOL_VEC3_ARB
-  int GL_BOOL_VEC4_ARB
-  int GL_FLOAT_MAT2_ARB
-  int GL_FLOAT_MAT3_ARB
-  int GL_FLOAT_MAT4_ARB
-  int GL_SAMPLER_1D_ARB
-  int GL_SAMPLER_2D_ARB
-  int GL_SAMPLER_3D_ARB
-  int GL_SAMPLER_CUBE_ARB
-  int GL_SAMPLER_1D_SHADOW_ARB
-  int GL_SAMPLER_2D_SHADOW_ARB
-  int GL_SAMPLER_2D_RECT_ARB
-  int GL_SAMPLER_2D_RECT_SHADOW_ARB
-  int GL_OBJECT_DELETE_STATUS_ARB
-  int GL_OBJECT_COMPILE_STATUS_ARB
-  int GL_OBJECT_LINK_STATUS_ARB
-  int GL_OBJECT_VALIDATE_STATUS_ARB
-  int GL_OBJECT_INFO_LOG_LENGTH_ARB
-  int GL_OBJECT_ATTACHED_OBJECTS_ARB
-  int GL_OBJECT_ACTIVE_UNIFORMS_ARB
-  int GL_OBJECT_ACTIVE_UNIFORM_MAX_LENGTH_ARB
-  int GL_OBJECT_SHADER_SOURCE_LENGTH_ARB
-  int GL_VERTEX_SHADER_ARB
-  int GL_MAX_VERTEX_UNIFORM_COMPONENTS_ARB
-  int GL_MAX_VARYING_FLOATS_ARB
-  int GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS_ARB
-  int GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS_ARB
-  int GL_OBJECT_ACTIVE_ATTRIBUTES_ARB
-  int GL_OBJECT_ACTIVE_ATTRIBUTE_MAX_LENGTH_ARB
-  int GL_VERTEX_PROGRAM_ARB
-  int GL_FRAGMENT_PROGRAM_ARB
-  int GL_PROGRAM_ALU_INSTRUCTIONS_ARB
-  int GL_PROGRAM_TEX_INSTRUCTIONS_ARB
-  int GL_PROGRAM_TEX_INDIRECTIONS_ARB
-  int GL_PROGRAM_NATIVE_ALU_INSTRUCTIONS_ARB
-  int GL_PROGRAM_NATIVE_TEX_INSTRUCTIONS_ARB
-  int GL_PROGRAM_NATIVE_TEX_INDIRECTIONS_ARB
-  int GL_MAX_PROGRAM_ALU_INSTRUCTIONS_ARB
-  int GL_MAX_PROGRAM_TEX_INSTRUCTIONS_ARB
-  int GL_MAX_PROGRAM_TEX_INDIRECTIONS_ARB
-  int GL_MAX_PROGRAM_NATIVE_ALU_INSTRUCTIONS_ARB
-  int GL_MAX_PROGRAM_NATIVE_TEX_INSTRUCTIONS_ARB
-  int GL_MAX_PROGRAM_NATIVE_TEX_INDIRECTIONS_ARB
-  int GL_MAX_TEXTURE_COORDS_ARB
-  int GL_MAX_TEXTURE_IMAGE_UNITS_ARB
+  int GL_PROGRAM_STRING
+  int GL_PROGRAM_ERROR_STRING
+  int GL_PROGRAM_ERROR_POSITION
+  int GL_PROGRAM_FORMAT_ASCII
+  int GL_PROGRAM_OBJECT
+  int GL_SHADER_OBJECT
+  int GL_OBJECT_TYPE
+  int GL_OBJECT_SUBTYPE
+  int GL_FLOAT_VEC2
+  int GL_FLOAT_VEC3
+  int GL_FLOAT_VEC4
+  int GL_INT_VEC2
+  int GL_INT_VEC3
+  int GL_INT_VEC4
+  int GL_BOOL
+  int GL_BOOL_VEC2
+  int GL_BOOL_VEC3
+  int GL_BOOL_VEC4
+  int GL_FLOAT_MAT2
+  int GL_FLOAT_MAT3
+  int GL_FLOAT_MAT4
+  int GL_SAMPLER_1D
+  int GL_SAMPLER_2D
+  int GL_SAMPLER_3D
+  int GL_SAMPLER_CUBE
+  int GL_SAMPLER_1D_SHADOW
+  int GL_SAMPLER_2D_SHADOW
+  int GL_SAMPLER_2D_RECT
+  int GL_SAMPLER_2D_RECT_SHADOW
+  int GL_OBJECT_DELETE_STATUS
+  int GL_OBJECT_COMPILE_STATUS
+  int GL_OBJECT_LINK_STATUS
+  int GL_OBJECT_VALIDATE_STATUS
+  int GL_OBJECT_INFO_LOG_LENGTH
+  int GL_OBJECT_ATTACHED_OBJECTS
+  int GL_OBJECT_ACTIVE_UNIFORMS
+  int GL_OBJECT_ACTIVE_UNIFORM_MAX_LENGTH
+  int GL_OBJECT_SHADER_SOURCE_LENGTH
+  int GL_VERTEX_SHADER
+  int GL_MAX_VERTEX_UNIFORM_COMPONENTS
+  int GL_MAX_VARYING_FLOATS
+  int GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS
+  int GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS
+  int GL_OBJECT_ACTIVE_ATTRIBUTES
+  int GL_OBJECT_ACTIVE_ATTRIBUTE_MAX_LENGTH
+  int GL_VERTEX_PROGRAM
+  int GL_FRAGMENT_PROGRAM
+  int GL_PROGRAM_ALU_INSTRUCTIONS
+  int GL_PROGRAM_TEX_INSTRUCTIONS
+  int GL_PROGRAM_TEX_INDIRECTIONS
+  int GL_PROGRAM_NATIVE_ALU_INSTRUCTIONS
+  int GL_PROGRAM_NATIVE_TEX_INSTRUCTIONS
+  int GL_PROGRAM_NATIVE_TEX_INDIRECTIONS
+  int GL_MAX_PROGRAM_ALU_INSTRUCTIONS
+  int GL_MAX_PROGRAM_TEX_INSTRUCTIONS
+  int GL_MAX_PROGRAM_TEX_INDIRECTIONS
+  int GL_MAX_PROGRAM_NATIVE_ALU_INSTRUCTIONS
+  int GL_MAX_PROGRAM_NATIVE_TEX_INSTRUCTIONS
+  int GL_MAX_PROGRAM_NATIVE_TEX_INDIRECTIONS
+  int GL_MAX_TEXTURE_COORDS
+  int GL_MAX_TEXTURE_IMAGE_UNITS
   
   int GL_VERTEX_SHADER
   int GL_FRAGMENT_SHADER
@@ -1482,41 +1477,42 @@ cdef extern from "include_glew.h":
   int GL_INFO_LOG_LENGTH
   int GL_LINK_STATUS
   
-  # cdef void glGetObjectParameterivARB(GLhandleARB int, GLenum pname, GLint *params)
-  cdef void glGetInfoLog(GLhandleARB int, GLsizei maxLength, GLsizei *length, GLchar *infoLog)
-  cdef void glShaderSourceARB(GLhandleARB shader, GLsizei nstrings, GLchar** strings, GLint *lengths)
-  cdef void glGetShaderiv(GLhandleARB shader,  GLenum pname,  GLint *params)
-  cdef void glGetProgramiv(GLhandleARB program,  GLenum pname,  GLint *params)
-  cdef void glCompileShaderARB(GLhandleARB shader)
-  cdef int glCreateShaderObjectARB(GLenum shaderType)
-  #cdef void glDeleteShader(GLhandleARB shader)
-  cdef void glAttachObjectARB(GLhandleARB program, GLhandleARB shader)
-  cdef void glDetachObjectARB(GLhandleARB program, GLhandleARB shader)
-  cdef void glLinkProgramARB(GLhandleARB program)
-  cdef int glCreateProgramObjectARB()
-  #cdef int glDeleteProgram(GLhandleARB program)
-  cdef int glGetUniformLocationARB(GLhandleARB program, char* name)
-  cdef int glUniform1fARB(int uniform, float v1)
-  cdef int glUniform1iARB(int uniform, int   v1)
-  cdef int glUniform2fARB(int uniform, float v1, float v2)
-  cdef int glUniform2iARB(int uniform, int   v1, int   v2)
-  cdef int glUniform3fARB(int uniform, float v1, float v2, float v3)
-  cdef int glUniform3iARB(int uniform, int   v1, int   v2, int   v3)
-  cdef int glUniform4fARB(int uniform, float v1, float v2, float v3, float v4)
-  cdef int glUniform4iARB(int uniform, int   v1, int   v2, int   v3, int   v4)
-  cdef int glUniform1ivARB(int uniform, int count, int* v)
+  # cdef void glGetObjectParameteriv(GLhandleARB int, GLenum pname, GLint *params)
+  cdef void glGetInfoLog(GLuint int, GLsizei maxLength, GLsizei *length, GLchar *infoLog)
+  cdef void glShaderSource(GLuint shader, GLsizei nstrings, GLchar** strings, GLint *lengths)
+  cdef void glGetShaderiv(GLuint shader,  GLenum pname,  GLint *params)
+  cdef void glGetProgramiv(GLuint program,  GLenum pname,  GLint *params)
+  cdef void glCompileShader(GLuint shader)
+  cdef int glCreateShader(GLenum shaderType)
+  cdef void glDeleteShader(GLuint shader)
+  cdef void glAttachShader(GLuint program, GLuint shader)
+  cdef void glDetachShader(GLuint program, GLuint shader)
+  cdef void glLinkProgram(GLuint program)
+  cdef int glCreateProgram()
+  cdef int glDeleteProgram(GLuint program)
+  cdef int glGetUniformLocation(GLuint program, char* name)
+  cdef int glGetAttribLocation(GLuint program, char* name)
+  cdef int glUniform1f(int uniform, float v1)
+  cdef int glUniform1i(int uniform, int   v1)
+  cdef int glUniform2f(int uniform, float v1, float v2)
+  cdef int glUniform2i(int uniform, int   v1, int   v2)
+  cdef int glUniform3f(int uniform, float v1, float v2, float v3)
+  cdef int glUniform3i(int uniform, int   v1, int   v2, int   v3)
+  cdef int glUniform4f(int uniform, float v1, float v2, float v3, float v4)
+  cdef int glUniform4i(int uniform, int   v1, int   v2, int   v3, int   v4)
+  cdef int glUniform1iv(int uniform, int count, int* v)
   cdef void glGetShaderInfoLog(GLuint shader, GLsizei maxLength, GLsizei* length, GLchar* infoLog)
   cdef void glGetProgramInfoLog(GLuint program, GLsizei maxLength, GLsizei* length, GLchar* infoLog)
-  cdef void glUseProgramObjectARB(GLuint program)
-  cdef void glDeleteObjectARB(GLuint o)
+  cdef void glUseProgram(GLuint program)
+  cdef void glDeleteObject(GLuint o)
   
-  cdef void glGenProgramsARB(GLsizei n, GLuint* ids)
-  cdef void glBindProgramARB(GLenum target, GLuint id)
-  cdef void glProgramStringARB(GLenum target, GLenum format, GLsizei len, char* string)
-  cdef void glDeleteProgramsARB(GLsizei n, GLuint* ids)
-  cdef void glProgramEnvParameter4fARB(GLenum target, GLuint index, GLfloat v0, GLfloat v1, GLfloat v2, GLfloat v3)
-  cdef void glProgramLocalParameter4fARB(GLenum target, GLuint index, GLfloat v0, GLfloat v1, GLfloat v2, GLfloat v3)
-  cdef void glGetProgramStringARB(GLenum target, GLenum pname, void* string)
+  cdef void glGenPrograms(GLsizei n, GLuint* ids)
+  cdef void glBindProgram(GLenum target, GLuint id)
+  cdef void glProgramString(GLenum target, GLenum format, GLsizei len, char* string)
+  cdef void glDeletePrograms(GLsizei n, GLuint* ids)
+  cdef void glProgramEnvParameter4f(GLenum target, GLuint index, GLfloat v0, GLfloat v1, GLfloat v2, GLfloat v3)
+  cdef void glProgramLocalParameter4f(GLenum target, GLuint index, GLfloat v0, GLfloat v1, GLfloat v2, GLfloat v3)
+  cdef void glGetProgramString(GLenum target, GLenum pname, void* string)
   
   int GL_ARRAY_BUFFER
   int GL_ELEMENT_ARRAY_BUFFER
@@ -1532,5 +1528,10 @@ cdef extern from "include_glew.h":
   cdef void  glBufferData(GLenum target, GLsizei size, GLvoid* data, GLenum usage)
   cdef void* glMapBuffer(GLenum target, GLenum access)
   cdef GLboolean glUnmapBuffer(GLenum target)
+  void glVertexAttribPointer(GLuint index,  GLint size,  GLenum type,
+          GLboolean normalized,  GLsizei stride,  const GLvoid * pointer);
+  void glEnableVertexAttribArray(GLuint index); 
+  void glDisableVertexAttribArray(GLuint index); 
+  
   
   cdef GLvoid* BUFFER_OFFSET(int offset)
