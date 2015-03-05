@@ -40,6 +40,8 @@ DEFAULT_TITLE = "Rotating Square"
 cdef int animate = True
 cdef float spin = 0.
 
+cdef GLuint vertexBuffer
+
 # The following section contains all the callback function definitions.
 
 def realize(widget, data):
@@ -50,9 +52,13 @@ def realize(widget, data):
     # OpenGL BEGIN
     if not GtkGLExt.widget_begin_gl(widget):
         return
+    
+    glewInit()
 
     glClearColor(0., 0., 0., 0.)
     glShadeModel(GL.GL_FLAT) #*
+
+    glGenBuffers(1, &vertexBuffer)
 
     GtkGLExt.widget_end_gl(widget, False)
     # OpenGL END
