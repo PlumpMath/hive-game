@@ -16,14 +16,30 @@ from __future__ import print_function
 import cython
 cimport cython
 
-cdef char* vertex_shader = """
+cdef char * vertexShader = """
+#version 120
 
+// Input vertex data, different for all executions of this shader.
+
+attribute vec3 vertexPosition_modelspace;
+
+void main(){
+        gl_Position = vec4(vertexPosition_modelspace, 1.0);
+}
 """
 
-cdef char* fragment_shader = """
+cdef char * fragmentShader = """
+
+#version 120
+
+void main()
+
+{
+        // Output color = red 
+        gl_FragColor = vec4(1,0,0,1);
+}
 
 """
-
 
 import sys
 
@@ -41,6 +57,41 @@ cdef int animate = True
 cdef float spin = 0.
 
 cdef GLuint vertexBuffer
+cdef GLfloat[9] vertexBufferData = [
+        -1, -1, 0,
+        1, -1, 0,
+        0, 1, 0,
+        ]
+
+cdef GLuint progID
+cdef GLuint vertexPositionModelspaceID
+
+def loadShaders ():
+    print("Gen IDs")
+    vertexShaderID = glCreateShader(GL_VERTEX_SHADER)
+    fragmentShaderID= glCreateShader(GL_FRAGMENT_SHADER)
+    print("Add source/compile")
+    glShaderSource(vertexShaderID, 1, <const char **>&vertexShader, NULL)
+    print("Added source")
+    glCompileShader(vertexShaderID)
+    print("One done!")
+    glShaderSource(fragmentShaderID, 1, <const char **>&fragmentShader, NULL)
+    glCompileShader(fragmentShaderID)
+
+    print("Prog ids")
+    progID = glCreateProgram()
+    print("Attach shaders")
+    glAttachShader(progID, vertexShaderID)
+    glAttachShader(progID, fragmentShaderID)
+    print("Link")
+    glLinkProgram(progID)
+
+    print("Clean memory")
+    glDeleteShader(vertexShaderID)
+    glDeleteShader(fragmentShaderID)
+
+    return progID
+
 
 # The following section contains all the callback function definitions.
 
@@ -50,16 +101,26 @@ def realize(widget, data):
     certain states etc.'''
 
     # OpenGL BEGIN
+    global progID
     if not GtkGLExt.widget_begin_gl(widget):
         return
     
+    print("Glew init!")
     glewInit()
+    
+    print("Shaders!")
+    progID = loadShaders()
+    vertexPositionModelspaceID = glGetAttribLocation(progID,
+            "vertexPosition_modelspace")
 
-    glClearColor(0., 0., 0., 0.)
-    glShadeModel(GL.GL_FLAT) #*
 
+    print("Buffers!")
     glGenBuffers(1, &vertexBuffer)
+    glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer)
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertexBufferData), vertexBufferData,
+            GL_STATIC_DRAW)
 
+    glClearColor(0, 0, 0.4, 1)
     GtkGLExt.widget_end_gl(widget, False)
     # OpenGL END
 
@@ -77,13 +138,6 @@ def configure_event(widget, event, data):
     if not GtkGLExt.widget_begin_gl(widget):
         return False
 
-    glViewport(0, 0, w, h)
-    glMatrixMode(GL_PROJECTION)
-    glLoadIdentity()
-    glOrtho(-50., 50., -50., 50., -1., 1.)
-    glMatrixMode(GL_MODELVIEW)
-    glLoadIdentity()
-
     GtkGLExt.widget_end_gl(widget, False)
     # OpenGL END
 
@@ -95,16 +149,30 @@ def draw (widget, cr, data):
     every time the 'draw' event is signalled.'''
 
     # OpenGL BEGIN
+    print("It begins!")
     if not GtkGLExt.widget_begin_gl(widget):
         return False
 
+    print("clearing")
     glClear(GL.GL_COLOR_BUFFER_BIT) #*
 
-    glPushMatrix()
-    glRotatef(spin, 0., 0., 1.)
-    glColor3f(1., 1., 1.)
-    glRectf(-25., -25., 25., 25.)
-    glPopMatrix()
+    print("set prog")
+    glUseProgram(progID)
+
+    print("Enable attrib")
+    glEnableVertexAttribArray(vertexPositionModelspaceID)
+    print("Passed one")
+    glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer)
+    glVertexAttribPointer(
+               vertexPositionModelspaceID,
+               3,
+               GL_FLOAT,
+               GL_FALSE,
+               0,
+               <void*>0
+            )
+    glDrawArrays(GL_TRIANGLES, 0, 3)
+    glDisableVertexAttribArray(vertexPositionModelspaceID)
 
     GtkGLExt.widget_end_gl(widget, True)
     # OpenGL END
@@ -200,7 +268,8 @@ def unrealize(widget, data):
     the OpenGL-capable window is unrealized should be done here.'''
     
     # Fill in the details here
-    pass
+    glDeleteBuffers(1, &vertexBuffer)
+    glDeleteProgram(progID)
 
 
 #
@@ -374,7 +443,7 @@ def configure_gl():
 
     # Try double-buffered visual
     try:
-        glconfig = GdkGLExt.Config.new_by_mode(GdkGLExt.ConfigMode.RGB |
+        glconfig = GdkGLExt.Config.new_by_mode(GdkGLExt.ConfigMode.RGBA |
                                                GdkGLExt.ConfigMode.DEPTH |
                                                GdkGLExt.ConfigMode.DOUBLE)
     except TypeError:
@@ -383,7 +452,7 @@ def configure_gl():
 
         # Try single-buffered visual
         try:
-            glconfig = GdkGLExt.Config.new_by_mode(GdkGLExt.ConfigMode.RGB |
+            glconfig = GdkGLExt.Config.new_by_mode(GdkGLExt.ConfigMode.RGBA |
                                                    GdkGLExt.ConfigMode.DEPTH)
         except TypeError:
             print("*** No appropriate OpenGL-capable visual found.")

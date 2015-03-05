@@ -432,9 +432,7 @@ static const char *__pyx_f[] = {
 
 /*--- Type declarations ---*/
 
-/* "openglTest.pxd":20
- * # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- * 
+/* "openglTest.pxd":1
  * ctypedef void (*_GLUfuncptr)()             # <<<<<<<<<<<<<<
  * 
  * cdef extern from "include_glew.h":
@@ -521,6 +519,12 @@ static CYTHON_INLINE PyObject* __Pyx_PyObject_GetAttrStr(PyObject* obj, PyObject
 
 static PyObject *__Pyx_GetBuiltinName(PyObject *name);
 
+#if CYTHON_COMPILING_IN_CPYTHON
+static CYTHON_INLINE PyObject* __Pyx_PyObject_Call(PyObject *func, PyObject *arg, PyObject *kw);
+#else
+#define __Pyx_PyObject_Call(func, arg, kw) PyObject_Call(func, arg, kw)
+#endif
+
 static void __Pyx_RaiseArgtupleInvalid(const char* func_name, int exact,
     Py_ssize_t num_min, Py_ssize_t num_max, Py_ssize_t num_found);
 
@@ -531,12 +535,6 @@ static int __Pyx_ParseOptionalKeywords(PyObject *kwds, PyObject **argnames[], \
     const char* function_name);
 
 static CYTHON_INLINE PyObject *__Pyx_GetModuleGlobalName(PyObject *name);
-
-#if CYTHON_COMPILING_IN_CPYTHON
-static CYTHON_INLINE PyObject* __Pyx_PyObject_Call(PyObject *func, PyObject *arg, PyObject *kw);
-#else
-#define __Pyx_PyObject_Call(func, arg, kw) PyObject_Call(func, arg, kw)
-#endif
 
 #if CYTHON_COMPILING_IN_CPYTHON
 static CYTHON_INLINE PyObject* __Pyx_PyObject_CallMethO(PyObject *func, PyObject *arg);
@@ -579,6 +577,8 @@ static CYTHON_INLINE void __Pyx_RaiseUnboundLocalError(const char *varname);
 
 static PyObject* __Pyx_ImportFrom(PyObject* module, PyObject* name);
 
+#include <string.h>
+
 typedef struct {
     int code_line;
     PyCodeObject* code_object;
@@ -598,7 +598,9 @@ static void __Pyx_AddTraceback(const char *funcname, int c_line,
 
 static PyObject *__Pyx_Import(PyObject *name, PyObject *from_list, int level);
 
-static CYTHON_INLINE GLenum __Pyx_PyInt_As_GLenum(PyObject *);
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From_int(int value);
+
+static CYTHON_INLINE GLuint __Pyx_PyInt_As_GLuint(PyObject *);
 
 static CYTHON_INLINE int __Pyx_PyInt_As_int(PyObject *);
 
@@ -616,48 +618,53 @@ static int __Pyx_InitStrings(__Pyx_StringTabEntry *t);
 /* Module declarations from 'cython' */
 
 /* Module declarations from 'openglTest' */
-static char *__pyx_v_10openglTest_vertex_shader;
-static char *__pyx_v_10openglTest_fragment_shader;
+static char *__pyx_v_10openglTest_vertexShader;
+static char *__pyx_v_10openglTest_fragmentShader;
 static int __pyx_v_10openglTest_animate;
 static float __pyx_v_10openglTest_spin;
+static GLuint __pyx_v_10openglTest_vertexBuffer;
+static GLfloat __pyx_v_10openglTest_vertexBufferData[9];
+static GLuint __pyx_v_10openglTest_progID;
+static GLuint __pyx_v_10openglTest_vertexPositionModelspaceID;
 #define __Pyx_MODULE_NAME "openglTest"
 int __pyx_module_is_main_openglTest = 0;
 
 /* Implementation of 'openglTest' */
-static PyObject *__pyx_builtin_TypeError;
 static PyObject *__pyx_builtin_print;
-static PyObject *__pyx_pf_10openglTest_realize(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_widget, CYTHON_UNUSED PyObject *__pyx_v_data); /* proto */
-static PyObject *__pyx_pf_10openglTest_2configure_event(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_widget, CYTHON_UNUSED PyObject *__pyx_v_event, CYTHON_UNUSED PyObject *__pyx_v_data); /* proto */
-static PyObject *__pyx_pf_10openglTest_4draw(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_widget, CYTHON_UNUSED PyObject *__pyx_v_cr, CYTHON_UNUSED PyObject *__pyx_v_data); /* proto */
-static PyObject *__pyx_pf_10openglTest_6idle(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_widget); /* proto */
-static PyObject *__pyx_pf_10openglTest_8motion_notify_event(CYTHON_UNUSED PyObject *__pyx_self, CYTHON_UNUSED PyObject *__pyx_v_widget, CYTHON_UNUSED PyObject *__pyx_v_event, CYTHON_UNUSED PyObject *__pyx_v_data); /* proto */
-static PyObject *__pyx_pf_10openglTest_10button_press_event(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_widget, PyObject *__pyx_v_event, CYTHON_UNUSED PyObject *__pyx_v_data); /* proto */
-static PyObject *__pyx_pf_10openglTest_12button_press_event_popup_menu(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_widget, PyObject *__pyx_v_event); /* proto */
-static PyObject *__pyx_pf_10openglTest_14key_press_event(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_widget, PyObject *__pyx_v_event); /* proto */
-static PyObject *__pyx_pf_10openglTest_16unrealize(CYTHON_UNUSED PyObject *__pyx_self, CYTHON_UNUSED PyObject *__pyx_v_widget, CYTHON_UNUSED PyObject *__pyx_v_data); /* proto */
-static PyObject *__pyx_pf_10openglTest_18idle_add(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_widget); /* proto */
-static PyObject *__pyx_pf_10openglTest_20idle_remove(CYTHON_UNUSED PyObject *__pyx_self, CYTHON_UNUSED PyObject *__pyx_v_widget); /* proto */
-static PyObject *__pyx_pf_10openglTest_22map_event(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_widget, CYTHON_UNUSED PyObject *__pyx_v_event, CYTHON_UNUSED PyObject *__pyx_v_data); /* proto */
-static PyObject *__pyx_pf_10openglTest_24unmap_event(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_widget, CYTHON_UNUSED PyObject *__pyx_v_event, CYTHON_UNUSED PyObject *__pyx_v_data); /* proto */
-static PyObject *__pyx_pf_10openglTest_26visibility_notify_event(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_widget, PyObject *__pyx_v_event, CYTHON_UNUSED PyObject *__pyx_v_data); /* proto */
-static PyObject *__pyx_pf_10openglTest_28toggle_animation(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_widget); /* proto */
-static PyObject *__pyx_pf_10openglTest_30create_popup_menu(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_drawing_area); /* proto */
-static PyObject *__pyx_pf_10openglTest_32create_window(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_glconfig); /* proto */
-static PyObject *__pyx_pf_10openglTest_34configure_gl(CYTHON_UNUSED PyObject *__pyx_self); /* proto */
-static PyObject *__pyx_pf_10openglTest_36main(CYTHON_UNUSED PyObject *__pyx_self); /* proto */
+static PyObject *__pyx_builtin_TypeError;
+static PyObject *__pyx_pf_10openglTest_loadShaders(CYTHON_UNUSED PyObject *__pyx_self); /* proto */
+static PyObject *__pyx_pf_10openglTest_2realize(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_widget, CYTHON_UNUSED PyObject *__pyx_v_data); /* proto */
+static PyObject *__pyx_pf_10openglTest_4configure_event(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_widget, CYTHON_UNUSED PyObject *__pyx_v_event, CYTHON_UNUSED PyObject *__pyx_v_data); /* proto */
+static PyObject *__pyx_pf_10openglTest_6draw(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_widget, CYTHON_UNUSED PyObject *__pyx_v_cr, CYTHON_UNUSED PyObject *__pyx_v_data); /* proto */
+static PyObject *__pyx_pf_10openglTest_8idle(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_widget); /* proto */
+static PyObject *__pyx_pf_10openglTest_10motion_notify_event(CYTHON_UNUSED PyObject *__pyx_self, CYTHON_UNUSED PyObject *__pyx_v_widget, CYTHON_UNUSED PyObject *__pyx_v_event, CYTHON_UNUSED PyObject *__pyx_v_data); /* proto */
+static PyObject *__pyx_pf_10openglTest_12button_press_event(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_widget, PyObject *__pyx_v_event, CYTHON_UNUSED PyObject *__pyx_v_data); /* proto */
+static PyObject *__pyx_pf_10openglTest_14button_press_event_popup_menu(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_widget, PyObject *__pyx_v_event); /* proto */
+static PyObject *__pyx_pf_10openglTest_16key_press_event(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_widget, PyObject *__pyx_v_event); /* proto */
+static PyObject *__pyx_pf_10openglTest_18unrealize(CYTHON_UNUSED PyObject *__pyx_self, CYTHON_UNUSED PyObject *__pyx_v_widget, CYTHON_UNUSED PyObject *__pyx_v_data); /* proto */
+static PyObject *__pyx_pf_10openglTest_20idle_add(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_widget); /* proto */
+static PyObject *__pyx_pf_10openglTest_22idle_remove(CYTHON_UNUSED PyObject *__pyx_self, CYTHON_UNUSED PyObject *__pyx_v_widget); /* proto */
+static PyObject *__pyx_pf_10openglTest_24map_event(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_widget, CYTHON_UNUSED PyObject *__pyx_v_event, CYTHON_UNUSED PyObject *__pyx_v_data); /* proto */
+static PyObject *__pyx_pf_10openglTest_26unmap_event(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_widget, CYTHON_UNUSED PyObject *__pyx_v_event, CYTHON_UNUSED PyObject *__pyx_v_data); /* proto */
+static PyObject *__pyx_pf_10openglTest_28visibility_notify_event(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_widget, PyObject *__pyx_v_event, CYTHON_UNUSED PyObject *__pyx_v_data); /* proto */
+static PyObject *__pyx_pf_10openglTest_30toggle_animation(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_widget); /* proto */
+static PyObject *__pyx_pf_10openglTest_32create_popup_menu(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_drawing_area); /* proto */
+static PyObject *__pyx_pf_10openglTest_34create_window(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_glconfig); /* proto */
+static PyObject *__pyx_pf_10openglTest_36configure_gl(CYTHON_UNUSED PyObject *__pyx_self); /* proto */
+static PyObject *__pyx_pf_10openglTest_38main(CYTHON_UNUSED PyObject *__pyx_self); /* proto */
 static char __pyx_k_h[] = "h";
 static char __pyx_k_w[] = "w";
 static char __pyx_k_GL[] = "GL";
 static char __pyx_k_cr[] = "cr";
 static char __pyx_k_Gdk[] = "Gdk";
 static char __pyx_k_Gtk[] = "Gtk";
-static char __pyx_k_RGB[] = "RGB";
-static char __pyx_k__11[] = "\n\n";
 static char __pyx_k_add[] = "add";
 static char __pyx_k_sys[] = "sys";
 static char __pyx_k_GLib[] = "GLib";
+static char __pyx_k_Link[] = "Link";
 static char __pyx_k_Menu[] = "Menu";
 static char __pyx_k_Quit[] = "Quit";
+static char __pyx_k_RGBA[] = "RGBA";
 static char __pyx_k_VBox[] = "VBox";
 static char __pyx_k_data[] = "data";
 static char __pyx_k_draw[] = "draw";
@@ -687,23 +694,33 @@ static char __pyx_k_height[] = "height";
 static char __pyx_k_import[] = "__import__";
 static char __pyx_k_keyval[] = "keyval";
 static char __pyx_k_main_2[] = "__main__";
+static char __pyx_k_progID[] = "progID";
 static char __pyx_k_widget[] = "widget";
 static char __pyx_k_window[] = "window";
-static char __pyx_k_GL_FLAT[] = "GL_FLAT";
+static char __pyx_k_Buffers[] = "Buffers!";
+static char __pyx_k_Gen_IDs[] = "Gen IDs";
+static char __pyx_k_Shaders[] = "Shaders!";
 static char __pyx_k_clicked[] = "clicked";
 static char __pyx_k_connect[] = "connect";
+static char __pyx_k_glOrtho[] = "glOrtho";
 static char __pyx_k_idle_id[] = "idle_id";
 static char __pyx_k_realize[] = "realize";
 static char __pyx_k_GdkGLExt[] = "GdkGLExt";
 static char __pyx_k_GtkGLExt[] = "GtkGLExt";
 static char __pyx_k_KEY_Left[] = "KEY_Left";
 static char __pyx_k_MenuItem[] = "MenuItem";
+static char __pyx_k_One_done[] = "One done!";
+static char __pyx_k_Prog_ids[] = "Prog ids";
 static char __pyx_k_TOPLEVEL[] = "TOPLEVEL";
 static char __pyx_k_activate[] = "activate";
+static char __pyx_k_clearing[] = "clearing";
 static char __pyx_k_glconfig[] = "glconfig";
 static char __pyx_k_idle_add[] = "idle_add";
 static char __pyx_k_priority[] = "priority";
+static char __pyx_k_set_prog[] = "set prog";
 static char __pyx_k_EventMask[] = "EventMask";
+static char __pyx_k_Glew_init[] = "Glew init!";
+static char __pyx_k_It_begins[] = "It begins!";
 static char __pyx_k_KEY_Right[] = "KEY_Right";
 static char __pyx_k_RGBA_TYPE[] = "RGBA_TYPE";
 static char __pyx_k_TypeError[] = "TypeError";
@@ -714,33 +731,45 @@ static char __pyx_k_set_title[] = "set_title";
 static char __pyx_k_unrealize[] = "unrealize";
 static char __pyx_k_ConfigMode[] = "ConfigMode";
 static char __pyx_k_KEY_Escape[] = "KEY_Escape";
+static char __pyx_k_Passed_one[] = "Passed one";
 static char __pyx_k_RenderType[] = "RenderType";
 static char __pyx_k_WindowType[] = "WindowType";
 static char __pyx_k_add_events[] = "add_events";
 static char __pyx_k_allocation[] = "allocation";
 static char __pyx_k_get_window[] = "get_window";
+static char __pyx_k_glViewport[] = "glViewport";
 static char __pyx_k_openglTest[] = "openglTest";
 static char __pyx_k_pack_start[] = "pack_start";
 static char __pyx_k_DrawingArea[] = "DrawingArea";
 static char __pyx_k_idle_remove[] = "idle_remove";
+static char __pyx_k_loadShaders[] = "loadShaders";
 static char __pyx_k_new_by_mode[] = "new_by_mode";
 static char __pyx_k_timeout_add[] = "timeout_add";
 static char __pyx_k_unmap_event[] = "unmap_event";
+static char __pyx_k_Added_source[] = "Added source";
+static char __pyx_k_Clean_memory[] = "Clean memory";
+static char __pyx_k_GL_MODELVIEW[] = "GL_MODELVIEW";
 static char __pyx_k_configure_gl[] = "configure_gl";
 static char __pyx_k_delete_event[] = "delete_event";
 static char __pyx_k_drawing_area[] = "drawing_area";
+static char __pyx_k_glMatrixMode[] = "glMatrixMode";
 static char __pyx_k_DEFAULT_TITLE[] = "DEFAULT_TITLE";
 static char __pyx_k_DEFAULT_WIDTH[] = "DEFAULT_WIDTH";
+static char __pyx_k_Enable_attrib[] = "Enable attrib";
+static char __pyx_k_GL_PROJECTION[] = "GL_PROJECTION";
 static char __pyx_k_connect_after[] = "connect_after";
 static char __pyx_k_create_window[] = "create_window";
 static char __pyx_k_gi_repository[] = "gi.repository";
 static char __pyx_k_source_remove[] = "source_remove";
 static char __pyx_k_widget_end_gl[] = "widget_end_gl";
+static char __pyx_k_Attach_shaders[] = "Attach shaders";
 static char __pyx_k_DEFAULT_HEIGHT[] = "DEFAULT_HEIGHT";
 static char __pyx_k_FULLY_OBSCURED[] = "FULLY_OBSCURED";
 static char __pyx_k_connect_object[] = "connect_object";
 static char __pyx_k_get_allocation[] = "get_allocation";
+static char __pyx_k_glLoadIdentity[] = "glLoadIdentity";
 static char __pyx_k_new_with_label[] = "new_with_label";
+static char __pyx_k_vertexShaderID[] = "vertexShaderID";
 static char __pyx_k_PRIORITY_REDRAW[] = "PRIORITY_REDRAW";
 static char __pyx_k_Rotating_Square[] = "Rotating Square";
 static char __pyx_k_VisibilityState[] = "VisibilityState";
@@ -750,10 +779,12 @@ static char __pyx_k_key_press_event[] = "key_press_event";
 static char __pyx_k_process_updates[] = "process_updates";
 static char __pyx_k_widget_begin_gl[] = "widget_begin_gl";
 static char __pyx_k_Toggle_Animation[] = "Toggle Animation";
+static char __pyx_k_fragmentShaderID[] = "fragmentShaderID";
 static char __pyx_k_set_size_request[] = "set_size_request";
 static char __pyx_k_toggle_animation[] = "toggle_animation";
 static char __pyx_k_BUTTON_PRESS_MASK[] = "BUTTON_PRESS_MASK";
 static char __pyx_k_create_popup_menu[] = "create_popup_menu";
+static char __pyx_k_Add_source_compile[] = "Add source/compile";
 static char __pyx_k_button_press_event[] = "button_press_event";
 static char __pyx_k_BUTTON1_MOTION_MASK[] = "BUTTON1_MOTION_MASK";
 static char __pyx_k_BUTTON2_MOTION_MASK[] = "BUTTON2_MOTION_MASK";
@@ -763,16 +794,25 @@ static char __pyx_k_VISIBILITY_NOTIFY_MASK[] = "VISIBILITY_NOTIFY_MASK";
 static char __pyx_k_set_reallocate_redraws[] = "set_reallocate_redraws";
 static char __pyx_k_visibility_notify_event[] = "visibility_notify_event";
 static char __pyx_k_widget_set_gl_capability[] = "widget_set_gl_capability";
+static char __pyx_k_vertexPosition_modelspace[] = "vertexPosition_modelspace";
+static char __pyx_k_vertexPositionModelspaceID[] = "vertexPositionModelspaceID";
 static char __pyx_k_Trying_single_buffered_visual[] = "*** Trying single-buffered visual.";
 static char __pyx_k_button_press_event_popup_menu[] = "button_press_event_popup_menu";
 static char __pyx_k_Cannot_find_the_double_buffered[] = "*** Cannot find the double-buffered visual.";
 static char __pyx_k_No_appropriate_OpenGL_capable_v[] = "*** No appropriate OpenGL-capable visual found.";
 static char __pyx_k_home_jay_scripts_hive_game_proo[] = "/home/jay/scripts/hive-game/proofOfConcept/GtkGl/openglTest.pyx";
+static char __pyx_k_version_120_Input_vertex_data_d[] = "\n#version 120\n\n// Input vertex data, different for all executions of this shader.\n\nattribute vec3 vertexPosition_modelspace;\n\nvoid main(){\n        gl_Position = vec4(vertexPosition_modelspace, 1.0);\n}\n";
+static char __pyx_k_version_120_void_main_Output_co[] = "\n\n#version 120\n\nvoid main()\n\n{\n        // Output color = red \n        gl_FragColor = vec4(1,0,0,1);\n}\n\n";
+static PyObject *__pyx_kp_u_Add_source_compile;
+static PyObject *__pyx_kp_u_Added_source;
+static PyObject *__pyx_kp_u_Attach_shaders;
 static PyObject *__pyx_n_s_BUTTON1_MOTION_MASK;
 static PyObject *__pyx_n_s_BUTTON2_MOTION_MASK;
 static PyObject *__pyx_n_s_BUTTON_PRESS_MASK;
+static PyObject *__pyx_kp_u_Buffers;
 static PyObject *__pyx_n_s_Button;
 static PyObject *__pyx_kp_u_Cannot_find_the_double_buffered;
+static PyObject *__pyx_kp_u_Clean_memory;
 static PyObject *__pyx_n_s_Config;
 static PyObject *__pyx_n_s_ConfigMode;
 static PyObject *__pyx_n_s_DEFAULT_HEIGHT;
@@ -781,30 +821,40 @@ static PyObject *__pyx_n_s_DEFAULT_WIDTH;
 static PyObject *__pyx_n_s_DEPTH;
 static PyObject *__pyx_n_s_DOUBLE;
 static PyObject *__pyx_n_s_DrawingArea;
+static PyObject *__pyx_kp_u_Enable_attrib;
 static PyObject *__pyx_n_s_EventMask;
 static PyObject *__pyx_n_s_FULLY_OBSCURED;
 static PyObject *__pyx_n_s_GL;
 static PyObject *__pyx_n_s_GL_COLOR_BUFFER_BIT;
-static PyObject *__pyx_n_s_GL_FLAT;
+static PyObject *__pyx_n_s_GL_MODELVIEW;
+static PyObject *__pyx_n_s_GL_PROJECTION;
 static PyObject *__pyx_n_s_GLib;
 static PyObject *__pyx_n_s_Gdk;
 static PyObject *__pyx_n_s_GdkGLExt;
+static PyObject *__pyx_kp_u_Gen_IDs;
+static PyObject *__pyx_kp_u_Glew_init;
 static PyObject *__pyx_n_s_Gtk;
 static PyObject *__pyx_n_s_GtkGLExt;
+static PyObject *__pyx_kp_u_It_begins;
 static PyObject *__pyx_n_s_KEY_Escape;
 static PyObject *__pyx_n_s_KEY_Left;
 static PyObject *__pyx_n_s_KEY_Right;
 static PyObject *__pyx_n_s_KEY_a;
+static PyObject *__pyx_n_u_Link;
 static PyObject *__pyx_n_s_Menu;
 static PyObject *__pyx_n_s_MenuItem;
 static PyObject *__pyx_kp_u_No_appropriate_OpenGL_capable_v;
+static PyObject *__pyx_kp_u_One_done;
 static PyObject *__pyx_n_s_OpenGL;
 static PyObject *__pyx_n_s_PRIORITY_REDRAW;
+static PyObject *__pyx_kp_u_Passed_one;
+static PyObject *__pyx_kp_u_Prog_ids;
 static PyObject *__pyx_n_u_Quit;
-static PyObject *__pyx_n_s_RGB;
+static PyObject *__pyx_n_s_RGBA;
 static PyObject *__pyx_n_s_RGBA_TYPE;
 static PyObject *__pyx_n_s_RenderType;
 static PyObject *__pyx_kp_u_Rotating_Square;
+static PyObject *__pyx_kp_u_Shaders;
 static PyObject *__pyx_n_s_TOPLEVEL;
 static PyObject *__pyx_kp_u_Toggle_Animation;
 static PyObject *__pyx_kp_u_Trying_single_buffered_visual;
@@ -823,6 +873,7 @@ static PyObject *__pyx_n_s_button;
 static PyObject *__pyx_n_s_button_press_event;
 static PyObject *__pyx_n_u_button_press_event;
 static PyObject *__pyx_n_s_button_press_event_popup_menu;
+static PyObject *__pyx_n_u_clearing;
 static PyObject *__pyx_n_u_clicked;
 static PyObject *__pyx_n_s_configure_event;
 static PyObject *__pyx_n_u_configure_event;
@@ -840,9 +891,14 @@ static PyObject *__pyx_n_u_draw;
 static PyObject *__pyx_n_s_drawing_area;
 static PyObject *__pyx_n_s_event;
 static PyObject *__pyx_n_s_exit;
+static PyObject *__pyx_n_s_fragmentShaderID;
 static PyObject *__pyx_n_s_get_allocation;
 static PyObject *__pyx_n_s_get_window;
 static PyObject *__pyx_n_s_gi_repository;
+static PyObject *__pyx_n_s_glLoadIdentity;
+static PyObject *__pyx_n_s_glMatrixMode;
+static PyObject *__pyx_n_s_glOrtho;
+static PyObject *__pyx_n_s_glViewport;
 static PyObject *__pyx_n_s_glconfig;
 static PyObject *__pyx_n_s_h;
 static PyObject *__pyx_n_s_height;
@@ -856,6 +912,7 @@ static PyObject *__pyx_n_s_invalidate_rect;
 static PyObject *__pyx_n_s_key_press_event;
 static PyObject *__pyx_n_u_key_press_event;
 static PyObject *__pyx_n_s_keyval;
+static PyObject *__pyx_n_s_loadShaders;
 static PyObject *__pyx_n_s_main;
 static PyObject *__pyx_n_s_main_2;
 static PyObject *__pyx_n_s_main_quit;
@@ -873,8 +930,10 @@ static PyObject *__pyx_n_s_popup;
 static PyObject *__pyx_n_s_print;
 static PyObject *__pyx_n_s_priority;
 static PyObject *__pyx_n_s_process_updates;
+static PyObject *__pyx_n_s_progID;
 static PyObject *__pyx_n_s_realize;
 static PyObject *__pyx_n_u_realize;
+static PyObject *__pyx_kp_u_set_prog;
 static PyObject *__pyx_n_s_set_reallocate_redraws;
 static PyObject *__pyx_n_s_set_size_request;
 static PyObject *__pyx_n_s_set_title;
@@ -891,6 +950,8 @@ static PyObject *__pyx_n_u_unmap_event;
 static PyObject *__pyx_n_s_unrealize;
 static PyObject *__pyx_n_u_unrealize;
 static PyObject *__pyx_n_s_vbox;
+static PyObject *__pyx_n_s_vertexPositionModelspaceID;
+static PyObject *__pyx_n_s_vertexShaderID;
 static PyObject *__pyx_n_s_visibility_notify_event;
 static PyObject *__pyx_n_u_visibility_notify_event;
 static PyObject *__pyx_n_s_w;
@@ -900,6 +961,10 @@ static PyObject *__pyx_n_s_widget_end_gl;
 static PyObject *__pyx_n_s_widget_set_gl_capability;
 static PyObject *__pyx_n_s_width;
 static PyObject *__pyx_n_s_window;
+static PyObject *__pyx_float_1_;
+static PyObject *__pyx_float_5_;
+static PyObject *__pyx_float_neg_1_;
+static PyObject *__pyx_float_neg_5_;
 static PyObject *__pyx_int_0;
 static PyObject *__pyx_int_1;
 static PyObject *__pyx_int_3;
@@ -916,14 +981,23 @@ static PyObject *__pyx_tuple__7;
 static PyObject *__pyx_tuple__8;
 static PyObject *__pyx_tuple__9;
 static PyObject *__pyx_tuple__10;
+static PyObject *__pyx_tuple__11;
 static PyObject *__pyx_tuple__12;
+static PyObject *__pyx_tuple__13;
 static PyObject *__pyx_tuple__14;
+static PyObject *__pyx_tuple__15;
 static PyObject *__pyx_tuple__16;
+static PyObject *__pyx_tuple__17;
 static PyObject *__pyx_tuple__18;
+static PyObject *__pyx_tuple__19;
 static PyObject *__pyx_tuple__20;
+static PyObject *__pyx_tuple__21;
 static PyObject *__pyx_tuple__22;
+static PyObject *__pyx_tuple__23;
 static PyObject *__pyx_tuple__24;
+static PyObject *__pyx_tuple__25;
 static PyObject *__pyx_tuple__26;
+static PyObject *__pyx_tuple__27;
 static PyObject *__pyx_tuple__28;
 static PyObject *__pyx_tuple__30;
 static PyObject *__pyx_tuple__32;
@@ -935,14 +1009,15 @@ static PyObject *__pyx_tuple__42;
 static PyObject *__pyx_tuple__44;
 static PyObject *__pyx_tuple__46;
 static PyObject *__pyx_tuple__48;
-static PyObject *__pyx_codeobj__13;
-static PyObject *__pyx_codeobj__15;
-static PyObject *__pyx_codeobj__17;
-static PyObject *__pyx_codeobj__19;
-static PyObject *__pyx_codeobj__21;
-static PyObject *__pyx_codeobj__23;
-static PyObject *__pyx_codeobj__25;
-static PyObject *__pyx_codeobj__27;
+static PyObject *__pyx_tuple__50;
+static PyObject *__pyx_tuple__52;
+static PyObject *__pyx_tuple__54;
+static PyObject *__pyx_tuple__56;
+static PyObject *__pyx_tuple__58;
+static PyObject *__pyx_tuple__60;
+static PyObject *__pyx_tuple__62;
+static PyObject *__pyx_tuple__64;
+static PyObject *__pyx_tuple__66;
 static PyObject *__pyx_codeobj__29;
 static PyObject *__pyx_codeobj__31;
 static PyObject *__pyx_codeobj__33;
@@ -954,8 +1029,280 @@ static PyObject *__pyx_codeobj__43;
 static PyObject *__pyx_codeobj__45;
 static PyObject *__pyx_codeobj__47;
 static PyObject *__pyx_codeobj__49;
+static PyObject *__pyx_codeobj__51;
+static PyObject *__pyx_codeobj__53;
+static PyObject *__pyx_codeobj__55;
+static PyObject *__pyx_codeobj__57;
+static PyObject *__pyx_codeobj__59;
+static PyObject *__pyx_codeobj__61;
+static PyObject *__pyx_codeobj__63;
+static PyObject *__pyx_codeobj__65;
+static PyObject *__pyx_codeobj__67;
 
-/* "openglTest.pyx":45
+/* "openglTest.pyx":69
+ * cdef GLuint vertexPositionModelspaceID
+ * 
+ * def loadShaders ():             # <<<<<<<<<<<<<<
+ *     print("Gen IDs")
+ *     vertexShaderID = glCreateShader(GL_VERTEX_SHADER)
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_10openglTest_1loadShaders(PyObject *__pyx_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyMethodDef __pyx_mdef_10openglTest_1loadShaders = {"loadShaders", (PyCFunction)__pyx_pw_10openglTest_1loadShaders, METH_NOARGS, 0};
+static PyObject *__pyx_pw_10openglTest_1loadShaders(PyObject *__pyx_self, CYTHON_UNUSED PyObject *unused) {
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("loadShaders (wrapper)", 0);
+  __pyx_r = __pyx_pf_10openglTest_loadShaders(__pyx_self);
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_10openglTest_loadShaders(CYTHON_UNUSED PyObject *__pyx_self) {
+  int __pyx_v_vertexShaderID;
+  int __pyx_v_fragmentShaderID;
+  int __pyx_v_progID;
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("loadShaders", 0);
+
+  /* "openglTest.pyx":70
+ * 
+ * def loadShaders ():
+ *     print("Gen IDs")             # <<<<<<<<<<<<<<
+ *     vertexShaderID = glCreateShader(GL_VERTEX_SHADER)
+ *     fragmentShaderID= glCreateShader(GL_FRAGMENT_SHADER)
+ */
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 70; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "openglTest.pyx":71
+ * def loadShaders ():
+ *     print("Gen IDs")
+ *     vertexShaderID = glCreateShader(GL_VERTEX_SHADER)             # <<<<<<<<<<<<<<
+ *     fragmentShaderID= glCreateShader(GL_FRAGMENT_SHADER)
+ *     print("Add source/compile")
+ */
+  __pyx_v_vertexShaderID = glCreateShader(GL_VERTEX_SHADER);
+
+  /* "openglTest.pyx":72
+ *     print("Gen IDs")
+ *     vertexShaderID = glCreateShader(GL_VERTEX_SHADER)
+ *     fragmentShaderID= glCreateShader(GL_FRAGMENT_SHADER)             # <<<<<<<<<<<<<<
+ *     print("Add source/compile")
+ *     glShaderSource(vertexShaderID, 1, <const char **>&vertexShader, NULL)
+ */
+  __pyx_v_fragmentShaderID = glCreateShader(GL_FRAGMENT_SHADER);
+
+  /* "openglTest.pyx":73
+ *     vertexShaderID = glCreateShader(GL_VERTEX_SHADER)
+ *     fragmentShaderID= glCreateShader(GL_FRAGMENT_SHADER)
+ *     print("Add source/compile")             # <<<<<<<<<<<<<<
+ *     glShaderSource(vertexShaderID, 1, <const char **>&vertexShader, NULL)
+ *     print("Added source")
+ */
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 73; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "openglTest.pyx":74
+ *     fragmentShaderID= glCreateShader(GL_FRAGMENT_SHADER)
+ *     print("Add source/compile")
+ *     glShaderSource(vertexShaderID, 1, <const char **>&vertexShader, NULL)             # <<<<<<<<<<<<<<
+ *     print("Added source")
+ *     glCompileShader(vertexShaderID)
+ */
+  glShaderSource(__pyx_v_vertexShaderID, 1, ((char const **)(&__pyx_v_10openglTest_vertexShader)), NULL);
+
+  /* "openglTest.pyx":75
+ *     print("Add source/compile")
+ *     glShaderSource(vertexShaderID, 1, <const char **>&vertexShader, NULL)
+ *     print("Added source")             # <<<<<<<<<<<<<<
+ *     glCompileShader(vertexShaderID)
+ *     print("One done!")
+ */
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__3, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 75; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "openglTest.pyx":76
+ *     glShaderSource(vertexShaderID, 1, <const char **>&vertexShader, NULL)
+ *     print("Added source")
+ *     glCompileShader(vertexShaderID)             # <<<<<<<<<<<<<<
+ *     print("One done!")
+ *     glShaderSource(fragmentShaderID, 1, <const char **>&fragmentShader, NULL)
+ */
+  glCompileShader(__pyx_v_vertexShaderID);
+
+  /* "openglTest.pyx":77
+ *     print("Added source")
+ *     glCompileShader(vertexShaderID)
+ *     print("One done!")             # <<<<<<<<<<<<<<
+ *     glShaderSource(fragmentShaderID, 1, <const char **>&fragmentShader, NULL)
+ *     glCompileShader(fragmentShaderID)
+ */
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__4, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 77; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "openglTest.pyx":78
+ *     glCompileShader(vertexShaderID)
+ *     print("One done!")
+ *     glShaderSource(fragmentShaderID, 1, <const char **>&fragmentShader, NULL)             # <<<<<<<<<<<<<<
+ *     glCompileShader(fragmentShaderID)
+ * 
+ */
+  glShaderSource(__pyx_v_fragmentShaderID, 1, ((char const **)(&__pyx_v_10openglTest_fragmentShader)), NULL);
+
+  /* "openglTest.pyx":79
+ *     print("One done!")
+ *     glShaderSource(fragmentShaderID, 1, <const char **>&fragmentShader, NULL)
+ *     glCompileShader(fragmentShaderID)             # <<<<<<<<<<<<<<
+ * 
+ *     print("Prog ids")
+ */
+  glCompileShader(__pyx_v_fragmentShaderID);
+
+  /* "openglTest.pyx":81
+ *     glCompileShader(fragmentShaderID)
+ * 
+ *     print("Prog ids")             # <<<<<<<<<<<<<<
+ *     progID = glCreateProgram()
+ *     print("Attach shaders")
+ */
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__5, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 81; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "openglTest.pyx":82
+ * 
+ *     print("Prog ids")
+ *     progID = glCreateProgram()             # <<<<<<<<<<<<<<
+ *     print("Attach shaders")
+ *     glAttachShader(progID, vertexShaderID)
+ */
+  __pyx_v_progID = glCreateProgram();
+
+  /* "openglTest.pyx":83
+ *     print("Prog ids")
+ *     progID = glCreateProgram()
+ *     print("Attach shaders")             # <<<<<<<<<<<<<<
+ *     glAttachShader(progID, vertexShaderID)
+ *     glAttachShader(progID, fragmentShaderID)
+ */
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__6, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 83; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "openglTest.pyx":84
+ *     progID = glCreateProgram()
+ *     print("Attach shaders")
+ *     glAttachShader(progID, vertexShaderID)             # <<<<<<<<<<<<<<
+ *     glAttachShader(progID, fragmentShaderID)
+ *     print("Link")
+ */
+  glAttachShader(__pyx_v_progID, __pyx_v_vertexShaderID);
+
+  /* "openglTest.pyx":85
+ *     print("Attach shaders")
+ *     glAttachShader(progID, vertexShaderID)
+ *     glAttachShader(progID, fragmentShaderID)             # <<<<<<<<<<<<<<
+ *     print("Link")
+ *     glLinkProgram(progID)
+ */
+  glAttachShader(__pyx_v_progID, __pyx_v_fragmentShaderID);
+
+  /* "openglTest.pyx":86
+ *     glAttachShader(progID, vertexShaderID)
+ *     glAttachShader(progID, fragmentShaderID)
+ *     print("Link")             # <<<<<<<<<<<<<<
+ *     glLinkProgram(progID)
+ * 
+ */
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__7, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 86; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "openglTest.pyx":87
+ *     glAttachShader(progID, fragmentShaderID)
+ *     print("Link")
+ *     glLinkProgram(progID)             # <<<<<<<<<<<<<<
+ * 
+ *     print("Clean memory")
+ */
+  glLinkProgram(__pyx_v_progID);
+
+  /* "openglTest.pyx":89
+ *     glLinkProgram(progID)
+ * 
+ *     print("Clean memory")             # <<<<<<<<<<<<<<
+ *     glDeleteShader(vertexShaderID)
+ *     glDeleteShader(fragmentShaderID)
+ */
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__8, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 89; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "openglTest.pyx":90
+ * 
+ *     print("Clean memory")
+ *     glDeleteShader(vertexShaderID)             # <<<<<<<<<<<<<<
+ *     glDeleteShader(fragmentShaderID)
+ * 
+ */
+  glDeleteShader(__pyx_v_vertexShaderID);
+
+  /* "openglTest.pyx":91
+ *     print("Clean memory")
+ *     glDeleteShader(vertexShaderID)
+ *     glDeleteShader(fragmentShaderID)             # <<<<<<<<<<<<<<
+ * 
+ *     return progID
+ */
+  glDeleteShader(__pyx_v_fragmentShaderID);
+
+  /* "openglTest.pyx":93
+ *     glDeleteShader(fragmentShaderID)
+ * 
+ *     return progID             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+  __Pyx_XDECREF(__pyx_r);
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_progID); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 93; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_r = __pyx_t_1;
+  __pyx_t_1 = 0;
+  goto __pyx_L0;
+
+  /* "openglTest.pyx":69
+ * cdef GLuint vertexPositionModelspaceID
+ * 
+ * def loadShaders ():             # <<<<<<<<<<<<<<
+ *     print("Gen IDs")
+ *     vertexShaderID = glCreateShader(GL_VERTEX_SHADER)
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("openglTest.loadShaders", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "openglTest.pyx":98
  * # The following section contains all the callback function definitions.
  * 
  * def realize(widget, data):             # <<<<<<<<<<<<<<
@@ -964,10 +1311,10 @@ static PyObject *__pyx_codeobj__49;
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_10openglTest_1realize(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static char __pyx_doc_10openglTest_realize[] = "The \"realize\" signal handler. All the OpenGL initialization\n    should be performed here, such as default background colour,\n    certain states etc.";
-static PyMethodDef __pyx_mdef_10openglTest_1realize = {"realize", (PyCFunction)__pyx_pw_10openglTest_1realize, METH_VARARGS|METH_KEYWORDS, __pyx_doc_10openglTest_realize};
-static PyObject *__pyx_pw_10openglTest_1realize(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_10openglTest_3realize(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static char __pyx_doc_10openglTest_2realize[] = "The \"realize\" signal handler. All the OpenGL initialization\n    should be performed here, such as default background colour,\n    certain states etc.";
+static PyMethodDef __pyx_mdef_10openglTest_3realize = {"realize", (PyCFunction)__pyx_pw_10openglTest_3realize, METH_VARARGS|METH_KEYWORDS, __pyx_doc_10openglTest_2realize};
+static PyObject *__pyx_pw_10openglTest_3realize(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_widget = 0;
   CYTHON_UNUSED PyObject *__pyx_v_data = 0;
   int __pyx_lineno = 0;
@@ -996,11 +1343,11 @@ static PyObject *__pyx_pw_10openglTest_1realize(PyObject *__pyx_self, PyObject *
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_data)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("realize", 1, 2, 2, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 45; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("realize", 1, 2, 2, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 98; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "realize") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 45; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "realize") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 98; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -1013,20 +1360,21 @@ static PyObject *__pyx_pw_10openglTest_1realize(PyObject *__pyx_self, PyObject *
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("realize", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 45; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __Pyx_RaiseArgtupleInvalid("realize", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 98; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
   __Pyx_AddTraceback("openglTest.realize", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_10openglTest_realize(__pyx_self, __pyx_v_widget, __pyx_v_data);
+  __pyx_r = __pyx_pf_10openglTest_2realize(__pyx_self, __pyx_v_widget, __pyx_v_data);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_10openglTest_realize(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_widget, CYTHON_UNUSED PyObject *__pyx_v_data) {
+static PyObject *__pyx_pf_10openglTest_2realize(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_widget, CYTHON_UNUSED PyObject *__pyx_v_data) {
+  CYTHON_UNUSED int __pyx_v_vertexPositionModelspaceID;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -1035,23 +1383,23 @@ static PyObject *__pyx_pf_10openglTest_realize(CYTHON_UNUSED PyObject *__pyx_sel
   PyObject *__pyx_t_4 = NULL;
   int __pyx_t_5;
   int __pyx_t_6;
-  GLenum __pyx_t_7;
+  GLuint __pyx_t_7;
   Py_ssize_t __pyx_t_8;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("realize", 0);
 
-  /* "openglTest.pyx":51
- * 
+  /* "openglTest.pyx":105
  *     # OpenGL BEGIN
+ *     global progID
  *     if not GtkGLExt.widget_begin_gl(widget):             # <<<<<<<<<<<<<<
  *         return
  * 
  */
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_GtkGLExt); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 51; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_GtkGLExt); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 105; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_widget_begin_gl); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 51; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_widget_begin_gl); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 105; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_2 = NULL;
@@ -1065,90 +1413,183 @@ static PyObject *__pyx_pf_10openglTest_realize(CYTHON_UNUSED PyObject *__pyx_sel
     }
   }
   if (!__pyx_t_2) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_v_widget); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 51; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_v_widget); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 105; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
   } else {
-    __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 51; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 105; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
     PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_2); __Pyx_GIVEREF(__pyx_t_2); __pyx_t_2 = NULL;
     __Pyx_INCREF(__pyx_v_widget);
     PyTuple_SET_ITEM(__pyx_t_4, 0+1, __pyx_v_widget);
     __Pyx_GIVEREF(__pyx_v_widget);
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_4, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 51; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_4, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 105; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   }
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_5 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 51; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_5 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 105; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_6 = ((!__pyx_t_5) != 0);
   if (__pyx_t_6) {
 
-    /* "openglTest.pyx":52
- *     # OpenGL BEGIN
+    /* "openglTest.pyx":106
+ *     global progID
  *     if not GtkGLExt.widget_begin_gl(widget):
  *         return             # <<<<<<<<<<<<<<
  * 
- *     glClearColor(0., 0., 0., 0.)
+ *     print("Glew init!")
  */
     __Pyx_XDECREF(__pyx_r);
     __pyx_r = Py_None; __Pyx_INCREF(Py_None);
     goto __pyx_L0;
   }
 
-  /* "openglTest.pyx":54
+  /* "openglTest.pyx":108
  *         return
  * 
- *     glClearColor(0., 0., 0., 0.)             # <<<<<<<<<<<<<<
- *     glShadeModel(GL.GL_FLAT) #*
+ *     print("Glew init!")             # <<<<<<<<<<<<<<
+ *     glewInit()
  * 
  */
-  glClearColor(0., 0., 0., 0.);
-
-  /* "openglTest.pyx":55
- * 
- *     glClearColor(0., 0., 0., 0.)
- *     glShadeModel(GL.GL_FLAT) #*             # <<<<<<<<<<<<<<
- * 
- *     GtkGLExt.widget_end_gl(widget, False)
- */
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_GL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 55; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__9, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 108; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_GL_FLAT); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 55; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_7 = __Pyx_PyInt_As_GLenum(__pyx_t_3); if (unlikely((__pyx_t_7 == (GLenum)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 55; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  glShadeModel(__pyx_t_7);
 
-  /* "openglTest.pyx":57
- *     glShadeModel(GL.GL_FLAT) #*
+  /* "openglTest.pyx":109
  * 
+ *     print("Glew init!")
+ *     glewInit()             # <<<<<<<<<<<<<<
+ * 
+ *     print("Shaders!")
+ */
+  glewInit();
+
+  /* "openglTest.pyx":111
+ *     glewInit()
+ * 
+ *     print("Shaders!")             # <<<<<<<<<<<<<<
+ *     progID = loadShaders()
+ *     vertexPositionModelspaceID = glGetAttribLocation(progID,
+ */
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__10, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 111; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "openglTest.pyx":112
+ * 
+ *     print("Shaders!")
+ *     progID = loadShaders()             # <<<<<<<<<<<<<<
+ *     vertexPositionModelspaceID = glGetAttribLocation(progID,
+ *             "vertexPosition_modelspace")
+ */
+  __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_loadShaders); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 112; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_4 = NULL;
+  if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_3))) {
+    __pyx_t_4 = PyMethod_GET_SELF(__pyx_t_3);
+    if (likely(__pyx_t_4)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_3);
+      __Pyx_INCREF(__pyx_t_4);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_3, function);
+    }
+  }
+  if (__pyx_t_4) {
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_4); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 112; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  } else {
+    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_3); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 112; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  }
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_7 = __Pyx_PyInt_As_GLuint(__pyx_t_1); if (unlikely((__pyx_t_7 == (GLuint)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 112; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_v_10openglTest_progID = __pyx_t_7;
+
+  /* "openglTest.pyx":113
+ *     print("Shaders!")
+ *     progID = loadShaders()
+ *     vertexPositionModelspaceID = glGetAttribLocation(progID,             # <<<<<<<<<<<<<<
+ *             "vertexPosition_modelspace")
+ * 
+ */
+  __pyx_v_vertexPositionModelspaceID = glGetAttribLocation(__pyx_v_10openglTest_progID, __pyx_k_vertexPosition_modelspace);
+
+  /* "openglTest.pyx":117
+ * 
+ * 
+ *     print("Buffers!")             # <<<<<<<<<<<<<<
+ *     glGenBuffers(1, &vertexBuffer)
+ *     glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer)
+ */
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__11, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 117; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "openglTest.pyx":118
+ * 
+ *     print("Buffers!")
+ *     glGenBuffers(1, &vertexBuffer)             # <<<<<<<<<<<<<<
+ *     glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer)
+ *     glBufferData(GL_ARRAY_BUFFER, sizeof(vertexBufferData), vertexBufferData,
+ */
+  glGenBuffers(1, (&__pyx_v_10openglTest_vertexBuffer));
+
+  /* "openglTest.pyx":119
+ *     print("Buffers!")
+ *     glGenBuffers(1, &vertexBuffer)
+ *     glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer)             # <<<<<<<<<<<<<<
+ *     glBufferData(GL_ARRAY_BUFFER, sizeof(vertexBufferData), vertexBufferData,
+ *             GL_STATIC_DRAW)
+ */
+  glBindBuffer(GL_ARRAY_BUFFER, __pyx_v_10openglTest_vertexBuffer);
+
+  /* "openglTest.pyx":120
+ *     glGenBuffers(1, &vertexBuffer)
+ *     glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer)
+ *     glBufferData(GL_ARRAY_BUFFER, sizeof(vertexBufferData), vertexBufferData,             # <<<<<<<<<<<<<<
+ *             GL_STATIC_DRAW)
+ * 
+ */
+  glBufferData(GL_ARRAY_BUFFER, (sizeof(__pyx_v_10openglTest_vertexBufferData)), __pyx_v_10openglTest_vertexBufferData, GL_STATIC_DRAW);
+
+  /* "openglTest.pyx":123
+ *             GL_STATIC_DRAW)
+ * 
+ *     glClearColor(0, 0, 0.4, 1)             # <<<<<<<<<<<<<<
+ *     GtkGLExt.widget_end_gl(widget, False)
+ *     # OpenGL END
+ */
+  glClearColor(0.0, 0.0, 0.4, 1.0);
+
+  /* "openglTest.pyx":124
+ * 
+ *     glClearColor(0, 0, 0.4, 1)
  *     GtkGLExt.widget_end_gl(widget, False)             # <<<<<<<<<<<<<<
  *     # OpenGL END
  * 
  */
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_GtkGLExt); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 57; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_widget_end_gl); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 57; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_GtkGLExt); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 124; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_widget_end_gl); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 124; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = NULL;
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_3 = NULL;
   __pyx_t_8 = 0;
   if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_4))) {
-    __pyx_t_1 = PyMethod_GET_SELF(__pyx_t_4);
-    if (likely(__pyx_t_1)) {
+    __pyx_t_3 = PyMethod_GET_SELF(__pyx_t_4);
+    if (likely(__pyx_t_3)) {
       PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_4);
-      __Pyx_INCREF(__pyx_t_1);
+      __Pyx_INCREF(__pyx_t_3);
       __Pyx_INCREF(function);
       __Pyx_DECREF_SET(__pyx_t_4, function);
       __pyx_t_8 = 1;
     }
   }
-  __pyx_t_2 = PyTuple_New(2+__pyx_t_8); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 57; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyTuple_New(2+__pyx_t_8); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 124; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  if (__pyx_t_1) {
-    PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_1); __Pyx_GIVEREF(__pyx_t_1); __pyx_t_1 = NULL;
+  if (__pyx_t_3) {
+    PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_3); __Pyx_GIVEREF(__pyx_t_3); __pyx_t_3 = NULL;
   }
   __Pyx_INCREF(__pyx_v_widget);
   PyTuple_SET_ITEM(__pyx_t_2, 0+__pyx_t_8, __pyx_v_widget);
@@ -1156,13 +1597,13 @@ static PyObject *__pyx_pf_10openglTest_realize(CYTHON_UNUSED PyObject *__pyx_sel
   __Pyx_INCREF(Py_False);
   PyTuple_SET_ITEM(__pyx_t_2, 1+__pyx_t_8, Py_False);
   __Pyx_GIVEREF(Py_False);
-  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_2, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 57; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_2, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 124; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "openglTest.pyx":45
+  /* "openglTest.pyx":98
  * # The following section contains all the callback function definitions.
  * 
  * def realize(widget, data):             # <<<<<<<<<<<<<<
@@ -1186,7 +1627,7 @@ static PyObject *__pyx_pf_10openglTest_realize(CYTHON_UNUSED PyObject *__pyx_sel
   return __pyx_r;
 }
 
-/* "openglTest.pyx":60
+/* "openglTest.pyx":127
  *     # OpenGL END
  * 
  * def configure_event(widget, event, data):             # <<<<<<<<<<<<<<
@@ -1195,10 +1636,10 @@ static PyObject *__pyx_pf_10openglTest_realize(CYTHON_UNUSED PyObject *__pyx_sel
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_10openglTest_3configure_event(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static char __pyx_doc_10openglTest_2configure_event[] = "The \"configure_event\" signal handler. Any processing required when\n    the OpenGL-capable drawing area is re-configured should be done here.\n    Almost always it will be used to resize the OpenGL viewport when\n    the window is resized.";
-static PyMethodDef __pyx_mdef_10openglTest_3configure_event = {"configure_event", (PyCFunction)__pyx_pw_10openglTest_3configure_event, METH_VARARGS|METH_KEYWORDS, __pyx_doc_10openglTest_2configure_event};
-static PyObject *__pyx_pw_10openglTest_3configure_event(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_10openglTest_5configure_event(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static char __pyx_doc_10openglTest_4configure_event[] = "The \"configure_event\" signal handler. Any processing required when\n    the OpenGL-capable drawing area is re-configured should be done here.\n    Almost always it will be used to resize the OpenGL viewport when\n    the window is resized.";
+static PyMethodDef __pyx_mdef_10openglTest_5configure_event = {"configure_event", (PyCFunction)__pyx_pw_10openglTest_5configure_event, METH_VARARGS|METH_KEYWORDS, __pyx_doc_10openglTest_4configure_event};
+static PyObject *__pyx_pw_10openglTest_5configure_event(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_widget = 0;
   CYTHON_UNUSED PyObject *__pyx_v_event = 0;
   CYTHON_UNUSED PyObject *__pyx_v_data = 0;
@@ -1229,16 +1670,16 @@ static PyObject *__pyx_pw_10openglTest_3configure_event(PyObject *__pyx_self, Py
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_event)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("configure_event", 1, 3, 3, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 60; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("configure_event", 1, 3, 3, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 127; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
         case  2:
         if (likely((values[2] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_data)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("configure_event", 1, 3, 3, 2); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 60; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("configure_event", 1, 3, 3, 2); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 127; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "configure_event") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 60; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "configure_event") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 127; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 3) {
       goto __pyx_L5_argtuple_error;
@@ -1253,20 +1694,20 @@ static PyObject *__pyx_pw_10openglTest_3configure_event(PyObject *__pyx_self, Py
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("configure_event", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 60; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __Pyx_RaiseArgtupleInvalid("configure_event", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 127; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
   __Pyx_AddTraceback("openglTest.configure_event", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_10openglTest_2configure_event(__pyx_self, __pyx_v_widget, __pyx_v_event, __pyx_v_data);
+  __pyx_r = __pyx_pf_10openglTest_4configure_event(__pyx_self, __pyx_v_widget, __pyx_v_event, __pyx_v_data);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_10openglTest_2configure_event(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_widget, CYTHON_UNUSED PyObject *__pyx_v_event, CYTHON_UNUSED PyObject *__pyx_v_data) {
+static PyObject *__pyx_pf_10openglTest_4configure_event(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_widget, CYTHON_UNUSED PyObject *__pyx_v_event, CYTHON_UNUSED PyObject *__pyx_v_data) {
   PyObject *__pyx_v_allocation = NULL;
   int __pyx_v_w;
   int __pyx_v_h;
@@ -1279,20 +1720,22 @@ static PyObject *__pyx_pf_10openglTest_2configure_event(CYTHON_UNUSED PyObject *
   PyObject *__pyx_t_5 = NULL;
   int __pyx_t_6;
   int __pyx_t_7;
-  Py_ssize_t __pyx_t_8;
+  PyObject *__pyx_t_8 = NULL;
+  Py_ssize_t __pyx_t_9;
+  PyObject *__pyx_t_10 = NULL;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("configure_event", 0);
 
-  /* "openglTest.pyx":66
+  /* "openglTest.pyx":133
  *     the window is resized.'''
  * 
  *     allocation = widget.get_allocation()             # <<<<<<<<<<<<<<
  *     cdef int w = allocation.width
  *     cdef int h = allocation.height
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_widget, __pyx_n_s_get_allocation); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 66; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_widget, __pyx_n_s_get_allocation); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 133; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_2))) {
@@ -1305,52 +1748,52 @@ static PyObject *__pyx_pf_10openglTest_2configure_event(CYTHON_UNUSED PyObject *
     }
   }
   if (__pyx_t_3) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 66; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 133; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   } else {
-    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 66; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 133; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_allocation = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "openglTest.pyx":67
+  /* "openglTest.pyx":134
  * 
  *     allocation = widget.get_allocation()
  *     cdef int w = allocation.width             # <<<<<<<<<<<<<<
  *     cdef int h = allocation.height
  * 
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_allocation, __pyx_n_s_width); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 67; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_allocation, __pyx_n_s_width); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 134; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_4 = __Pyx_PyInt_As_int(__pyx_t_1); if (unlikely((__pyx_t_4 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 67; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_PyInt_As_int(__pyx_t_1); if (unlikely((__pyx_t_4 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 134; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_w = __pyx_t_4;
 
-  /* "openglTest.pyx":68
+  /* "openglTest.pyx":135
  *     allocation = widget.get_allocation()
  *     cdef int w = allocation.width
  *     cdef int h = allocation.height             # <<<<<<<<<<<<<<
  * 
  *     # OpenGL BEGIN
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_allocation, __pyx_n_s_height); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 68; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_allocation, __pyx_n_s_height); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 135; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_4 = __Pyx_PyInt_As_int(__pyx_t_1); if (unlikely((__pyx_t_4 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 68; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_PyInt_As_int(__pyx_t_1); if (unlikely((__pyx_t_4 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 135; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_h = __pyx_t_4;
 
-  /* "openglTest.pyx":71
+  /* "openglTest.pyx":138
  * 
  *     # OpenGL BEGIN
  *     if not GtkGLExt.widget_begin_gl(widget):             # <<<<<<<<<<<<<<
  *         return False
  * 
  */
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_GtkGLExt); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 71; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_GtkGLExt); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 138; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_widget_begin_gl); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 71; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_widget_begin_gl); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 138; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_2 = NULL;
@@ -1364,31 +1807,31 @@ static PyObject *__pyx_pf_10openglTest_2configure_event(CYTHON_UNUSED PyObject *
     }
   }
   if (!__pyx_t_2) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_v_widget); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 71; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_v_widget); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 138; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
   } else {
-    __pyx_t_5 = PyTuple_New(1+1); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 71; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_5 = PyTuple_New(1+1); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 138; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_5);
     PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_2); __Pyx_GIVEREF(__pyx_t_2); __pyx_t_2 = NULL;
     __Pyx_INCREF(__pyx_v_widget);
     PyTuple_SET_ITEM(__pyx_t_5, 0+1, __pyx_v_widget);
     __Pyx_GIVEREF(__pyx_v_widget);
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 71; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 138; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   }
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_6 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 71; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_6 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 138; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_7 = ((!__pyx_t_6) != 0);
   if (__pyx_t_7) {
 
-    /* "openglTest.pyx":72
+    /* "openglTest.pyx":139
  *     # OpenGL BEGIN
  *     if not GtkGLExt.widget_begin_gl(widget):
  *         return False             # <<<<<<<<<<<<<<
  * 
- *     glViewport(0, 0, w, h)
+ *     GL.glViewport(0, 0, w, h)
  */
     __Pyx_XDECREF(__pyx_r);
     __Pyx_INCREF(Py_False);
@@ -1396,102 +1839,270 @@ static PyObject *__pyx_pf_10openglTest_2configure_event(CYTHON_UNUSED PyObject *
     goto __pyx_L0;
   }
 
-  /* "openglTest.pyx":74
+  /* "openglTest.pyx":141
  *         return False
  * 
- *     glViewport(0, 0, w, h)             # <<<<<<<<<<<<<<
- *     glMatrixMode(GL_PROJECTION)
- *     glLoadIdentity()
+ *     GL.glViewport(0, 0, w, h)             # <<<<<<<<<<<<<<
+ *     GL.glMatrixMode(GL.GL_PROJECTION)
+ *     GL.glLoadIdentity()
  */
-  glViewport(0, 0, __pyx_v_w, __pyx_v_h);
+  __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_GL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 141; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_glViewport); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 141; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_5);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_w); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 141; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_h); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 141; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_8 = NULL;
+  __pyx_t_9 = 0;
+  if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_5))) {
+    __pyx_t_8 = PyMethod_GET_SELF(__pyx_t_5);
+    if (likely(__pyx_t_8)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_5);
+      __Pyx_INCREF(__pyx_t_8);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_5, function);
+      __pyx_t_9 = 1;
+    }
+  }
+  __pyx_t_10 = PyTuple_New(4+__pyx_t_9); if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 141; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_10);
+  if (__pyx_t_8) {
+    PyTuple_SET_ITEM(__pyx_t_10, 0, __pyx_t_8); __Pyx_GIVEREF(__pyx_t_8); __pyx_t_8 = NULL;
+  }
+  __Pyx_INCREF(__pyx_int_0);
+  PyTuple_SET_ITEM(__pyx_t_10, 0+__pyx_t_9, __pyx_int_0);
+  __Pyx_GIVEREF(__pyx_int_0);
+  __Pyx_INCREF(__pyx_int_0);
+  PyTuple_SET_ITEM(__pyx_t_10, 1+__pyx_t_9, __pyx_int_0);
+  __Pyx_GIVEREF(__pyx_int_0);
+  PyTuple_SET_ITEM(__pyx_t_10, 2+__pyx_t_9, __pyx_t_3);
+  __Pyx_GIVEREF(__pyx_t_3);
+  PyTuple_SET_ITEM(__pyx_t_10, 3+__pyx_t_9, __pyx_t_2);
+  __Pyx_GIVEREF(__pyx_t_2);
+  __pyx_t_3 = 0;
+  __pyx_t_2 = 0;
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_10, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 141; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "openglTest.pyx":75
+  /* "openglTest.pyx":142
  * 
- *     glViewport(0, 0, w, h)
- *     glMatrixMode(GL_PROJECTION)             # <<<<<<<<<<<<<<
- *     glLoadIdentity()
- *     glOrtho(-50., 50., -50., 50., -1., 1.)
+ *     GL.glViewport(0, 0, w, h)
+ *     GL.glMatrixMode(GL.GL_PROJECTION)             # <<<<<<<<<<<<<<
+ *     GL.glLoadIdentity()
+ *     GL.glOrtho(-5., 5., -5., 5., -1., 1.)
  */
-  glMatrixMode(GL_PROJECTION);
+  __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_GL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 142; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_5);
+  __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_glMatrixMode); if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 142; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_10);
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+  __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_GL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 142; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_5);
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_GL_PROJECTION); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 142; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+  __pyx_t_5 = NULL;
+  if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_10))) {
+    __pyx_t_5 = PyMethod_GET_SELF(__pyx_t_10);
+    if (likely(__pyx_t_5)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_10);
+      __Pyx_INCREF(__pyx_t_5);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_10, function);
+    }
+  }
+  if (!__pyx_t_5) {
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_10, __pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 142; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __Pyx_GOTREF(__pyx_t_1);
+  } else {
+    __pyx_t_3 = PyTuple_New(1+1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 142; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_GOTREF(__pyx_t_3);
+    PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_5); __Pyx_GIVEREF(__pyx_t_5); __pyx_t_5 = NULL;
+    PyTuple_SET_ITEM(__pyx_t_3, 0+1, __pyx_t_2);
+    __Pyx_GIVEREF(__pyx_t_2);
+    __pyx_t_2 = 0;
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_10, __pyx_t_3, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 142; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  }
+  __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "openglTest.pyx":76
- *     glViewport(0, 0, w, h)
- *     glMatrixMode(GL_PROJECTION)
- *     glLoadIdentity()             # <<<<<<<<<<<<<<
- *     glOrtho(-50., 50., -50., 50., -1., 1.)
- *     glMatrixMode(GL_MODELVIEW)
+  /* "openglTest.pyx":143
+ *     GL.glViewport(0, 0, w, h)
+ *     GL.glMatrixMode(GL.GL_PROJECTION)
+ *     GL.glLoadIdentity()             # <<<<<<<<<<<<<<
+ *     GL.glOrtho(-5., 5., -5., 5., -1., 1.)
+ *     GL.glMatrixMode(GL.GL_MODELVIEW)
  */
-  glLoadIdentity();
+  __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_GL); if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 143; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_10);
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_n_s_glLoadIdentity); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 143; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
+  __pyx_t_10 = NULL;
+  if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_3))) {
+    __pyx_t_10 = PyMethod_GET_SELF(__pyx_t_3);
+    if (likely(__pyx_t_10)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_3);
+      __Pyx_INCREF(__pyx_t_10);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_3, function);
+    }
+  }
+  if (__pyx_t_10) {
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_10); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 143; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
+  } else {
+    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_3); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 143; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  }
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "openglTest.pyx":77
- *     glMatrixMode(GL_PROJECTION)
- *     glLoadIdentity()
- *     glOrtho(-50., 50., -50., 50., -1., 1.)             # <<<<<<<<<<<<<<
- *     glMatrixMode(GL_MODELVIEW)
- *     glLoadIdentity()
+  /* "openglTest.pyx":144
+ *     GL.glMatrixMode(GL.GL_PROJECTION)
+ *     GL.glLoadIdentity()
+ *     GL.glOrtho(-5., 5., -5., 5., -1., 1.)             # <<<<<<<<<<<<<<
+ *     GL.glMatrixMode(GL.GL_MODELVIEW)
+ *     GL.glLoadIdentity()
  */
-  glOrtho(-50., 50., -50., 50., -1., 1.);
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_GL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 144; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_glOrtho); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 144; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__12, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 144; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "openglTest.pyx":78
- *     glLoadIdentity()
- *     glOrtho(-50., 50., -50., 50., -1., 1.)
- *     glMatrixMode(GL_MODELVIEW)             # <<<<<<<<<<<<<<
- *     glLoadIdentity()
+  /* "openglTest.pyx":145
+ *     GL.glLoadIdentity()
+ *     GL.glOrtho(-5., 5., -5., 5., -1., 1.)
+ *     GL.glMatrixMode(GL.GL_MODELVIEW)             # <<<<<<<<<<<<<<
+ *     GL.glLoadIdentity()
  * 
  */
-  glMatrixMode(GL_MODELVIEW);
+  __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_GL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 145; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_glMatrixMode); if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 145; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_10);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_GL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 145; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_GL_MODELVIEW); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 145; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_3 = NULL;
+  if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_10))) {
+    __pyx_t_3 = PyMethod_GET_SELF(__pyx_t_10);
+    if (likely(__pyx_t_3)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_10);
+      __Pyx_INCREF(__pyx_t_3);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_10, function);
+    }
+  }
+  if (!__pyx_t_3) {
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_10, __pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 145; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __Pyx_GOTREF(__pyx_t_1);
+  } else {
+    __pyx_t_5 = PyTuple_New(1+1); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 145; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_GOTREF(__pyx_t_5);
+    PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_3); __Pyx_GIVEREF(__pyx_t_3); __pyx_t_3 = NULL;
+    PyTuple_SET_ITEM(__pyx_t_5, 0+1, __pyx_t_2);
+    __Pyx_GIVEREF(__pyx_t_2);
+    __pyx_t_2 = 0;
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_10, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 145; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+  }
+  __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "openglTest.pyx":79
- *     glOrtho(-50., 50., -50., 50., -1., 1.)
- *     glMatrixMode(GL_MODELVIEW)
- *     glLoadIdentity()             # <<<<<<<<<<<<<<
+  /* "openglTest.pyx":146
+ *     GL.glOrtho(-5., 5., -5., 5., -1., 1.)
+ *     GL.glMatrixMode(GL.GL_MODELVIEW)
+ *     GL.glLoadIdentity()             # <<<<<<<<<<<<<<
  * 
- *     GtkGLExt.widget_end_gl(widget, False)
+ * 
  */
-  glLoadIdentity();
+  __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_GL); if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 146; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_10);
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_n_s_glLoadIdentity); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 146; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_5);
+  __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
+  __pyx_t_10 = NULL;
+  if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_5))) {
+    __pyx_t_10 = PyMethod_GET_SELF(__pyx_t_5);
+    if (likely(__pyx_t_10)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_5);
+      __Pyx_INCREF(__pyx_t_10);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_5, function);
+    }
+  }
+  if (__pyx_t_10) {
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_t_10); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 146; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
+  } else {
+    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_5); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 146; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  }
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "openglTest.pyx":81
- *     glLoadIdentity()
+  /* "openglTest.pyx":149
+ * 
  * 
  *     GtkGLExt.widget_end_gl(widget, False)             # <<<<<<<<<<<<<<
  *     # OpenGL END
  * 
  */
-  __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_GtkGLExt); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 81; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_widget_end_gl); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 81; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_GtkGLExt); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 149; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = NULL;
-  __pyx_t_8 = 0;
-  if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_5))) {
-    __pyx_t_3 = PyMethod_GET_SELF(__pyx_t_5);
-    if (likely(__pyx_t_3)) {
-      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_5);
-      __Pyx_INCREF(__pyx_t_3);
+  __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_widget_end_gl); if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 149; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_10);
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+  __pyx_t_5 = NULL;
+  __pyx_t_9 = 0;
+  if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_10))) {
+    __pyx_t_5 = PyMethod_GET_SELF(__pyx_t_10);
+    if (likely(__pyx_t_5)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_10);
+      __Pyx_INCREF(__pyx_t_5);
       __Pyx_INCREF(function);
-      __Pyx_DECREF_SET(__pyx_t_5, function);
-      __pyx_t_8 = 1;
+      __Pyx_DECREF_SET(__pyx_t_10, function);
+      __pyx_t_9 = 1;
     }
   }
-  __pyx_t_2 = PyTuple_New(2+__pyx_t_8); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 81; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyTuple_New(2+__pyx_t_9); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 149; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  if (__pyx_t_3) {
-    PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_3); __Pyx_GIVEREF(__pyx_t_3); __pyx_t_3 = NULL;
+  if (__pyx_t_5) {
+    PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_5); __Pyx_GIVEREF(__pyx_t_5); __pyx_t_5 = NULL;
   }
   __Pyx_INCREF(__pyx_v_widget);
-  PyTuple_SET_ITEM(__pyx_t_2, 0+__pyx_t_8, __pyx_v_widget);
+  PyTuple_SET_ITEM(__pyx_t_2, 0+__pyx_t_9, __pyx_v_widget);
   __Pyx_GIVEREF(__pyx_v_widget);
   __Pyx_INCREF(Py_False);
-  PyTuple_SET_ITEM(__pyx_t_2, 1+__pyx_t_8, Py_False);
+  PyTuple_SET_ITEM(__pyx_t_2, 1+__pyx_t_9, Py_False);
   __Pyx_GIVEREF(Py_False);
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_2, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 81; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_10, __pyx_t_2, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 149; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+  __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "openglTest.pyx":84
+  /* "openglTest.pyx":152
  *     # OpenGL END
  * 
  *     return True             # <<<<<<<<<<<<<<
@@ -1503,7 +2114,7 @@ static PyObject *__pyx_pf_10openglTest_2configure_event(CYTHON_UNUSED PyObject *
   __pyx_r = Py_True;
   goto __pyx_L0;
 
-  /* "openglTest.pyx":60
+  /* "openglTest.pyx":127
  *     # OpenGL END
  * 
  * def configure_event(widget, event, data):             # <<<<<<<<<<<<<<
@@ -1517,6 +2128,8 @@ static PyObject *__pyx_pf_10openglTest_2configure_event(CYTHON_UNUSED PyObject *
   __Pyx_XDECREF(__pyx_t_2);
   __Pyx_XDECREF(__pyx_t_3);
   __Pyx_XDECREF(__pyx_t_5);
+  __Pyx_XDECREF(__pyx_t_8);
+  __Pyx_XDECREF(__pyx_t_10);
   __Pyx_AddTraceback("openglTest.configure_event", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
@@ -1526,7 +2139,7 @@ static PyObject *__pyx_pf_10openglTest_2configure_event(CYTHON_UNUSED PyObject *
   return __pyx_r;
 }
 
-/* "openglTest.pyx":86
+/* "openglTest.pyx":154
  *     return True
  * 
  * def draw (widget, cr, data):             # <<<<<<<<<<<<<<
@@ -1535,10 +2148,10 @@ static PyObject *__pyx_pf_10openglTest_2configure_event(CYTHON_UNUSED PyObject *
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_10openglTest_5draw(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static char __pyx_doc_10openglTest_4draw[] = "The \"draw\" signal handler. All the OpenGL re-drawing should\n    be done here. This is repeatedly called as the painting routine\n    every time the 'draw' event is signalled.";
-static PyMethodDef __pyx_mdef_10openglTest_5draw = {"draw", (PyCFunction)__pyx_pw_10openglTest_5draw, METH_VARARGS|METH_KEYWORDS, __pyx_doc_10openglTest_4draw};
-static PyObject *__pyx_pw_10openglTest_5draw(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_10openglTest_7draw(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static char __pyx_doc_10openglTest_6draw[] = "The \"draw\" signal handler. All the OpenGL re-drawing should\n    be done here. This is repeatedly called as the painting routine\n    every time the 'draw' event is signalled.";
+static PyMethodDef __pyx_mdef_10openglTest_7draw = {"draw", (PyCFunction)__pyx_pw_10openglTest_7draw, METH_VARARGS|METH_KEYWORDS, __pyx_doc_10openglTest_6draw};
+static PyObject *__pyx_pw_10openglTest_7draw(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_widget = 0;
   CYTHON_UNUSED PyObject *__pyx_v_cr = 0;
   CYTHON_UNUSED PyObject *__pyx_v_data = 0;
@@ -1569,16 +2182,16 @@ static PyObject *__pyx_pw_10openglTest_5draw(PyObject *__pyx_self, PyObject *__p
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_cr)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("draw", 1, 3, 3, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 86; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("draw", 1, 3, 3, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 154; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
         case  2:
         if (likely((values[2] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_data)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("draw", 1, 3, 3, 2); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 86; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("draw", 1, 3, 3, 2); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 154; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "draw") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 86; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "draw") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 154; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 3) {
       goto __pyx_L5_argtuple_error;
@@ -1593,20 +2206,20 @@ static PyObject *__pyx_pw_10openglTest_5draw(PyObject *__pyx_self, PyObject *__p
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("draw", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 86; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __Pyx_RaiseArgtupleInvalid("draw", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 154; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
   __Pyx_AddTraceback("openglTest.draw", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_10openglTest_4draw(__pyx_self, __pyx_v_widget, __pyx_v_cr, __pyx_v_data);
+  __pyx_r = __pyx_pf_10openglTest_6draw(__pyx_self, __pyx_v_widget, __pyx_v_cr, __pyx_v_data);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_10openglTest_4draw(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_widget, CYTHON_UNUSED PyObject *__pyx_v_cr, CYTHON_UNUSED PyObject *__pyx_v_data) {
+static PyObject *__pyx_pf_10openglTest_6draw(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_widget, CYTHON_UNUSED PyObject *__pyx_v_cr, CYTHON_UNUSED PyObject *__pyx_v_data) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -1622,16 +2235,27 @@ static PyObject *__pyx_pf_10openglTest_4draw(CYTHON_UNUSED PyObject *__pyx_self,
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("draw", 0);
 
-  /* "openglTest.pyx":92
+  /* "openglTest.pyx":160
  * 
  *     # OpenGL BEGIN
+ *     print("It begins!")             # <<<<<<<<<<<<<<
+ *     if not GtkGLExt.widget_begin_gl(widget):
+ *         return False
+ */
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__13, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 160; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "openglTest.pyx":161
+ *     # OpenGL BEGIN
+ *     print("It begins!")
  *     if not GtkGLExt.widget_begin_gl(widget):             # <<<<<<<<<<<<<<
  *         return False
  * 
  */
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_GtkGLExt); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 92; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_GtkGLExt); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 161; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_widget_begin_gl); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 92; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_widget_begin_gl); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 161; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_2 = NULL;
@@ -1645,31 +2269,31 @@ static PyObject *__pyx_pf_10openglTest_4draw(CYTHON_UNUSED PyObject *__pyx_self,
     }
   }
   if (!__pyx_t_2) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_v_widget); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 92; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_v_widget); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 161; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
   } else {
-    __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 92; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 161; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
     PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_2); __Pyx_GIVEREF(__pyx_t_2); __pyx_t_2 = NULL;
     __Pyx_INCREF(__pyx_v_widget);
     PyTuple_SET_ITEM(__pyx_t_4, 0+1, __pyx_v_widget);
     __Pyx_GIVEREF(__pyx_v_widget);
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_4, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 92; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_4, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 161; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   }
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_5 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 92; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_5 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 161; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_6 = ((!__pyx_t_5) != 0);
   if (__pyx_t_6) {
 
-    /* "openglTest.pyx":93
- *     # OpenGL BEGIN
+    /* "openglTest.pyx":162
+ *     print("It begins!")
  *     if not GtkGLExt.widget_begin_gl(widget):
  *         return False             # <<<<<<<<<<<<<<
  * 
- *     glClear(GL.GL_COLOR_BUFFER_BIT) #*
+ *     print("clearing")
  */
     __Pyx_XDECREF(__pyx_r);
     __Pyx_INCREF(Py_False);
@@ -1677,77 +2301,130 @@ static PyObject *__pyx_pf_10openglTest_4draw(CYTHON_UNUSED PyObject *__pyx_self,
     goto __pyx_L0;
   }
 
-  /* "openglTest.pyx":95
+  /* "openglTest.pyx":164
  *         return False
  * 
+ *     print("clearing")             # <<<<<<<<<<<<<<
+ *     glClear(GL.GL_COLOR_BUFFER_BIT) #*
+ * 
+ */
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__14, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 164; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "openglTest.pyx":165
+ * 
+ *     print("clearing")
  *     glClear(GL.GL_COLOR_BUFFER_BIT) #*             # <<<<<<<<<<<<<<
  * 
- *     glPushMatrix()
+ *     print("set prog")
  */
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_GL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 95; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_GL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 165; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_GL_COLOR_BUFFER_BIT); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 95; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_GL_COLOR_BUFFER_BIT); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 165; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_7 = __Pyx_PyInt_As_GLbitfield(__pyx_t_3); if (unlikely((__pyx_t_7 == (GLbitfield)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 95; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = __Pyx_PyInt_As_GLbitfield(__pyx_t_3); if (unlikely((__pyx_t_7 == (GLbitfield)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 165; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   glClear(__pyx_t_7);
 
-  /* "openglTest.pyx":97
+  /* "openglTest.pyx":167
  *     glClear(GL.GL_COLOR_BUFFER_BIT) #*
  * 
- *     glPushMatrix()             # <<<<<<<<<<<<<<
- *     glRotatef(spin, 0., 0., 1.)
- *     glColor3f(1., 1., 1.)
- */
-  glPushMatrix();
-
-  /* "openglTest.pyx":98
- * 
- *     glPushMatrix()
- *     glRotatef(spin, 0., 0., 1.)             # <<<<<<<<<<<<<<
- *     glColor3f(1., 1., 1.)
- *     glRectf(-25., -25., 25., 25.)
- */
-  glRotatef(__pyx_v_10openglTest_spin, 0., 0., 1.);
-
-  /* "openglTest.pyx":99
- *     glPushMatrix()
- *     glRotatef(spin, 0., 0., 1.)
- *     glColor3f(1., 1., 1.)             # <<<<<<<<<<<<<<
- *     glRectf(-25., -25., 25., 25.)
- *     glPopMatrix()
- */
-  glColor3f(1., 1., 1.);
-
-  /* "openglTest.pyx":100
- *     glRotatef(spin, 0., 0., 1.)
- *     glColor3f(1., 1., 1.)
- *     glRectf(-25., -25., 25., 25.)             # <<<<<<<<<<<<<<
- *     glPopMatrix()
+ *     print("set prog")             # <<<<<<<<<<<<<<
+ *     glUseProgram(progID)
  * 
  */
-  glRectf(-25., -25., 25., 25.);
+  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__15, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 167; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "openglTest.pyx":101
- *     glColor3f(1., 1., 1.)
- *     glRectf(-25., -25., 25., 25.)
- *     glPopMatrix()             # <<<<<<<<<<<<<<
+  /* "openglTest.pyx":168
+ * 
+ *     print("set prog")
+ *     glUseProgram(progID)             # <<<<<<<<<<<<<<
+ * 
+ *     print("Enable attrib")
+ */
+  glUseProgram(__pyx_v_10openglTest_progID);
+
+  /* "openglTest.pyx":170
+ *     glUseProgram(progID)
+ * 
+ *     print("Enable attrib")             # <<<<<<<<<<<<<<
+ *     glEnableVertexAttribArray(vertexPositionModelspaceID)
+ *     print("Passed one")
+ */
+  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__16, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 170; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+
+  /* "openglTest.pyx":171
+ * 
+ *     print("Enable attrib")
+ *     glEnableVertexAttribArray(vertexPositionModelspaceID)             # <<<<<<<<<<<<<<
+ *     print("Passed one")
+ *     glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer)
+ */
+  glEnableVertexAttribArray(__pyx_v_10openglTest_vertexPositionModelspaceID);
+
+  /* "openglTest.pyx":172
+ *     print("Enable attrib")
+ *     glEnableVertexAttribArray(vertexPositionModelspaceID)
+ *     print("Passed one")             # <<<<<<<<<<<<<<
+ *     glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer)
+ *     glVertexAttribPointer(
+ */
+  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__17, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 172; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+
+  /* "openglTest.pyx":173
+ *     glEnableVertexAttribArray(vertexPositionModelspaceID)
+ *     print("Passed one")
+ *     glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer)             # <<<<<<<<<<<<<<
+ *     glVertexAttribPointer(
+ *                vertexPositionModelspaceID,
+ */
+  glBindBuffer(GL_ARRAY_BUFFER, __pyx_v_10openglTest_vertexBuffer);
+
+  /* "openglTest.pyx":174
+ *     print("Passed one")
+ *     glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer)
+ *     glVertexAttribPointer(             # <<<<<<<<<<<<<<
+ *                vertexPositionModelspaceID,
+ *                3,
+ */
+  glVertexAttribPointer(__pyx_v_10openglTest_vertexPositionModelspaceID, 3, GL_FLOAT, GL_FALSE, 0, ((void *)0));
+
+  /* "openglTest.pyx":182
+ *                <void*>0
+ *             )
+ *     glDrawArrays(GL_TRIANGLES, 0, 3)             # <<<<<<<<<<<<<<
+ *     glDisableVertexAttribArray(vertexPositionModelspaceID)
+ * 
+ */
+  glDrawArrays(GL_TRIANGLES, 0, 3);
+
+  /* "openglTest.pyx":183
+ *             )
+ *     glDrawArrays(GL_TRIANGLES, 0, 3)
+ *     glDisableVertexAttribArray(vertexPositionModelspaceID)             # <<<<<<<<<<<<<<
  * 
  *     GtkGLExt.widget_end_gl(widget, True)
  */
-  glPopMatrix();
+  glDisableVertexAttribArray(__pyx_v_10openglTest_vertexPositionModelspaceID);
 
-  /* "openglTest.pyx":103
- *     glPopMatrix()
+  /* "openglTest.pyx":185
+ *     glDisableVertexAttribArray(vertexPositionModelspaceID)
  * 
  *     GtkGLExt.widget_end_gl(widget, True)             # <<<<<<<<<<<<<<
  *     # OpenGL END
  * 
  */
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_GtkGLExt); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 103; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_GtkGLExt); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 185; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_widget_end_gl); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 103; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_widget_end_gl); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 185; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_1 = NULL;
@@ -1762,7 +2439,7 @@ static PyObject *__pyx_pf_10openglTest_4draw(CYTHON_UNUSED PyObject *__pyx_self,
       __pyx_t_8 = 1;
     }
   }
-  __pyx_t_2 = PyTuple_New(2+__pyx_t_8); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 103; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyTuple_New(2+__pyx_t_8); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 185; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   if (__pyx_t_1) {
     PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_1); __Pyx_GIVEREF(__pyx_t_1); __pyx_t_1 = NULL;
@@ -1773,13 +2450,13 @@ static PyObject *__pyx_pf_10openglTest_4draw(CYTHON_UNUSED PyObject *__pyx_self,
   __Pyx_INCREF(Py_True);
   PyTuple_SET_ITEM(__pyx_t_2, 1+__pyx_t_8, Py_True);
   __Pyx_GIVEREF(Py_True);
-  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_2, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 103; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_2, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 185; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "openglTest.pyx":106
+  /* "openglTest.pyx":188
  *     # OpenGL END
  * 
  *     return True             # <<<<<<<<<<<<<<
@@ -1791,7 +2468,7 @@ static PyObject *__pyx_pf_10openglTest_4draw(CYTHON_UNUSED PyObject *__pyx_self,
   __pyx_r = Py_True;
   goto __pyx_L0;
 
-  /* "openglTest.pyx":86
+  /* "openglTest.pyx":154
  *     return True
  * 
  * def draw (widget, cr, data):             # <<<<<<<<<<<<<<
@@ -1813,7 +2490,7 @@ static PyObject *__pyx_pf_10openglTest_4draw(CYTHON_UNUSED PyObject *__pyx_self,
   return __pyx_r;
 }
 
-/* "openglTest.pyx":108
+/* "openglTest.pyx":190
  *     return True
  * 
  * def idle(widget):             # <<<<<<<<<<<<<<
@@ -1822,21 +2499,21 @@ static PyObject *__pyx_pf_10openglTest_4draw(CYTHON_UNUSED PyObject *__pyx_self,
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_10openglTest_7idle(PyObject *__pyx_self, PyObject *__pyx_v_widget); /*proto*/
-static char __pyx_doc_10openglTest_6idle[] = "The idle function. Often in animations,\n    idle functions are suitable for continous\n    frame updates.";
-static PyMethodDef __pyx_mdef_10openglTest_7idle = {"idle", (PyCFunction)__pyx_pw_10openglTest_7idle, METH_O, __pyx_doc_10openglTest_6idle};
-static PyObject *__pyx_pw_10openglTest_7idle(PyObject *__pyx_self, PyObject *__pyx_v_widget) {
+static PyObject *__pyx_pw_10openglTest_9idle(PyObject *__pyx_self, PyObject *__pyx_v_widget); /*proto*/
+static char __pyx_doc_10openglTest_8idle[] = "The idle function. Often in animations,\n    idle functions are suitable for continous\n    frame updates.";
+static PyMethodDef __pyx_mdef_10openglTest_9idle = {"idle", (PyCFunction)__pyx_pw_10openglTest_9idle, METH_O, __pyx_doc_10openglTest_8idle};
+static PyObject *__pyx_pw_10openglTest_9idle(PyObject *__pyx_self, PyObject *__pyx_v_widget) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("idle (wrapper)", 0);
-  __pyx_r = __pyx_pf_10openglTest_6idle(__pyx_self, ((PyObject *)__pyx_v_widget));
+  __pyx_r = __pyx_pf_10openglTest_8idle(__pyx_self, ((PyObject *)__pyx_v_widget));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_10openglTest_6idle(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_widget) {
+static PyObject *__pyx_pf_10openglTest_8idle(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_widget) {
   PyObject *__pyx_v_window = NULL;
   PyObject *__pyx_v_allocation = NULL;
   PyObject *__pyx_r = NULL;
@@ -1852,14 +2529,14 @@ static PyObject *__pyx_pf_10openglTest_6idle(CYTHON_UNUSED PyObject *__pyx_self,
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("idle", 0);
 
-  /* "openglTest.pyx":115
+  /* "openglTest.pyx":197
  *     global spin
  * 
  *     window = widget.get_window()             # <<<<<<<<<<<<<<
  *     allocation = widget.get_allocation()
  * 
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_widget, __pyx_n_s_get_window); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 115; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_widget, __pyx_n_s_get_window); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 197; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_2))) {
@@ -1872,24 +2549,24 @@ static PyObject *__pyx_pf_10openglTest_6idle(CYTHON_UNUSED PyObject *__pyx_self,
     }
   }
   if (__pyx_t_3) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 115; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 197; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   } else {
-    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 115; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 197; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_window = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "openglTest.pyx":116
+  /* "openglTest.pyx":198
  * 
  *     window = widget.get_window()
  *     allocation = widget.get_allocation()             # <<<<<<<<<<<<<<
  * 
  *     spin += 2.
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_widget, __pyx_n_s_get_allocation); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 116; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_widget, __pyx_n_s_get_allocation); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 198; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_2))) {
@@ -1902,17 +2579,17 @@ static PyObject *__pyx_pf_10openglTest_6idle(CYTHON_UNUSED PyObject *__pyx_self,
     }
   }
   if (__pyx_t_3) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 116; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 198; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   } else {
-    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 116; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 198; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_allocation = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "openglTest.pyx":118
+  /* "openglTest.pyx":200
  *     allocation = widget.get_allocation()
  * 
  *     spin += 2.             # <<<<<<<<<<<<<<
@@ -1921,7 +2598,7 @@ static PyObject *__pyx_pf_10openglTest_6idle(CYTHON_UNUSED PyObject *__pyx_self,
  */
   __pyx_v_10openglTest_spin = (__pyx_v_10openglTest_spin + 2.);
 
-  /* "openglTest.pyx":119
+  /* "openglTest.pyx":201
  * 
  *     spin += 2.
  *     if spin > 360.:             # <<<<<<<<<<<<<<
@@ -1931,7 +2608,7 @@ static PyObject *__pyx_pf_10openglTest_6idle(CYTHON_UNUSED PyObject *__pyx_self,
   __pyx_t_4 = ((__pyx_v_10openglTest_spin > 360.) != 0);
   if (__pyx_t_4) {
 
-    /* "openglTest.pyx":120
+    /* "openglTest.pyx":202
  *     spin += 2.
  *     if spin > 360.:
  *         spin -= 360.             # <<<<<<<<<<<<<<
@@ -1943,14 +2620,14 @@ static PyObject *__pyx_pf_10openglTest_6idle(CYTHON_UNUSED PyObject *__pyx_self,
   }
   __pyx_L3:;
 
-  /* "openglTest.pyx":123
+  /* "openglTest.pyx":205
  * 
  *     # Invalidate the whole window.
  *     window.invalidate_rect(allocation, False)             # <<<<<<<<<<<<<<
  * 
  *     # Update synchronously.
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_window, __pyx_n_s_invalidate_rect); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 123; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_window, __pyx_n_s_invalidate_rect); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 205; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   __pyx_t_5 = 0;
@@ -1964,7 +2641,7 @@ static PyObject *__pyx_pf_10openglTest_6idle(CYTHON_UNUSED PyObject *__pyx_self,
       __pyx_t_5 = 1;
     }
   }
-  __pyx_t_6 = PyTuple_New(2+__pyx_t_5); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 123; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_6 = PyTuple_New(2+__pyx_t_5); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 205; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_6);
   if (__pyx_t_3) {
     PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_3); __Pyx_GIVEREF(__pyx_t_3); __pyx_t_3 = NULL;
@@ -1975,27 +2652,27 @@ static PyObject *__pyx_pf_10openglTest_6idle(CYTHON_UNUSED PyObject *__pyx_self,
   __Pyx_INCREF(Py_False);
   PyTuple_SET_ITEM(__pyx_t_6, 1+__pyx_t_5, Py_False);
   __Pyx_GIVEREF(Py_False);
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_6, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 123; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_6, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 205; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "openglTest.pyx":126
+  /* "openglTest.pyx":208
  * 
  *     # Update synchronously.
  *     window.process_updates(False)             # <<<<<<<<<<<<<<
  * 
  *     return True
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_window, __pyx_n_s_process_updates); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 126; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_window, __pyx_n_s_process_updates); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 208; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 126; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__18, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 208; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "openglTest.pyx":128
+  /* "openglTest.pyx":210
  *     window.process_updates(False)
  * 
  *     return True             # <<<<<<<<<<<<<<
@@ -2007,7 +2684,7 @@ static PyObject *__pyx_pf_10openglTest_6idle(CYTHON_UNUSED PyObject *__pyx_self,
   __pyx_r = Py_True;
   goto __pyx_L0;
 
-  /* "openglTest.pyx":108
+  /* "openglTest.pyx":190
  *     return True
  * 
  * def idle(widget):             # <<<<<<<<<<<<<<
@@ -2031,7 +2708,7 @@ static PyObject *__pyx_pf_10openglTest_6idle(CYTHON_UNUSED PyObject *__pyx_self,
   return __pyx_r;
 }
 
-/* "openglTest.pyx":130
+/* "openglTest.pyx":212
  *     return True
  * 
  * def motion_notify_event(widget, event, data):             # <<<<<<<<<<<<<<
@@ -2040,10 +2717,10 @@ static PyObject *__pyx_pf_10openglTest_6idle(CYTHON_UNUSED PyObject *__pyx_self,
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_10openglTest_9motion_notify_event(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static char __pyx_doc_10openglTest_8motion_notify_event[] = "The \"motion_notify_event\" signal handler. Any processing required when\n    the OpenGL-capable drawing area is under drag motion should be done here.";
-static PyMethodDef __pyx_mdef_10openglTest_9motion_notify_event = {"motion_notify_event", (PyCFunction)__pyx_pw_10openglTest_9motion_notify_event, METH_VARARGS|METH_KEYWORDS, __pyx_doc_10openglTest_8motion_notify_event};
-static PyObject *__pyx_pw_10openglTest_9motion_notify_event(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_10openglTest_11motion_notify_event(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static char __pyx_doc_10openglTest_10motion_notify_event[] = "The \"motion_notify_event\" signal handler. Any processing required when\n    the OpenGL-capable drawing area is under drag motion should be done here.";
+static PyMethodDef __pyx_mdef_10openglTest_11motion_notify_event = {"motion_notify_event", (PyCFunction)__pyx_pw_10openglTest_11motion_notify_event, METH_VARARGS|METH_KEYWORDS, __pyx_doc_10openglTest_10motion_notify_event};
+static PyObject *__pyx_pw_10openglTest_11motion_notify_event(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   CYTHON_UNUSED PyObject *__pyx_v_widget = 0;
   CYTHON_UNUSED PyObject *__pyx_v_event = 0;
   CYTHON_UNUSED PyObject *__pyx_v_data = 0;
@@ -2074,16 +2751,16 @@ static PyObject *__pyx_pw_10openglTest_9motion_notify_event(PyObject *__pyx_self
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_event)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("motion_notify_event", 1, 3, 3, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 130; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("motion_notify_event", 1, 3, 3, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 212; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
         case  2:
         if (likely((values[2] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_data)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("motion_notify_event", 1, 3, 3, 2); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 130; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("motion_notify_event", 1, 3, 3, 2); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 212; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "motion_notify_event") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 130; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "motion_notify_event") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 212; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 3) {
       goto __pyx_L5_argtuple_error;
@@ -2098,25 +2775,25 @@ static PyObject *__pyx_pw_10openglTest_9motion_notify_event(PyObject *__pyx_self
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("motion_notify_event", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 130; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __Pyx_RaiseArgtupleInvalid("motion_notify_event", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 212; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
   __Pyx_AddTraceback("openglTest.motion_notify_event", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_10openglTest_8motion_notify_event(__pyx_self, __pyx_v_widget, __pyx_v_event, __pyx_v_data);
+  __pyx_r = __pyx_pf_10openglTest_10motion_notify_event(__pyx_self, __pyx_v_widget, __pyx_v_event, __pyx_v_data);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_10openglTest_8motion_notify_event(CYTHON_UNUSED PyObject *__pyx_self, CYTHON_UNUSED PyObject *__pyx_v_widget, CYTHON_UNUSED PyObject *__pyx_v_event, CYTHON_UNUSED PyObject *__pyx_v_data) {
+static PyObject *__pyx_pf_10openglTest_10motion_notify_event(CYTHON_UNUSED PyObject *__pyx_self, CYTHON_UNUSED PyObject *__pyx_v_widget, CYTHON_UNUSED PyObject *__pyx_v_event, CYTHON_UNUSED PyObject *__pyx_v_data) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("motion_notify_event", 0);
 
-  /* "openglTest.pyx":135
+  /* "openglTest.pyx":217
  * 
  *     # Fill in the details here.
  *     return False             # <<<<<<<<<<<<<<
@@ -2128,7 +2805,7 @@ static PyObject *__pyx_pf_10openglTest_8motion_notify_event(CYTHON_UNUSED PyObje
   __pyx_r = Py_False;
   goto __pyx_L0;
 
-  /* "openglTest.pyx":130
+  /* "openglTest.pyx":212
  *     return True
  * 
  * def motion_notify_event(widget, event, data):             # <<<<<<<<<<<<<<
@@ -2143,7 +2820,7 @@ static PyObject *__pyx_pf_10openglTest_8motion_notify_event(CYTHON_UNUSED PyObje
   return __pyx_r;
 }
 
-/* "openglTest.pyx":137
+/* "openglTest.pyx":219
  *     return False
  * 
  * def button_press_event(widget, event, data):             # <<<<<<<<<<<<<<
@@ -2152,10 +2829,10 @@ static PyObject *__pyx_pf_10openglTest_8motion_notify_event(CYTHON_UNUSED PyObje
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_10openglTest_11button_press_event(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static char __pyx_doc_10openglTest_10button_press_event[] = "The \"button_press_event\" signal handler. Any processing required when\n    mouse buttons (only left and middle buttons) are pressed on the OpenGL-\n    capable drawing area should be done here.\n    \n    Starts/Stops animation according mouse button clicks.\n    ";
-static PyMethodDef __pyx_mdef_10openglTest_11button_press_event = {"button_press_event", (PyCFunction)__pyx_pw_10openglTest_11button_press_event, METH_VARARGS|METH_KEYWORDS, __pyx_doc_10openglTest_10button_press_event};
-static PyObject *__pyx_pw_10openglTest_11button_press_event(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_10openglTest_13button_press_event(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static char __pyx_doc_10openglTest_12button_press_event[] = "The \"button_press_event\" signal handler. Any processing required when\n    mouse buttons (only left and middle buttons) are pressed on the OpenGL-\n    capable drawing area should be done here.\n    \n    Starts/Stops animation according mouse button clicks.\n    ";
+static PyMethodDef __pyx_mdef_10openglTest_13button_press_event = {"button_press_event", (PyCFunction)__pyx_pw_10openglTest_13button_press_event, METH_VARARGS|METH_KEYWORDS, __pyx_doc_10openglTest_12button_press_event};
+static PyObject *__pyx_pw_10openglTest_13button_press_event(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_widget = 0;
   PyObject *__pyx_v_event = 0;
   CYTHON_UNUSED PyObject *__pyx_v_data = 0;
@@ -2186,16 +2863,16 @@ static PyObject *__pyx_pw_10openglTest_11button_press_event(PyObject *__pyx_self
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_event)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("button_press_event", 1, 3, 3, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 137; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("button_press_event", 1, 3, 3, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 219; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
         case  2:
         if (likely((values[2] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_data)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("button_press_event", 1, 3, 3, 2); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 137; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("button_press_event", 1, 3, 3, 2); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 219; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "button_press_event") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 137; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "button_press_event") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 219; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 3) {
       goto __pyx_L5_argtuple_error;
@@ -2210,20 +2887,20 @@ static PyObject *__pyx_pw_10openglTest_11button_press_event(PyObject *__pyx_self
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("button_press_event", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 137; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __Pyx_RaiseArgtupleInvalid("button_press_event", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 219; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
   __Pyx_AddTraceback("openglTest.button_press_event", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_10openglTest_10button_press_event(__pyx_self, __pyx_v_widget, __pyx_v_event, __pyx_v_data);
+  __pyx_r = __pyx_pf_10openglTest_12button_press_event(__pyx_self, __pyx_v_widget, __pyx_v_event, __pyx_v_data);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_10openglTest_10button_press_event(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_widget, PyObject *__pyx_v_event, CYTHON_UNUSED PyObject *__pyx_v_data) {
+static PyObject *__pyx_pf_10openglTest_12button_press_event(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_widget, PyObject *__pyx_v_event, CYTHON_UNUSED PyObject *__pyx_v_data) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -2236,29 +2913,29 @@ static PyObject *__pyx_pf_10openglTest_10button_press_event(CYTHON_UNUSED PyObje
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("button_press_event", 0);
 
-  /* "openglTest.pyx":144
+  /* "openglTest.pyx":226
  *     Starts/Stops animation according mouse button clicks.
  *     '''
  *     if event.button == 1:             # <<<<<<<<<<<<<<
  *         toggle_animation(widget)
  *         return True
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_event, __pyx_n_s_button); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 144; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_event, __pyx_n_s_button); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 226; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyObject_RichCompare(__pyx_t_1, __pyx_int_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 144; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyObject_RichCompare(__pyx_t_1, __pyx_int_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 226; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 144; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 226; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   if (__pyx_t_3) {
 
-    /* "openglTest.pyx":145
+    /* "openglTest.pyx":227
  *     '''
  *     if event.button == 1:
  *         toggle_animation(widget)             # <<<<<<<<<<<<<<
  *         return True
  *     return False
  */
-    __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_toggle_animation); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 145; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_toggle_animation); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 227; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
     __pyx_t_4 = NULL;
     if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_1))) {
@@ -2271,23 +2948,23 @@ static PyObject *__pyx_pf_10openglTest_10button_press_event(CYTHON_UNUSED PyObje
       }
     }
     if (!__pyx_t_4) {
-      __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_v_widget); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 145; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_v_widget); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 227; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_2);
     } else {
-      __pyx_t_5 = PyTuple_New(1+1); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 145; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_5 = PyTuple_New(1+1); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 227; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_5);
       PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_4); __Pyx_GIVEREF(__pyx_t_4); __pyx_t_4 = NULL;
       __Pyx_INCREF(__pyx_v_widget);
       PyTuple_SET_ITEM(__pyx_t_5, 0+1, __pyx_v_widget);
       __Pyx_GIVEREF(__pyx_v_widget);
-      __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_5, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 145; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_5, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 227; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_2);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     }
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-    /* "openglTest.pyx":146
+    /* "openglTest.pyx":228
  *     if event.button == 1:
  *         toggle_animation(widget)
  *         return True             # <<<<<<<<<<<<<<
@@ -2300,7 +2977,7 @@ static PyObject *__pyx_pf_10openglTest_10button_press_event(CYTHON_UNUSED PyObje
     goto __pyx_L0;
   }
 
-  /* "openglTest.pyx":147
+  /* "openglTest.pyx":229
  *         toggle_animation(widget)
  *         return True
  *     return False             # <<<<<<<<<<<<<<
@@ -2312,7 +2989,7 @@ static PyObject *__pyx_pf_10openglTest_10button_press_event(CYTHON_UNUSED PyObje
   __pyx_r = Py_False;
   goto __pyx_L0;
 
-  /* "openglTest.pyx":137
+  /* "openglTest.pyx":219
  *     return False
  * 
  * def button_press_event(widget, event, data):             # <<<<<<<<<<<<<<
@@ -2334,7 +3011,7 @@ static PyObject *__pyx_pf_10openglTest_10button_press_event(CYTHON_UNUSED PyObje
   return __pyx_r;
 }
 
-/* "openglTest.pyx":149
+/* "openglTest.pyx":231
  *     return False
  * 
  * def button_press_event_popup_menu(widget, event):             # <<<<<<<<<<<<<<
@@ -2343,10 +3020,10 @@ static PyObject *__pyx_pf_10openglTest_10button_press_event(CYTHON_UNUSED PyObje
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_10openglTest_13button_press_event_popup_menu(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static char __pyx_doc_10openglTest_12button_press_event_popup_menu[] = "For popup menu.";
-static PyMethodDef __pyx_mdef_10openglTest_13button_press_event_popup_menu = {"button_press_event_popup_menu", (PyCFunction)__pyx_pw_10openglTest_13button_press_event_popup_menu, METH_VARARGS|METH_KEYWORDS, __pyx_doc_10openglTest_12button_press_event_popup_menu};
-static PyObject *__pyx_pw_10openglTest_13button_press_event_popup_menu(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_10openglTest_15button_press_event_popup_menu(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static char __pyx_doc_10openglTest_14button_press_event_popup_menu[] = "For popup menu.";
+static PyMethodDef __pyx_mdef_10openglTest_15button_press_event_popup_menu = {"button_press_event_popup_menu", (PyCFunction)__pyx_pw_10openglTest_15button_press_event_popup_menu, METH_VARARGS|METH_KEYWORDS, __pyx_doc_10openglTest_14button_press_event_popup_menu};
+static PyObject *__pyx_pw_10openglTest_15button_press_event_popup_menu(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_widget = 0;
   PyObject *__pyx_v_event = 0;
   int __pyx_lineno = 0;
@@ -2375,11 +3052,11 @@ static PyObject *__pyx_pw_10openglTest_13button_press_event_popup_menu(PyObject 
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_event)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("button_press_event_popup_menu", 1, 2, 2, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 149; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("button_press_event_popup_menu", 1, 2, 2, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 231; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "button_press_event_popup_menu") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 149; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "button_press_event_popup_menu") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 231; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -2392,20 +3069,20 @@ static PyObject *__pyx_pw_10openglTest_13button_press_event_popup_menu(PyObject 
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("button_press_event_popup_menu", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 149; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __Pyx_RaiseArgtupleInvalid("button_press_event_popup_menu", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 231; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
   __Pyx_AddTraceback("openglTest.button_press_event_popup_menu", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_10openglTest_12button_press_event_popup_menu(__pyx_self, __pyx_v_widget, __pyx_v_event);
+  __pyx_r = __pyx_pf_10openglTest_14button_press_event_popup_menu(__pyx_self, __pyx_v_widget, __pyx_v_event);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_10openglTest_12button_press_event_popup_menu(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_widget, PyObject *__pyx_v_event) {
+static PyObject *__pyx_pf_10openglTest_14button_press_event_popup_menu(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_widget, PyObject *__pyx_v_event) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -2421,33 +3098,33 @@ static PyObject *__pyx_pf_10openglTest_12button_press_event_popup_menu(CYTHON_UN
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("button_press_event_popup_menu", 0);
 
-  /* "openglTest.pyx":152
+  /* "openglTest.pyx":234
  *     '''For popup menu.'''
  * 
  *     if event.button == 3:             # <<<<<<<<<<<<<<
  *         # Popup menu.
  *         widget.popup(None, None, None, None, event.button, event.time)
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_event, __pyx_n_s_button); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 152; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_event, __pyx_n_s_button); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 234; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyObject_RichCompare(__pyx_t_1, __pyx_int_3, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 152; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyObject_RichCompare(__pyx_t_1, __pyx_int_3, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 234; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 152; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 234; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   if (__pyx_t_3) {
 
-    /* "openglTest.pyx":154
+    /* "openglTest.pyx":236
  *     if event.button == 3:
  *         # Popup menu.
  *         widget.popup(None, None, None, None, event.button, event.time)             # <<<<<<<<<<<<<<
  *         return True
  *     return False
  */
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_widget, __pyx_n_s_popup); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 154; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_widget, __pyx_n_s_popup); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 236; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_event, __pyx_n_s_button); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 154; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_event, __pyx_n_s_button); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 236; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_event, __pyx_n_s_time); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 154; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_event, __pyx_n_s_time); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 236; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_5);
     __pyx_t_6 = NULL;
     __pyx_t_7 = 0;
@@ -2461,7 +3138,7 @@ static PyObject *__pyx_pf_10openglTest_12button_press_event_popup_menu(CYTHON_UN
         __pyx_t_7 = 1;
       }
     }
-    __pyx_t_8 = PyTuple_New(6+__pyx_t_7); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 154; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_8 = PyTuple_New(6+__pyx_t_7); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 236; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_8);
     if (__pyx_t_6) {
       PyTuple_SET_ITEM(__pyx_t_8, 0, __pyx_t_6); __Pyx_GIVEREF(__pyx_t_6); __pyx_t_6 = NULL;
@@ -2484,13 +3161,13 @@ static PyObject *__pyx_pf_10openglTest_12button_press_event_popup_menu(CYTHON_UN
     __Pyx_GIVEREF(__pyx_t_5);
     __pyx_t_4 = 0;
     __pyx_t_5 = 0;
-    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_8, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 154; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_8, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 236; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-    /* "openglTest.pyx":155
+    /* "openglTest.pyx":237
  *         # Popup menu.
  *         widget.popup(None, None, None, None, event.button, event.time)
  *         return True             # <<<<<<<<<<<<<<
@@ -2503,7 +3180,7 @@ static PyObject *__pyx_pf_10openglTest_12button_press_event_popup_menu(CYTHON_UN
     goto __pyx_L0;
   }
 
-  /* "openglTest.pyx":156
+  /* "openglTest.pyx":238
  *         widget.popup(None, None, None, None, event.button, event.time)
  *         return True
  *     return False             # <<<<<<<<<<<<<<
@@ -2515,7 +3192,7 @@ static PyObject *__pyx_pf_10openglTest_12button_press_event_popup_menu(CYTHON_UN
   __pyx_r = Py_False;
   goto __pyx_L0;
 
-  /* "openglTest.pyx":149
+  /* "openglTest.pyx":231
  *     return False
  * 
  * def button_press_event_popup_menu(widget, event):             # <<<<<<<<<<<<<<
@@ -2539,7 +3216,7 @@ static PyObject *__pyx_pf_10openglTest_12button_press_event_popup_menu(CYTHON_UN
   return __pyx_r;
 }
 
-/* "openglTest.pyx":158
+/* "openglTest.pyx":240
  *     return False
  * 
  * def key_press_event(widget, event):             # <<<<<<<<<<<<<<
@@ -2548,10 +3225,10 @@ static PyObject *__pyx_pf_10openglTest_12button_press_event_popup_menu(CYTHON_UN
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_10openglTest_15key_press_event(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static char __pyx_doc_10openglTest_14key_press_event[] = "The \"key_press_event\" signal handler. Any processing required when key\n    presses occur should be done here.";
-static PyMethodDef __pyx_mdef_10openglTest_15key_press_event = {"key_press_event", (PyCFunction)__pyx_pw_10openglTest_15key_press_event, METH_VARARGS|METH_KEYWORDS, __pyx_doc_10openglTest_14key_press_event};
-static PyObject *__pyx_pw_10openglTest_15key_press_event(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_10openglTest_17key_press_event(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static char __pyx_doc_10openglTest_16key_press_event[] = "The \"key_press_event\" signal handler. Any processing required when key\n    presses occur should be done here.";
+static PyMethodDef __pyx_mdef_10openglTest_17key_press_event = {"key_press_event", (PyCFunction)__pyx_pw_10openglTest_17key_press_event, METH_VARARGS|METH_KEYWORDS, __pyx_doc_10openglTest_16key_press_event};
+static PyObject *__pyx_pw_10openglTest_17key_press_event(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_widget = 0;
   PyObject *__pyx_v_event = 0;
   int __pyx_lineno = 0;
@@ -2580,11 +3257,11 @@ static PyObject *__pyx_pw_10openglTest_15key_press_event(PyObject *__pyx_self, P
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_event)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("key_press_event", 1, 2, 2, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 158; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("key_press_event", 1, 2, 2, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 240; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "key_press_event") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 158; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "key_press_event") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 240; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -2597,20 +3274,20 @@ static PyObject *__pyx_pw_10openglTest_15key_press_event(PyObject *__pyx_self, P
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("key_press_event", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 158; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __Pyx_RaiseArgtupleInvalid("key_press_event", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 240; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
   __Pyx_AddTraceback("openglTest.key_press_event", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_10openglTest_14key_press_event(__pyx_self, __pyx_v_widget, __pyx_v_event);
+  __pyx_r = __pyx_pf_10openglTest_16key_press_event(__pyx_self, __pyx_v_widget, __pyx_v_event);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_10openglTest_14key_press_event(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_widget, PyObject *__pyx_v_event) {
+static PyObject *__pyx_pf_10openglTest_16key_press_event(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_widget, PyObject *__pyx_v_event) {
   PyObject *__pyx_v_window = NULL;
   PyObject *__pyx_v_allocation = NULL;
   PyObject *__pyx_r = NULL;
@@ -2626,14 +3303,14 @@ static PyObject *__pyx_pf_10openglTest_14key_press_event(CYTHON_UNUSED PyObject 
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("key_press_event", 0);
 
-  /* "openglTest.pyx":164
+  /* "openglTest.pyx":246
  *     global spin
  * 
  *     window = widget.get_window()             # <<<<<<<<<<<<<<
  *     allocation = widget.get_allocation()
  * 
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_widget, __pyx_n_s_get_window); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 164; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_widget, __pyx_n_s_get_window); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 246; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_2))) {
@@ -2646,24 +3323,24 @@ static PyObject *__pyx_pf_10openglTest_14key_press_event(CYTHON_UNUSED PyObject 
     }
   }
   if (__pyx_t_3) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 164; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 246; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   } else {
-    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 164; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 246; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_window = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "openglTest.pyx":165
+  /* "openglTest.pyx":247
  * 
  *     window = widget.get_window()
  *     allocation = widget.get_allocation()             # <<<<<<<<<<<<<<
  * 
  *     if event.keyval == Gdk.KEY_Left:
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_widget, __pyx_n_s_get_allocation); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 165; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_widget, __pyx_n_s_get_allocation); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 247; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_2))) {
@@ -2676,38 +3353,38 @@ static PyObject *__pyx_pf_10openglTest_14key_press_event(CYTHON_UNUSED PyObject 
     }
   }
   if (__pyx_t_3) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 165; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 247; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   } else {
-    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 165; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 247; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_allocation = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "openglTest.pyx":167
+  /* "openglTest.pyx":249
  *     allocation = widget.get_allocation()
  * 
  *     if event.keyval == Gdk.KEY_Left:             # <<<<<<<<<<<<<<
  *         # Rotate left.
  *         if not animate:
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_event, __pyx_n_s_keyval); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 167; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_event, __pyx_n_s_keyval); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 249; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_Gdk); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 167; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_Gdk); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 249; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_KEY_Left); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 167; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_KEY_Left); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 249; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = PyObject_RichCompare(__pyx_t_1, __pyx_t_3, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 167; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyObject_RichCompare(__pyx_t_1, __pyx_t_3, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 249; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 167; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 249; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   if (__pyx_t_4) {
 
-    /* "openglTest.pyx":169
+    /* "openglTest.pyx":251
  *     if event.keyval == Gdk.KEY_Left:
  *         # Rotate left.
  *         if not animate:             # <<<<<<<<<<<<<<
@@ -2717,7 +3394,7 @@ static PyObject *__pyx_pf_10openglTest_14key_press_event(CYTHON_UNUSED PyObject 
     __pyx_t_4 = ((!(__pyx_v_10openglTest_animate != 0)) != 0);
     if (__pyx_t_4) {
 
-      /* "openglTest.pyx":170
+      /* "openglTest.pyx":252
  *         # Rotate left.
  *         if not animate:
  *             spin += 2.             # <<<<<<<<<<<<<<
@@ -2726,7 +3403,7 @@ static PyObject *__pyx_pf_10openglTest_14key_press_event(CYTHON_UNUSED PyObject 
  */
       __pyx_v_10openglTest_spin = (__pyx_v_10openglTest_spin + 2.);
 
-      /* "openglTest.pyx":171
+      /* "openglTest.pyx":253
  *         if not animate:
  *             spin += 2.
  *             if spin > 360.:             # <<<<<<<<<<<<<<
@@ -2736,7 +3413,7 @@ static PyObject *__pyx_pf_10openglTest_14key_press_event(CYTHON_UNUSED PyObject 
       __pyx_t_4 = ((__pyx_v_10openglTest_spin > 360.) != 0);
       if (__pyx_t_4) {
 
-        /* "openglTest.pyx":172
+        /* "openglTest.pyx":254
  *             spin += 2.
  *             if spin > 360.:
  *                 spin -= 360.             # <<<<<<<<<<<<<<
@@ -2748,14 +3425,14 @@ static PyObject *__pyx_pf_10openglTest_14key_press_event(CYTHON_UNUSED PyObject 
       }
       __pyx_L5:;
 
-      /* "openglTest.pyx":173
+      /* "openglTest.pyx":255
  *             if spin > 360.:
  *                 spin -= 360.
  *             window.invalidate_rect(allocation, False)             # <<<<<<<<<<<<<<
  *     elif event.keyval == Gdk.KEY_Right:
  *         # Rotate right.
  */
-      __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_window, __pyx_n_s_invalidate_rect); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 173; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_window, __pyx_n_s_invalidate_rect); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 255; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_3);
       __pyx_t_1 = NULL;
       __pyx_t_5 = 0;
@@ -2769,7 +3446,7 @@ static PyObject *__pyx_pf_10openglTest_14key_press_event(CYTHON_UNUSED PyObject 
           __pyx_t_5 = 1;
         }
       }
-      __pyx_t_6 = PyTuple_New(2+__pyx_t_5); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 173; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_6 = PyTuple_New(2+__pyx_t_5); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 255; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_6);
       if (__pyx_t_1) {
         PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_1); __Pyx_GIVEREF(__pyx_t_1); __pyx_t_1 = NULL;
@@ -2780,7 +3457,7 @@ static PyObject *__pyx_pf_10openglTest_14key_press_event(CYTHON_UNUSED PyObject 
       __Pyx_INCREF(Py_False);
       PyTuple_SET_ITEM(__pyx_t_6, 1+__pyx_t_5, Py_False);
       __Pyx_GIVEREF(Py_False);
-      __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_6, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 173; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_6, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 255; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_2);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -2791,28 +3468,28 @@ static PyObject *__pyx_pf_10openglTest_14key_press_event(CYTHON_UNUSED PyObject 
     goto __pyx_L3;
   }
 
-  /* "openglTest.pyx":174
+  /* "openglTest.pyx":256
  *                 spin -= 360.
  *             window.invalidate_rect(allocation, False)
  *     elif event.keyval == Gdk.KEY_Right:             # <<<<<<<<<<<<<<
  *         # Rotate right.
  *         if not animate:
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_event, __pyx_n_s_keyval); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 174; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_event, __pyx_n_s_keyval); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 256; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_Gdk); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 174; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_Gdk); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 256; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_KEY_Right); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 174; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_KEY_Right); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 256; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = PyObject_RichCompare(__pyx_t_2, __pyx_t_6, Py_EQ); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 174; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = PyObject_RichCompare(__pyx_t_2, __pyx_t_6, Py_EQ); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 256; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 174; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 256; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   if (__pyx_t_4) {
 
-    /* "openglTest.pyx":176
+    /* "openglTest.pyx":258
  *     elif event.keyval == Gdk.KEY_Right:
  *         # Rotate right.
  *         if not animate:             # <<<<<<<<<<<<<<
@@ -2822,7 +3499,7 @@ static PyObject *__pyx_pf_10openglTest_14key_press_event(CYTHON_UNUSED PyObject 
     __pyx_t_4 = ((!(__pyx_v_10openglTest_animate != 0)) != 0);
     if (__pyx_t_4) {
 
-      /* "openglTest.pyx":177
+      /* "openglTest.pyx":259
  *         # Rotate right.
  *         if not animate:
  *             spin -= 2.             # <<<<<<<<<<<<<<
@@ -2831,7 +3508,7 @@ static PyObject *__pyx_pf_10openglTest_14key_press_event(CYTHON_UNUSED PyObject 
  */
       __pyx_v_10openglTest_spin = (__pyx_v_10openglTest_spin - 2.);
 
-      /* "openglTest.pyx":178
+      /* "openglTest.pyx":260
  *         if not animate:
  *             spin -= 2.
  *             if spin < 360.:             # <<<<<<<<<<<<<<
@@ -2841,7 +3518,7 @@ static PyObject *__pyx_pf_10openglTest_14key_press_event(CYTHON_UNUSED PyObject 
       __pyx_t_4 = ((__pyx_v_10openglTest_spin < 360.) != 0);
       if (__pyx_t_4) {
 
-        /* "openglTest.pyx":179
+        /* "openglTest.pyx":261
  *             spin -= 2.
  *             if spin < 360.:
  *                 spin += 360.             # <<<<<<<<<<<<<<
@@ -2853,14 +3530,14 @@ static PyObject *__pyx_pf_10openglTest_14key_press_event(CYTHON_UNUSED PyObject 
       }
       __pyx_L7:;
 
-      /* "openglTest.pyx":180
+      /* "openglTest.pyx":262
  *             if spin < 360.:
  *                 spin += 360.
  *             window.invalidate_rect(allocation, False)             # <<<<<<<<<<<<<<
  *     elif event.keyval == Gdk.KEY_a:
  *         # Toggle animation.
  */
-      __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_window, __pyx_n_s_invalidate_rect); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 180; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_window, __pyx_n_s_invalidate_rect); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 262; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_6);
       __pyx_t_2 = NULL;
       __pyx_t_5 = 0;
@@ -2874,7 +3551,7 @@ static PyObject *__pyx_pf_10openglTest_14key_press_event(CYTHON_UNUSED PyObject 
           __pyx_t_5 = 1;
         }
       }
-      __pyx_t_1 = PyTuple_New(2+__pyx_t_5); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 180; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = PyTuple_New(2+__pyx_t_5); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 262; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
       if (__pyx_t_2) {
         PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_2); __Pyx_GIVEREF(__pyx_t_2); __pyx_t_2 = NULL;
@@ -2885,7 +3562,7 @@ static PyObject *__pyx_pf_10openglTest_14key_press_event(CYTHON_UNUSED PyObject 
       __Pyx_INCREF(Py_False);
       PyTuple_SET_ITEM(__pyx_t_1, 1+__pyx_t_5, Py_False);
       __Pyx_GIVEREF(Py_False);
-      __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_1, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 180; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_1, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 262; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
@@ -2896,35 +3573,35 @@ static PyObject *__pyx_pf_10openglTest_14key_press_event(CYTHON_UNUSED PyObject 
     goto __pyx_L3;
   }
 
-  /* "openglTest.pyx":181
+  /* "openglTest.pyx":263
  *                 spin += 360.
  *             window.invalidate_rect(allocation, False)
  *     elif event.keyval == Gdk.KEY_a:             # <<<<<<<<<<<<<<
  *         # Toggle animation.
  *         toggle_animation(widget)
  */
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_event, __pyx_n_s_keyval); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 181; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_event, __pyx_n_s_keyval); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 263; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_Gdk); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 181; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_Gdk); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 263; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_KEY_a); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 181; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_KEY_a); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 263; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_t_6 = PyObject_RichCompare(__pyx_t_3, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_6); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 181; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_6 = PyObject_RichCompare(__pyx_t_3, __pyx_t_1, Py_EQ); __Pyx_XGOTREF(__pyx_t_6); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 263; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_6); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 181; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_6); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 263; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   if (__pyx_t_4) {
 
-    /* "openglTest.pyx":183
+    /* "openglTest.pyx":265
  *     elif event.keyval == Gdk.KEY_a:
  *         # Toggle animation.
  *         toggle_animation(widget)             # <<<<<<<<<<<<<<
  *     elif event.keyval == Gdk.KEY_Escape:
  *         # Quit.
  */
-    __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_toggle_animation); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 183; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_toggle_animation); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 265; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
     __pyx_t_3 = NULL;
     if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_1))) {
@@ -2937,16 +3614,16 @@ static PyObject *__pyx_pf_10openglTest_14key_press_event(CYTHON_UNUSED PyObject 
       }
     }
     if (!__pyx_t_3) {
-      __pyx_t_6 = __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_v_widget); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 183; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_6 = __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_v_widget); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 265; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_6);
     } else {
-      __pyx_t_2 = PyTuple_New(1+1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 183; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_2 = PyTuple_New(1+1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 265; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_2);
       PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_3); __Pyx_GIVEREF(__pyx_t_3); __pyx_t_3 = NULL;
       __Pyx_INCREF(__pyx_v_widget);
       PyTuple_SET_ITEM(__pyx_t_2, 0+1, __pyx_v_widget);
       __Pyx_GIVEREF(__pyx_v_widget);
-      __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_2, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 183; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_2, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 265; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     }
@@ -2955,37 +3632,37 @@ static PyObject *__pyx_pf_10openglTest_14key_press_event(CYTHON_UNUSED PyObject 
     goto __pyx_L3;
   }
 
-  /* "openglTest.pyx":184
+  /* "openglTest.pyx":266
  *         # Toggle animation.
  *         toggle_animation(widget)
  *     elif event.keyval == Gdk.KEY_Escape:             # <<<<<<<<<<<<<<
  *         # Quit.
  *         Gtk.main_quit()
  */
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_event, __pyx_n_s_keyval); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 184; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_event, __pyx_n_s_keyval); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 266; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_Gdk); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 184; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_Gdk); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 266; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_KEY_Escape); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 184; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_KEY_Escape); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 266; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = PyObject_RichCompare(__pyx_t_6, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 184; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = PyObject_RichCompare(__pyx_t_6, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 266; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 184; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 266; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   if (__pyx_t_4) {
 
-    /* "openglTest.pyx":186
+    /* "openglTest.pyx":268
  *     elif event.keyval == Gdk.KEY_Escape:
  *         # Quit.
  *         Gtk.main_quit()             # <<<<<<<<<<<<<<
  *     else:
  *         return False
  */
-    __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_Gtk); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 186; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_Gtk); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 268; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_main_quit); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 186; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_main_quit); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 268; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __pyx_t_2 = NULL;
@@ -2999,10 +3676,10 @@ static PyObject *__pyx_pf_10openglTest_14key_press_event(CYTHON_UNUSED PyObject 
       }
     }
     if (__pyx_t_2) {
-      __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_6, __pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 186; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_6, __pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 268; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     } else {
-      __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_6); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 186; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_6); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 268; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
@@ -3011,7 +3688,7 @@ static PyObject *__pyx_pf_10openglTest_14key_press_event(CYTHON_UNUSED PyObject 
   }
   /*else*/ {
 
-    /* "openglTest.pyx":188
+    /* "openglTest.pyx":270
  *         Gtk.main_quit()
  *     else:
  *         return False             # <<<<<<<<<<<<<<
@@ -3025,7 +3702,7 @@ static PyObject *__pyx_pf_10openglTest_14key_press_event(CYTHON_UNUSED PyObject 
   }
   __pyx_L3:;
 
-  /* "openglTest.pyx":190
+  /* "openglTest.pyx":272
  *         return False
  * 
  *     return True             # <<<<<<<<<<<<<<
@@ -3037,7 +3714,7 @@ static PyObject *__pyx_pf_10openglTest_14key_press_event(CYTHON_UNUSED PyObject 
   __pyx_r = Py_True;
   goto __pyx_L0;
 
-  /* "openglTest.pyx":158
+  /* "openglTest.pyx":240
  *     return False
  * 
  * def key_press_event(widget, event):             # <<<<<<<<<<<<<<
@@ -3061,7 +3738,7 @@ static PyObject *__pyx_pf_10openglTest_14key_press_event(CYTHON_UNUSED PyObject 
   return __pyx_r;
 }
 
-/* "openglTest.pyx":192
+/* "openglTest.pyx":274
  *     return True
  * 
  * def unrealize(widget, data):             # <<<<<<<<<<<<<<
@@ -3070,10 +3747,10 @@ static PyObject *__pyx_pf_10openglTest_14key_press_event(CYTHON_UNUSED PyObject 
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_10openglTest_17unrealize(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static char __pyx_doc_10openglTest_16unrealize[] = "The \"unrealize\" signal handler. Any processing required when\n    the OpenGL-capable window is unrealized should be done here.";
-static PyMethodDef __pyx_mdef_10openglTest_17unrealize = {"unrealize", (PyCFunction)__pyx_pw_10openglTest_17unrealize, METH_VARARGS|METH_KEYWORDS, __pyx_doc_10openglTest_16unrealize};
-static PyObject *__pyx_pw_10openglTest_17unrealize(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_10openglTest_19unrealize(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static char __pyx_doc_10openglTest_18unrealize[] = "The \"unrealize\" signal handler. Any processing required when\n    the OpenGL-capable window is unrealized should be done here.";
+static PyMethodDef __pyx_mdef_10openglTest_19unrealize = {"unrealize", (PyCFunction)__pyx_pw_10openglTest_19unrealize, METH_VARARGS|METH_KEYWORDS, __pyx_doc_10openglTest_18unrealize};
+static PyObject *__pyx_pw_10openglTest_19unrealize(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   CYTHON_UNUSED PyObject *__pyx_v_widget = 0;
   CYTHON_UNUSED PyObject *__pyx_v_data = 0;
   int __pyx_lineno = 0;
@@ -3102,11 +3779,11 @@ static PyObject *__pyx_pw_10openglTest_17unrealize(PyObject *__pyx_self, PyObjec
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_data)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("unrealize", 1, 2, 2, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 192; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("unrealize", 1, 2, 2, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 274; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "unrealize") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 192; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "unrealize") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 274; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -3119,23 +3796,49 @@ static PyObject *__pyx_pw_10openglTest_17unrealize(PyObject *__pyx_self, PyObjec
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("unrealize", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 192; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __Pyx_RaiseArgtupleInvalid("unrealize", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 274; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
   __Pyx_AddTraceback("openglTest.unrealize", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_10openglTest_16unrealize(__pyx_self, __pyx_v_widget, __pyx_v_data);
+  __pyx_r = __pyx_pf_10openglTest_18unrealize(__pyx_self, __pyx_v_widget, __pyx_v_data);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_10openglTest_16unrealize(CYTHON_UNUSED PyObject *__pyx_self, CYTHON_UNUSED PyObject *__pyx_v_widget, CYTHON_UNUSED PyObject *__pyx_v_data) {
+static PyObject *__pyx_pf_10openglTest_18unrealize(CYTHON_UNUSED PyObject *__pyx_self, CYTHON_UNUSED PyObject *__pyx_v_widget, CYTHON_UNUSED PyObject *__pyx_v_data) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("unrealize", 0);
+
+  /* "openglTest.pyx":279
+ * 
+ *     # Fill in the details here
+ *     glDeleteBuffers(1, &vertexBuffer)             # <<<<<<<<<<<<<<
+ *     glDeleteProgram(progID)
+ * 
+ */
+  glDeleteBuffers(1, (&__pyx_v_10openglTest_vertexBuffer));
+
+  /* "openglTest.pyx":280
+ *     # Fill in the details here
+ *     glDeleteBuffers(1, &vertexBuffer)
+ *     glDeleteProgram(progID)             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+  glDeleteProgram(__pyx_v_10openglTest_progID);
+
+  /* "openglTest.pyx":274
+ *     return True
+ * 
+ * def unrealize(widget, data):             # <<<<<<<<<<<<<<
+ *     '''The "unrealize" signal handler. Any processing required when
+ *     the OpenGL-capable window is unrealized should be done here.'''
+ */
 
   /* function exit code */
   __pyx_r = Py_None; __Pyx_INCREF(Py_None);
@@ -3144,7 +3847,7 @@ static PyObject *__pyx_pf_10openglTest_16unrealize(CYTHON_UNUSED PyObject *__pyx
   return __pyx_r;
 }
 
-/* "openglTest.pyx":208
+/* "openglTest.pyx":291
  * idle_id = 0
  * 
  * def idle_add(widget):             # <<<<<<<<<<<<<<
@@ -3153,20 +3856,20 @@ static PyObject *__pyx_pf_10openglTest_16unrealize(CYTHON_UNUSED PyObject *__pyx
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_10openglTest_19idle_add(PyObject *__pyx_self, PyObject *__pyx_v_widget); /*proto*/
-static PyMethodDef __pyx_mdef_10openglTest_19idle_add = {"idle_add", (PyCFunction)__pyx_pw_10openglTest_19idle_add, METH_O, 0};
-static PyObject *__pyx_pw_10openglTest_19idle_add(PyObject *__pyx_self, PyObject *__pyx_v_widget) {
+static PyObject *__pyx_pw_10openglTest_21idle_add(PyObject *__pyx_self, PyObject *__pyx_v_widget); /*proto*/
+static PyMethodDef __pyx_mdef_10openglTest_21idle_add = {"idle_add", (PyCFunction)__pyx_pw_10openglTest_21idle_add, METH_O, 0};
+static PyObject *__pyx_pw_10openglTest_21idle_add(PyObject *__pyx_self, PyObject *__pyx_v_widget) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("idle_add (wrapper)", 0);
-  __pyx_r = __pyx_pf_10openglTest_18idle_add(__pyx_self, ((PyObject *)__pyx_v_widget));
+  __pyx_r = __pyx_pf_10openglTest_20idle_add(__pyx_self, ((PyObject *)__pyx_v_widget));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_10openglTest_18idle_add(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_widget) {
+static PyObject *__pyx_pf_10openglTest_20idle_add(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_widget) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -3180,36 +3883,36 @@ static PyObject *__pyx_pf_10openglTest_18idle_add(CYTHON_UNUSED PyObject *__pyx_
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("idle_add", 0);
 
-  /* "openglTest.pyx":210
+  /* "openglTest.pyx":293
  * def idle_add(widget):
  *     global idle_id
  *     if idle_id == 0:             # <<<<<<<<<<<<<<
  *         #idle_id = GLib.idle_add(idle, widget, priority=Gdk.PRIORITY_REDRAW+100)
  *         idle_id = GLib.timeout_add(8, idle, widget, priority=Gdk.PRIORITY_REDRAW+100)
  */
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_idle_id); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 210; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_idle_id); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 293; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyObject_RichCompare(__pyx_t_1, __pyx_int_0, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 210; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyObject_RichCompare(__pyx_t_1, __pyx_int_0, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 293; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 210; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 293; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   if (__pyx_t_3) {
 
-    /* "openglTest.pyx":212
+    /* "openglTest.pyx":295
  *     if idle_id == 0:
  *         #idle_id = GLib.idle_add(idle, widget, priority=Gdk.PRIORITY_REDRAW+100)
  *         idle_id = GLib.timeout_add(8, idle, widget, priority=Gdk.PRIORITY_REDRAW+100)             # <<<<<<<<<<<<<<
  * 
  * def idle_remove(widget):
  */
-    __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_GLib); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 212; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_GLib); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 295; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_timeout_add); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 212; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_timeout_add); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 295; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_idle); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 212; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_idle); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 295; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_4 = PyTuple_New(3); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 212; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = PyTuple_New(3); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 295; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_INCREF(__pyx_int_8);
     PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_int_8);
@@ -3220,30 +3923,30 @@ static PyObject *__pyx_pf_10openglTest_18idle_add(CYTHON_UNUSED PyObject *__pyx_
     PyTuple_SET_ITEM(__pyx_t_4, 2, __pyx_v_widget);
     __Pyx_GIVEREF(__pyx_v_widget);
     __pyx_t_2 = 0;
-    __pyx_t_2 = PyDict_New(); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 212; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = PyDict_New(); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 295; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_Gdk); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 212; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_Gdk); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 295; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_PRIORITY_REDRAW); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 212; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_PRIORITY_REDRAW); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 295; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __pyx_t_5 = PyNumber_Add(__pyx_t_6, __pyx_int_100); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 212; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_5 = PyNumber_Add(__pyx_t_6, __pyx_int_100); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 295; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_priority, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 212; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_priority, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 295; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_4, __pyx_t_2); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 212; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_4, __pyx_t_2); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 295; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    if (PyDict_SetItem(__pyx_d, __pyx_n_s_idle_id, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 212; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    if (PyDict_SetItem(__pyx_d, __pyx_n_s_idle_id, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 295; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     goto __pyx_L3;
   }
   __pyx_L3:;
 
-  /* "openglTest.pyx":208
+  /* "openglTest.pyx":291
  * idle_id = 0
  * 
  * def idle_add(widget):             # <<<<<<<<<<<<<<
@@ -3268,7 +3971,7 @@ static PyObject *__pyx_pf_10openglTest_18idle_add(CYTHON_UNUSED PyObject *__pyx_
   return __pyx_r;
 }
 
-/* "openglTest.pyx":214
+/* "openglTest.pyx":297
  *         idle_id = GLib.timeout_add(8, idle, widget, priority=Gdk.PRIORITY_REDRAW+100)
  * 
  * def idle_remove(widget):             # <<<<<<<<<<<<<<
@@ -3277,20 +3980,20 @@ static PyObject *__pyx_pf_10openglTest_18idle_add(CYTHON_UNUSED PyObject *__pyx_
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_10openglTest_21idle_remove(PyObject *__pyx_self, PyObject *__pyx_v_widget); /*proto*/
-static PyMethodDef __pyx_mdef_10openglTest_21idle_remove = {"idle_remove", (PyCFunction)__pyx_pw_10openglTest_21idle_remove, METH_O, 0};
-static PyObject *__pyx_pw_10openglTest_21idle_remove(PyObject *__pyx_self, PyObject *__pyx_v_widget) {
+static PyObject *__pyx_pw_10openglTest_23idle_remove(PyObject *__pyx_self, PyObject *__pyx_v_widget); /*proto*/
+static PyMethodDef __pyx_mdef_10openglTest_23idle_remove = {"idle_remove", (PyCFunction)__pyx_pw_10openglTest_23idle_remove, METH_O, 0};
+static PyObject *__pyx_pw_10openglTest_23idle_remove(PyObject *__pyx_self, PyObject *__pyx_v_widget) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("idle_remove (wrapper)", 0);
-  __pyx_r = __pyx_pf_10openglTest_20idle_remove(__pyx_self, ((PyObject *)__pyx_v_widget));
+  __pyx_r = __pyx_pf_10openglTest_22idle_remove(__pyx_self, ((PyObject *)__pyx_v_widget));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_10openglTest_20idle_remove(CYTHON_UNUSED PyObject *__pyx_self, CYTHON_UNUSED PyObject *__pyx_v_widget) {
+static PyObject *__pyx_pf_10openglTest_22idle_remove(CYTHON_UNUSED PyObject *__pyx_self, CYTHON_UNUSED PyObject *__pyx_v_widget) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -3304,34 +4007,34 @@ static PyObject *__pyx_pf_10openglTest_20idle_remove(CYTHON_UNUSED PyObject *__p
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("idle_remove", 0);
 
-  /* "openglTest.pyx":216
+  /* "openglTest.pyx":299
  * def idle_remove(widget):
  *     global idle_id
  *     if idle_id != 0:             # <<<<<<<<<<<<<<
  *         GLib.source_remove(idle_id)
  *         idle_id = 0
  */
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_idle_id); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 216; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_idle_id); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 299; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyObject_RichCompare(__pyx_t_1, __pyx_int_0, Py_NE); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 216; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyObject_RichCompare(__pyx_t_1, __pyx_int_0, Py_NE); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 299; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 216; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 299; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   if (__pyx_t_3) {
 
-    /* "openglTest.pyx":217
+    /* "openglTest.pyx":300
  *     global idle_id
  *     if idle_id != 0:
  *         GLib.source_remove(idle_id)             # <<<<<<<<<<<<<<
  *         idle_id = 0
  * 
  */
-    __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_GLib); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 217; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_GLib); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 300; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_source_remove); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 217; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_source_remove); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 300; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_idle_id); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 217; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_idle_id); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 300; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
     __pyx_t_5 = NULL;
     if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_4))) {
@@ -3344,36 +4047,36 @@ static PyObject *__pyx_pf_10openglTest_20idle_remove(CYTHON_UNUSED PyObject *__p
       }
     }
     if (!__pyx_t_5) {
-      __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_t_1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 217; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_t_1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 300; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       __Pyx_GOTREF(__pyx_t_2);
     } else {
-      __pyx_t_6 = PyTuple_New(1+1); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 217; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_6 = PyTuple_New(1+1); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 300; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_6);
       PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_5); __Pyx_GIVEREF(__pyx_t_5); __pyx_t_5 = NULL;
       PyTuple_SET_ITEM(__pyx_t_6, 0+1, __pyx_t_1);
       __Pyx_GIVEREF(__pyx_t_1);
       __pyx_t_1 = 0;
-      __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_6, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 217; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_6, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 300; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_2);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     }
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-    /* "openglTest.pyx":218
+    /* "openglTest.pyx":301
  *     if idle_id != 0:
  *         GLib.source_remove(idle_id)
  *         idle_id = 0             # <<<<<<<<<<<<<<
  * 
  * def map_event(widget, event, data):
  */
-    if (PyDict_SetItem(__pyx_d, __pyx_n_s_idle_id, __pyx_int_0) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 218; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    if (PyDict_SetItem(__pyx_d, __pyx_n_s_idle_id, __pyx_int_0) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 301; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     goto __pyx_L3;
   }
   __pyx_L3:;
 
-  /* "openglTest.pyx":214
+  /* "openglTest.pyx":297
  *         idle_id = GLib.timeout_add(8, idle, widget, priority=Gdk.PRIORITY_REDRAW+100)
  * 
  * def idle_remove(widget):             # <<<<<<<<<<<<<<
@@ -3398,7 +4101,7 @@ static PyObject *__pyx_pf_10openglTest_20idle_remove(CYTHON_UNUSED PyObject *__p
   return __pyx_r;
 }
 
-/* "openglTest.pyx":220
+/* "openglTest.pyx":303
  *         idle_id = 0
  * 
  * def map_event(widget, event, data):             # <<<<<<<<<<<<<<
@@ -3407,10 +4110,10 @@ static PyObject *__pyx_pf_10openglTest_20idle_remove(CYTHON_UNUSED PyObject *__p
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_10openglTest_23map_event(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static char __pyx_doc_10openglTest_22map_event[] = "The \"map_event\" signal handler. Any processing required when the\n    OpenGL-capable drawing area is mapped should be done here.";
-static PyMethodDef __pyx_mdef_10openglTest_23map_event = {"map_event", (PyCFunction)__pyx_pw_10openglTest_23map_event, METH_VARARGS|METH_KEYWORDS, __pyx_doc_10openglTest_22map_event};
-static PyObject *__pyx_pw_10openglTest_23map_event(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_10openglTest_25map_event(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static char __pyx_doc_10openglTest_24map_event[] = "The \"map_event\" signal handler. Any processing required when the\n    OpenGL-capable drawing area is mapped should be done here.";
+static PyMethodDef __pyx_mdef_10openglTest_25map_event = {"map_event", (PyCFunction)__pyx_pw_10openglTest_25map_event, METH_VARARGS|METH_KEYWORDS, __pyx_doc_10openglTest_24map_event};
+static PyObject *__pyx_pw_10openglTest_25map_event(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_widget = 0;
   CYTHON_UNUSED PyObject *__pyx_v_event = 0;
   CYTHON_UNUSED PyObject *__pyx_v_data = 0;
@@ -3441,16 +4144,16 @@ static PyObject *__pyx_pw_10openglTest_23map_event(PyObject *__pyx_self, PyObjec
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_event)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("map_event", 1, 3, 3, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 220; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("map_event", 1, 3, 3, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 303; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
         case  2:
         if (likely((values[2] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_data)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("map_event", 1, 3, 3, 2); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 220; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("map_event", 1, 3, 3, 2); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 303; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "map_event") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 220; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "map_event") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 303; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 3) {
       goto __pyx_L5_argtuple_error;
@@ -3465,20 +4168,20 @@ static PyObject *__pyx_pw_10openglTest_23map_event(PyObject *__pyx_self, PyObjec
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("map_event", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 220; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __Pyx_RaiseArgtupleInvalid("map_event", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 303; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
   __Pyx_AddTraceback("openglTest.map_event", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_10openglTest_22map_event(__pyx_self, __pyx_v_widget, __pyx_v_event, __pyx_v_data);
+  __pyx_r = __pyx_pf_10openglTest_24map_event(__pyx_self, __pyx_v_widget, __pyx_v_event, __pyx_v_data);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_10openglTest_22map_event(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_widget, CYTHON_UNUSED PyObject *__pyx_v_event, CYTHON_UNUSED PyObject *__pyx_v_data) {
+static PyObject *__pyx_pf_10openglTest_24map_event(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_widget, CYTHON_UNUSED PyObject *__pyx_v_event, CYTHON_UNUSED PyObject *__pyx_v_data) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   int __pyx_t_1;
@@ -3491,7 +4194,7 @@ static PyObject *__pyx_pf_10openglTest_22map_event(CYTHON_UNUSED PyObject *__pyx
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("map_event", 0);
 
-  /* "openglTest.pyx":224
+  /* "openglTest.pyx":307
  *     OpenGL-capable drawing area is mapped should be done here.'''
  * 
  *     if animate:             # <<<<<<<<<<<<<<
@@ -3501,14 +4204,14 @@ static PyObject *__pyx_pf_10openglTest_22map_event(CYTHON_UNUSED PyObject *__pyx
   __pyx_t_1 = (__pyx_v_10openglTest_animate != 0);
   if (__pyx_t_1) {
 
-    /* "openglTest.pyx":225
+    /* "openglTest.pyx":308
  * 
  *     if animate:
  *         idle_add(widget)             # <<<<<<<<<<<<<<
  *     return True
  * 
  */
-    __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_idle_add); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 225; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_idle_add); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 308; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
     __pyx_t_4 = NULL;
     if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_3))) {
@@ -3521,16 +4224,16 @@ static PyObject *__pyx_pf_10openglTest_22map_event(CYTHON_UNUSED PyObject *__pyx
       }
     }
     if (!__pyx_t_4) {
-      __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_v_widget); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 225; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_v_widget); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 308; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_2);
     } else {
-      __pyx_t_5 = PyTuple_New(1+1); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 225; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_5 = PyTuple_New(1+1); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 308; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_5);
       PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_4); __Pyx_GIVEREF(__pyx_t_4); __pyx_t_4 = NULL;
       __Pyx_INCREF(__pyx_v_widget);
       PyTuple_SET_ITEM(__pyx_t_5, 0+1, __pyx_v_widget);
       __Pyx_GIVEREF(__pyx_v_widget);
-      __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_5, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 225; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_5, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 308; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_2);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     }
@@ -3540,7 +4243,7 @@ static PyObject *__pyx_pf_10openglTest_22map_event(CYTHON_UNUSED PyObject *__pyx
   }
   __pyx_L3:;
 
-  /* "openglTest.pyx":226
+  /* "openglTest.pyx":309
  *     if animate:
  *         idle_add(widget)
  *     return True             # <<<<<<<<<<<<<<
@@ -3552,7 +4255,7 @@ static PyObject *__pyx_pf_10openglTest_22map_event(CYTHON_UNUSED PyObject *__pyx
   __pyx_r = Py_True;
   goto __pyx_L0;
 
-  /* "openglTest.pyx":220
+  /* "openglTest.pyx":303
  *         idle_id = 0
  * 
  * def map_event(widget, event, data):             # <<<<<<<<<<<<<<
@@ -3574,7 +4277,7 @@ static PyObject *__pyx_pf_10openglTest_22map_event(CYTHON_UNUSED PyObject *__pyx
   return __pyx_r;
 }
 
-/* "openglTest.pyx":228
+/* "openglTest.pyx":311
  *     return True
  * 
  * def unmap_event(widget, event, data):             # <<<<<<<<<<<<<<
@@ -3583,10 +4286,10 @@ static PyObject *__pyx_pf_10openglTest_22map_event(CYTHON_UNUSED PyObject *__pyx
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_10openglTest_25unmap_event(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static char __pyx_doc_10openglTest_24unmap_event[] = "The \"unmap_event\" signal handler. Any processing required when the\n    OpenGL-capable drawing area is unmapped should be done here.";
-static PyMethodDef __pyx_mdef_10openglTest_25unmap_event = {"unmap_event", (PyCFunction)__pyx_pw_10openglTest_25unmap_event, METH_VARARGS|METH_KEYWORDS, __pyx_doc_10openglTest_24unmap_event};
-static PyObject *__pyx_pw_10openglTest_25unmap_event(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_10openglTest_27unmap_event(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static char __pyx_doc_10openglTest_26unmap_event[] = "The \"unmap_event\" signal handler. Any processing required when the\n    OpenGL-capable drawing area is unmapped should be done here.";
+static PyMethodDef __pyx_mdef_10openglTest_27unmap_event = {"unmap_event", (PyCFunction)__pyx_pw_10openglTest_27unmap_event, METH_VARARGS|METH_KEYWORDS, __pyx_doc_10openglTest_26unmap_event};
+static PyObject *__pyx_pw_10openglTest_27unmap_event(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_widget = 0;
   CYTHON_UNUSED PyObject *__pyx_v_event = 0;
   CYTHON_UNUSED PyObject *__pyx_v_data = 0;
@@ -3617,16 +4320,16 @@ static PyObject *__pyx_pw_10openglTest_25unmap_event(PyObject *__pyx_self, PyObj
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_event)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("unmap_event", 1, 3, 3, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 228; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("unmap_event", 1, 3, 3, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 311; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
         case  2:
         if (likely((values[2] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_data)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("unmap_event", 1, 3, 3, 2); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 228; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("unmap_event", 1, 3, 3, 2); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 311; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "unmap_event") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 228; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "unmap_event") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 311; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 3) {
       goto __pyx_L5_argtuple_error;
@@ -3641,20 +4344,20 @@ static PyObject *__pyx_pw_10openglTest_25unmap_event(PyObject *__pyx_self, PyObj
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("unmap_event", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 228; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __Pyx_RaiseArgtupleInvalid("unmap_event", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 311; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
   __Pyx_AddTraceback("openglTest.unmap_event", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_10openglTest_24unmap_event(__pyx_self, __pyx_v_widget, __pyx_v_event, __pyx_v_data);
+  __pyx_r = __pyx_pf_10openglTest_26unmap_event(__pyx_self, __pyx_v_widget, __pyx_v_event, __pyx_v_data);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_10openglTest_24unmap_event(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_widget, CYTHON_UNUSED PyObject *__pyx_v_event, CYTHON_UNUSED PyObject *__pyx_v_data) {
+static PyObject *__pyx_pf_10openglTest_26unmap_event(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_widget, CYTHON_UNUSED PyObject *__pyx_v_event, CYTHON_UNUSED PyObject *__pyx_v_data) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -3666,14 +4369,14 @@ static PyObject *__pyx_pf_10openglTest_24unmap_event(CYTHON_UNUSED PyObject *__p
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("unmap_event", 0);
 
-  /* "openglTest.pyx":232
+  /* "openglTest.pyx":315
  *     OpenGL-capable drawing area is unmapped should be done here.'''
  * 
  *     idle_remove(widget)             # <<<<<<<<<<<<<<
  *     return True
  * 
  */
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_idle_remove); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 232; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_idle_remove); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 315; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_2))) {
@@ -3686,23 +4389,23 @@ static PyObject *__pyx_pf_10openglTest_24unmap_event(CYTHON_UNUSED PyObject *__p
     }
   }
   if (!__pyx_t_3) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_widget); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 232; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_widget); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 315; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
   } else {
-    __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 232; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 315; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
     PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_3); __Pyx_GIVEREF(__pyx_t_3); __pyx_t_3 = NULL;
     __Pyx_INCREF(__pyx_v_widget);
     PyTuple_SET_ITEM(__pyx_t_4, 0+1, __pyx_v_widget);
     __Pyx_GIVEREF(__pyx_v_widget);
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_4, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 232; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_4, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 315; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "openglTest.pyx":233
+  /* "openglTest.pyx":316
  * 
  *     idle_remove(widget)
  *     return True             # <<<<<<<<<<<<<<
@@ -3714,7 +4417,7 @@ static PyObject *__pyx_pf_10openglTest_24unmap_event(CYTHON_UNUSED PyObject *__p
   __pyx_r = Py_True;
   goto __pyx_L0;
 
-  /* "openglTest.pyx":228
+  /* "openglTest.pyx":311
  *     return True
  * 
  * def unmap_event(widget, event, data):             # <<<<<<<<<<<<<<
@@ -3736,7 +4439,7 @@ static PyObject *__pyx_pf_10openglTest_24unmap_event(CYTHON_UNUSED PyObject *__p
   return __pyx_r;
 }
 
-/* "openglTest.pyx":235
+/* "openglTest.pyx":318
  *     return True
  * 
  * def visibility_notify_event(widget, event, data):             # <<<<<<<<<<<<<<
@@ -3745,10 +4448,10 @@ static PyObject *__pyx_pf_10openglTest_24unmap_event(CYTHON_UNUSED PyObject *__p
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_10openglTest_27visibility_notify_event(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static char __pyx_doc_10openglTest_26visibility_notify_event[] = "The \"visibility_notify_event\" signal handler. Any processing required\n    when the OpenGL-capable drawing area is visually obscured should be\n    done here.";
-static PyMethodDef __pyx_mdef_10openglTest_27visibility_notify_event = {"visibility_notify_event", (PyCFunction)__pyx_pw_10openglTest_27visibility_notify_event, METH_VARARGS|METH_KEYWORDS, __pyx_doc_10openglTest_26visibility_notify_event};
-static PyObject *__pyx_pw_10openglTest_27visibility_notify_event(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_10openglTest_29visibility_notify_event(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static char __pyx_doc_10openglTest_28visibility_notify_event[] = "The \"visibility_notify_event\" signal handler. Any processing required\n    when the OpenGL-capable drawing area is visually obscured should be\n    done here.";
+static PyMethodDef __pyx_mdef_10openglTest_29visibility_notify_event = {"visibility_notify_event", (PyCFunction)__pyx_pw_10openglTest_29visibility_notify_event, METH_VARARGS|METH_KEYWORDS, __pyx_doc_10openglTest_28visibility_notify_event};
+static PyObject *__pyx_pw_10openglTest_29visibility_notify_event(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_widget = 0;
   PyObject *__pyx_v_event = 0;
   CYTHON_UNUSED PyObject *__pyx_v_data = 0;
@@ -3779,16 +4482,16 @@ static PyObject *__pyx_pw_10openglTest_27visibility_notify_event(PyObject *__pyx
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_event)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("visibility_notify_event", 1, 3, 3, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 235; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("visibility_notify_event", 1, 3, 3, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 318; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
         case  2:
         if (likely((values[2] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_data)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("visibility_notify_event", 1, 3, 3, 2); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 235; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("visibility_notify_event", 1, 3, 3, 2); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 318; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "visibility_notify_event") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 235; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "visibility_notify_event") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 318; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 3) {
       goto __pyx_L5_argtuple_error;
@@ -3803,20 +4506,20 @@ static PyObject *__pyx_pw_10openglTest_27visibility_notify_event(PyObject *__pyx
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("visibility_notify_event", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 235; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __Pyx_RaiseArgtupleInvalid("visibility_notify_event", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 318; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
   __Pyx_AddTraceback("openglTest.visibility_notify_event", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_10openglTest_26visibility_notify_event(__pyx_self, __pyx_v_widget, __pyx_v_event, __pyx_v_data);
+  __pyx_r = __pyx_pf_10openglTest_28visibility_notify_event(__pyx_self, __pyx_v_widget, __pyx_v_event, __pyx_v_data);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_10openglTest_26visibility_notify_event(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_widget, PyObject *__pyx_v_event, CYTHON_UNUSED PyObject *__pyx_v_data) {
+static PyObject *__pyx_pf_10openglTest_28visibility_notify_event(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_widget, PyObject *__pyx_v_event, CYTHON_UNUSED PyObject *__pyx_v_data) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   int __pyx_t_1;
@@ -3829,7 +4532,7 @@ static PyObject *__pyx_pf_10openglTest_26visibility_notify_event(CYTHON_UNUSED P
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("visibility_notify_event", 0);
 
-  /* "openglTest.pyx":240
+  /* "openglTest.pyx":323
  *     done here.'''
  * 
  *     if animate:             # <<<<<<<<<<<<<<
@@ -3839,38 +4542,38 @@ static PyObject *__pyx_pf_10openglTest_26visibility_notify_event(CYTHON_UNUSED P
   __pyx_t_1 = (__pyx_v_10openglTest_animate != 0);
   if (__pyx_t_1) {
 
-    /* "openglTest.pyx":241
+    /* "openglTest.pyx":324
  * 
  *     if animate:
  *         if event.state == Gdk.VisibilityState.FULLY_OBSCURED:             # <<<<<<<<<<<<<<
  *             idle_remove(widget)
  *         else:
  */
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_event, __pyx_n_s_state); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 241; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_event, __pyx_n_s_state); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 324; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_Gdk); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 241; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_Gdk); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 324; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_VisibilityState); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 241; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_VisibilityState); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 324; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_FULLY_OBSCURED); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 241; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_FULLY_OBSCURED); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 324; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __pyx_t_4 = PyObject_RichCompare(__pyx_t_2, __pyx_t_3, Py_EQ); __Pyx_XGOTREF(__pyx_t_4); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 241; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = PyObject_RichCompare(__pyx_t_2, __pyx_t_3, Py_EQ); __Pyx_XGOTREF(__pyx_t_4); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 324; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_t_4); if (unlikely(__pyx_t_1 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 241; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_t_4); if (unlikely(__pyx_t_1 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 324; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     if (__pyx_t_1) {
 
-      /* "openglTest.pyx":242
+      /* "openglTest.pyx":325
  *     if animate:
  *         if event.state == Gdk.VisibilityState.FULLY_OBSCURED:
  *             idle_remove(widget)             # <<<<<<<<<<<<<<
  *         else:
  *             idle_add(widget)
  */
-      __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_idle_remove); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 242; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_idle_remove); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 325; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_3);
       __pyx_t_2 = NULL;
       if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_3))) {
@@ -3883,16 +4586,16 @@ static PyObject *__pyx_pf_10openglTest_26visibility_notify_event(CYTHON_UNUSED P
         }
       }
       if (!__pyx_t_2) {
-        __pyx_t_4 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_v_widget); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 242; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_4 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_v_widget); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 325; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_4);
       } else {
-        __pyx_t_5 = PyTuple_New(1+1); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 242; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_5 = PyTuple_New(1+1); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 325; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_5);
         PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_2); __Pyx_GIVEREF(__pyx_t_2); __pyx_t_2 = NULL;
         __Pyx_INCREF(__pyx_v_widget);
         PyTuple_SET_ITEM(__pyx_t_5, 0+1, __pyx_v_widget);
         __Pyx_GIVEREF(__pyx_v_widget);
-        __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_5, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 242; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_5, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 325; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_4);
         __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
       }
@@ -3902,14 +4605,14 @@ static PyObject *__pyx_pf_10openglTest_26visibility_notify_event(CYTHON_UNUSED P
     }
     /*else*/ {
 
-      /* "openglTest.pyx":244
+      /* "openglTest.pyx":327
  *             idle_remove(widget)
  *         else:
  *             idle_add(widget)             # <<<<<<<<<<<<<<
  *     return True
  * 
  */
-      __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_idle_add); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 244; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_idle_add); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 327; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_3);
       __pyx_t_5 = NULL;
       if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_3))) {
@@ -3922,16 +4625,16 @@ static PyObject *__pyx_pf_10openglTest_26visibility_notify_event(CYTHON_UNUSED P
         }
       }
       if (!__pyx_t_5) {
-        __pyx_t_4 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_v_widget); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 244; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_4 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_v_widget); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 327; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_4);
       } else {
-        __pyx_t_2 = PyTuple_New(1+1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 244; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_2 = PyTuple_New(1+1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 327; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_2);
         PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_5); __Pyx_GIVEREF(__pyx_t_5); __pyx_t_5 = NULL;
         __Pyx_INCREF(__pyx_v_widget);
         PyTuple_SET_ITEM(__pyx_t_2, 0+1, __pyx_v_widget);
         __Pyx_GIVEREF(__pyx_v_widget);
-        __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_2, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 244; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_2, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 327; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_4);
         __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
       }
@@ -3943,7 +4646,7 @@ static PyObject *__pyx_pf_10openglTest_26visibility_notify_event(CYTHON_UNUSED P
   }
   __pyx_L3:;
 
-  /* "openglTest.pyx":245
+  /* "openglTest.pyx":328
  *         else:
  *             idle_add(widget)
  *     return True             # <<<<<<<<<<<<<<
@@ -3955,7 +4658,7 @@ static PyObject *__pyx_pf_10openglTest_26visibility_notify_event(CYTHON_UNUSED P
   __pyx_r = Py_True;
   goto __pyx_L0;
 
-  /* "openglTest.pyx":235
+  /* "openglTest.pyx":318
  *     return True
  * 
  * def visibility_notify_event(widget, event, data):             # <<<<<<<<<<<<<<
@@ -3977,7 +4680,7 @@ static PyObject *__pyx_pf_10openglTest_26visibility_notify_event(CYTHON_UNUSED P
   return __pyx_r;
 }
 
-/* "openglTest.pyx":252
+/* "openglTest.pyx":335
  * #
  * 
  * def toggle_animation(widget):             # <<<<<<<<<<<<<<
@@ -3986,21 +4689,21 @@ static PyObject *__pyx_pf_10openglTest_26visibility_notify_event(CYTHON_UNUSED P
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_10openglTest_29toggle_animation(PyObject *__pyx_self, PyObject *__pyx_v_widget); /*proto*/
-static char __pyx_doc_10openglTest_28toggle_animation[] = "Toggle animation.";
-static PyMethodDef __pyx_mdef_10openglTest_29toggle_animation = {"toggle_animation", (PyCFunction)__pyx_pw_10openglTest_29toggle_animation, METH_O, __pyx_doc_10openglTest_28toggle_animation};
-static PyObject *__pyx_pw_10openglTest_29toggle_animation(PyObject *__pyx_self, PyObject *__pyx_v_widget) {
+static PyObject *__pyx_pw_10openglTest_31toggle_animation(PyObject *__pyx_self, PyObject *__pyx_v_widget); /*proto*/
+static char __pyx_doc_10openglTest_30toggle_animation[] = "Toggle animation.";
+static PyMethodDef __pyx_mdef_10openglTest_31toggle_animation = {"toggle_animation", (PyCFunction)__pyx_pw_10openglTest_31toggle_animation, METH_O, __pyx_doc_10openglTest_30toggle_animation};
+static PyObject *__pyx_pw_10openglTest_31toggle_animation(PyObject *__pyx_self, PyObject *__pyx_v_widget) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("toggle_animation (wrapper)", 0);
-  __pyx_r = __pyx_pf_10openglTest_28toggle_animation(__pyx_self, ((PyObject *)__pyx_v_widget));
+  __pyx_r = __pyx_pf_10openglTest_30toggle_animation(__pyx_self, ((PyObject *)__pyx_v_widget));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_10openglTest_28toggle_animation(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_widget) {
+static PyObject *__pyx_pf_10openglTest_30toggle_animation(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_widget) {
   PyObject *__pyx_v_allocation = NULL;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
@@ -4015,7 +4718,7 @@ static PyObject *__pyx_pf_10openglTest_28toggle_animation(CYTHON_UNUSED PyObject
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("toggle_animation", 0);
 
-  /* "openglTest.pyx":256
+  /* "openglTest.pyx":339
  * 
  *     global animate
  *     animate = not animate             # <<<<<<<<<<<<<<
@@ -4024,7 +4727,7 @@ static PyObject *__pyx_pf_10openglTest_28toggle_animation(CYTHON_UNUSED PyObject
  */
   __pyx_v_10openglTest_animate = (!(__pyx_v_10openglTest_animate != 0));
 
-  /* "openglTest.pyx":258
+  /* "openglTest.pyx":341
  *     animate = not animate
  * 
  *     if animate:             # <<<<<<<<<<<<<<
@@ -4034,14 +4737,14 @@ static PyObject *__pyx_pf_10openglTest_28toggle_animation(CYTHON_UNUSED PyObject
   __pyx_t_1 = (__pyx_v_10openglTest_animate != 0);
   if (__pyx_t_1) {
 
-    /* "openglTest.pyx":259
+    /* "openglTest.pyx":342
  * 
  *     if animate:
  *         idle_add(widget)             # <<<<<<<<<<<<<<
  *     else:
  *         idle_remove(widget)
  */
-    __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_idle_add); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 259; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_idle_add); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 342; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
     __pyx_t_4 = NULL;
     if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_3))) {
@@ -4054,16 +4757,16 @@ static PyObject *__pyx_pf_10openglTest_28toggle_animation(CYTHON_UNUSED PyObject
       }
     }
     if (!__pyx_t_4) {
-      __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_v_widget); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 259; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_v_widget); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 342; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_2);
     } else {
-      __pyx_t_5 = PyTuple_New(1+1); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 259; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_5 = PyTuple_New(1+1); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 342; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_5);
       PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_4); __Pyx_GIVEREF(__pyx_t_4); __pyx_t_4 = NULL;
       __Pyx_INCREF(__pyx_v_widget);
       PyTuple_SET_ITEM(__pyx_t_5, 0+1, __pyx_v_widget);
       __Pyx_GIVEREF(__pyx_v_widget);
-      __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_5, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 259; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_5, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 342; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_2);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     }
@@ -4073,14 +4776,14 @@ static PyObject *__pyx_pf_10openglTest_28toggle_animation(CYTHON_UNUSED PyObject
   }
   /*else*/ {
 
-    /* "openglTest.pyx":261
+    /* "openglTest.pyx":344
  *         idle_add(widget)
  *     else:
  *         idle_remove(widget)             # <<<<<<<<<<<<<<
  *         allocation = widget.get_allocation()
  *         widget.get_window().invalidate_rect(allocation, False)
  */
-    __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_idle_remove); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 261; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_idle_remove); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 344; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
     __pyx_t_5 = NULL;
     if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_3))) {
@@ -4093,30 +4796,30 @@ static PyObject *__pyx_pf_10openglTest_28toggle_animation(CYTHON_UNUSED PyObject
       }
     }
     if (!__pyx_t_5) {
-      __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_v_widget); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 261; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_v_widget); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 344; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_2);
     } else {
-      __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 261; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 344; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_4);
       PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_5); __Pyx_GIVEREF(__pyx_t_5); __pyx_t_5 = NULL;
       __Pyx_INCREF(__pyx_v_widget);
       PyTuple_SET_ITEM(__pyx_t_4, 0+1, __pyx_v_widget);
       __Pyx_GIVEREF(__pyx_v_widget);
-      __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_4, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 261; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_4, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 344; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_2);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     }
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-    /* "openglTest.pyx":262
+    /* "openglTest.pyx":345
  *     else:
  *         idle_remove(widget)
  *         allocation = widget.get_allocation()             # <<<<<<<<<<<<<<
  *         widget.get_window().invalidate_rect(allocation, False)
  * 
  */
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_widget, __pyx_n_s_get_allocation); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 262; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_widget, __pyx_n_s_get_allocation); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 345; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
     __pyx_t_4 = NULL;
     if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_3))) {
@@ -4129,24 +4832,24 @@ static PyObject *__pyx_pf_10openglTest_28toggle_animation(CYTHON_UNUSED PyObject
       }
     }
     if (__pyx_t_4) {
-      __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_4); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 262; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_4); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 345; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     } else {
-      __pyx_t_2 = __Pyx_PyObject_CallNoArg(__pyx_t_3); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 262; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_2 = __Pyx_PyObject_CallNoArg(__pyx_t_3); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 345; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __pyx_v_allocation = __pyx_t_2;
     __pyx_t_2 = 0;
 
-    /* "openglTest.pyx":263
+    /* "openglTest.pyx":346
  *         idle_remove(widget)
  *         allocation = widget.get_allocation()
  *         widget.get_window().invalidate_rect(allocation, False)             # <<<<<<<<<<<<<<
  * 
  * 
  */
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_widget, __pyx_n_s_get_window); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 263; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_widget, __pyx_n_s_get_window); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 346; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
     __pyx_t_5 = NULL;
     if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_4))) {
@@ -4159,14 +4862,14 @@ static PyObject *__pyx_pf_10openglTest_28toggle_animation(CYTHON_UNUSED PyObject
       }
     }
     if (__pyx_t_5) {
-      __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_t_5); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 263; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_t_5); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 346; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     } else {
-      __pyx_t_3 = __Pyx_PyObject_CallNoArg(__pyx_t_4); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 263; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_3 = __Pyx_PyObject_CallNoArg(__pyx_t_4); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 346; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_invalidate_rect); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 263; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_invalidate_rect); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 346; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __pyx_t_3 = NULL;
@@ -4181,7 +4884,7 @@ static PyObject *__pyx_pf_10openglTest_28toggle_animation(CYTHON_UNUSED PyObject
         __pyx_t_6 = 1;
       }
     }
-    __pyx_t_5 = PyTuple_New(2+__pyx_t_6); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 263; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_5 = PyTuple_New(2+__pyx_t_6); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 346; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_5);
     if (__pyx_t_3) {
       PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_3); __Pyx_GIVEREF(__pyx_t_3); __pyx_t_3 = NULL;
@@ -4192,7 +4895,7 @@ static PyObject *__pyx_pf_10openglTest_28toggle_animation(CYTHON_UNUSED PyObject
     __Pyx_INCREF(Py_False);
     PyTuple_SET_ITEM(__pyx_t_5, 1+__pyx_t_6, Py_False);
     __Pyx_GIVEREF(Py_False);
-    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_5, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 263; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_5, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 346; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
@@ -4200,7 +4903,7 @@ static PyObject *__pyx_pf_10openglTest_28toggle_animation(CYTHON_UNUSED PyObject
   }
   __pyx_L3:;
 
-  /* "openglTest.pyx":252
+  /* "openglTest.pyx":335
  * #
  * 
  * def toggle_animation(widget):             # <<<<<<<<<<<<<<
@@ -4225,7 +4928,7 @@ static PyObject *__pyx_pf_10openglTest_28toggle_animation(CYTHON_UNUSED PyObject
   return __pyx_r;
 }
 
-/* "openglTest.pyx":270
+/* "openglTest.pyx":353
  * #
  * 
  * def create_popup_menu(drawing_area):             # <<<<<<<<<<<<<<
@@ -4234,21 +4937,21 @@ static PyObject *__pyx_pf_10openglTest_28toggle_animation(CYTHON_UNUSED PyObject
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_10openglTest_31create_popup_menu(PyObject *__pyx_self, PyObject *__pyx_v_drawing_area); /*proto*/
-static char __pyx_doc_10openglTest_30create_popup_menu[] = "Creates the popup menu to be displayed.";
-static PyMethodDef __pyx_mdef_10openglTest_31create_popup_menu = {"create_popup_menu", (PyCFunction)__pyx_pw_10openglTest_31create_popup_menu, METH_O, __pyx_doc_10openglTest_30create_popup_menu};
-static PyObject *__pyx_pw_10openglTest_31create_popup_menu(PyObject *__pyx_self, PyObject *__pyx_v_drawing_area) {
+static PyObject *__pyx_pw_10openglTest_33create_popup_menu(PyObject *__pyx_self, PyObject *__pyx_v_drawing_area); /*proto*/
+static char __pyx_doc_10openglTest_32create_popup_menu[] = "Creates the popup menu to be displayed.";
+static PyMethodDef __pyx_mdef_10openglTest_33create_popup_menu = {"create_popup_menu", (PyCFunction)__pyx_pw_10openglTest_33create_popup_menu, METH_O, __pyx_doc_10openglTest_32create_popup_menu};
+static PyObject *__pyx_pw_10openglTest_33create_popup_menu(PyObject *__pyx_self, PyObject *__pyx_v_drawing_area) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("create_popup_menu (wrapper)", 0);
-  __pyx_r = __pyx_pf_10openglTest_30create_popup_menu(__pyx_self, ((PyObject *)__pyx_v_drawing_area));
+  __pyx_r = __pyx_pf_10openglTest_32create_popup_menu(__pyx_self, ((PyObject *)__pyx_v_drawing_area));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_10openglTest_30create_popup_menu(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_drawing_area) {
+static PyObject *__pyx_pf_10openglTest_32create_popup_menu(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_drawing_area) {
   PyObject *__pyx_v_menu = NULL;
   PyObject *__pyx_v_menu_item = NULL;
   PyObject *__pyx_r = NULL;
@@ -4265,16 +4968,16 @@ static PyObject *__pyx_pf_10openglTest_30create_popup_menu(CYTHON_UNUSED PyObjec
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("create_popup_menu", 0);
 
-  /* "openglTest.pyx":273
+  /* "openglTest.pyx":356
  *     '''Creates the popup menu to be displayed.'''
  * 
  *     menu = Gtk.Menu()             # <<<<<<<<<<<<<<
  * 
  *     # Toggle animation
  */
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_Gtk); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 273; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_Gtk); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 356; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_Menu); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 273; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_Menu); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 356; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_2 = NULL;
@@ -4288,56 +4991,56 @@ static PyObject *__pyx_pf_10openglTest_30create_popup_menu(CYTHON_UNUSED PyObjec
     }
   }
   if (__pyx_t_2) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 273; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 356; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   } else {
-    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_3); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 273; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_3); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 356; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_v_menu = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "openglTest.pyx":276
+  /* "openglTest.pyx":359
  * 
  *     # Toggle animation
  *     menu_item = Gtk.MenuItem.new_with_label("Toggle Animation")             # <<<<<<<<<<<<<<
  *     menu.append(menu_item)
  *     menu_item.connect_object("activate", toggle_animation, drawing_area)
  */
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_Gtk); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 276; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_Gtk); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 359; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_MenuItem); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 276; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_MenuItem); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 359; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_new_with_label); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 276; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_new_with_label); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 359; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 276; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__19, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 359; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_menu_item = __pyx_t_3;
   __pyx_t_3 = 0;
 
-  /* "openglTest.pyx":277
+  /* "openglTest.pyx":360
  *     # Toggle animation
  *     menu_item = Gtk.MenuItem.new_with_label("Toggle Animation")
  *     menu.append(menu_item)             # <<<<<<<<<<<<<<
  *     menu_item.connect_object("activate", toggle_animation, drawing_area)
  *     menu_item.show()
  */
-  __pyx_t_4 = __Pyx_PyObject_Append(__pyx_v_menu, __pyx_v_menu_item); if (unlikely(__pyx_t_4 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 277; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_PyObject_Append(__pyx_v_menu, __pyx_v_menu_item); if (unlikely(__pyx_t_4 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 360; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "openglTest.pyx":278
+  /* "openglTest.pyx":361
  *     menu_item = Gtk.MenuItem.new_with_label("Toggle Animation")
  *     menu.append(menu_item)
  *     menu_item.connect_object("activate", toggle_animation, drawing_area)             # <<<<<<<<<<<<<<
  *     menu_item.show()
  * 
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_menu_item, __pyx_n_s_connect_object); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 278; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_menu_item, __pyx_n_s_connect_object); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 361; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_toggle_animation); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 278; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_toggle_animation); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 361; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_5 = NULL;
   __pyx_t_6 = 0;
@@ -4351,7 +5054,7 @@ static PyObject *__pyx_pf_10openglTest_30create_popup_menu(CYTHON_UNUSED PyObjec
       __pyx_t_6 = 1;
     }
   }
-  __pyx_t_7 = PyTuple_New(3+__pyx_t_6); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 278; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = PyTuple_New(3+__pyx_t_6); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 361; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_7);
   if (__pyx_t_5) {
     PyTuple_SET_ITEM(__pyx_t_7, 0, __pyx_t_5); __Pyx_GIVEREF(__pyx_t_5); __pyx_t_5 = NULL;
@@ -4365,20 +5068,20 @@ static PyObject *__pyx_pf_10openglTest_30create_popup_menu(CYTHON_UNUSED PyObjec
   PyTuple_SET_ITEM(__pyx_t_7, 2+__pyx_t_6, __pyx_v_drawing_area);
   __Pyx_GIVEREF(__pyx_v_drawing_area);
   __pyx_t_2 = 0;
-  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_7, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 278; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_7, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 361; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "openglTest.pyx":279
+  /* "openglTest.pyx":362
  *     menu.append(menu_item)
  *     menu_item.connect_object("activate", toggle_animation, drawing_area)
  *     menu_item.show()             # <<<<<<<<<<<<<<
  * 
  *     # Quit
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_menu_item, __pyx_n_s_show); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 279; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_menu_item, __pyx_n_s_show); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 362; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_t_7 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_1))) {
@@ -4391,57 +5094,57 @@ static PyObject *__pyx_pf_10openglTest_30create_popup_menu(CYTHON_UNUSED PyObjec
     }
   }
   if (__pyx_t_7) {
-    __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_t_7); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 279; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_t_7); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 362; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   } else {
-    __pyx_t_3 = __Pyx_PyObject_CallNoArg(__pyx_t_1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 279; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyObject_CallNoArg(__pyx_t_1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 362; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "openglTest.pyx":282
+  /* "openglTest.pyx":365
  * 
  *     # Quit
  *     menu_item = Gtk.MenuItem.new_with_label("Quit")             # <<<<<<<<<<<<<<
  *     menu.append(menu_item)
  *     menu_item.connect("activate", Gtk.main_quit)
  */
-  __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_Gtk); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 282; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_Gtk); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 365; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_MenuItem); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 282; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_MenuItem); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 365; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_new_with_label); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 282; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_new_with_label); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 365; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__3, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 282; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__20, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 365; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF_SET(__pyx_v_menu_item, __pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "openglTest.pyx":283
+  /* "openglTest.pyx":366
  *     # Quit
  *     menu_item = Gtk.MenuItem.new_with_label("Quit")
  *     menu.append(menu_item)             # <<<<<<<<<<<<<<
  *     menu_item.connect("activate", Gtk.main_quit)
  *     menu_item.show()
  */
-  __pyx_t_4 = __Pyx_PyObject_Append(__pyx_v_menu, __pyx_v_menu_item); if (unlikely(__pyx_t_4 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 283; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_PyObject_Append(__pyx_v_menu, __pyx_v_menu_item); if (unlikely(__pyx_t_4 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 366; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "openglTest.pyx":284
+  /* "openglTest.pyx":367
  *     menu_item = Gtk.MenuItem.new_with_label("Quit")
  *     menu.append(menu_item)
  *     menu_item.connect("activate", Gtk.main_quit)             # <<<<<<<<<<<<<<
  *     menu_item.show()
  * 
  */
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_menu_item, __pyx_n_s_connect); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 284; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_menu_item, __pyx_n_s_connect); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 367; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_7 = __Pyx_GetModuleGlobalName(__pyx_n_s_Gtk); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 284; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = __Pyx_GetModuleGlobalName(__pyx_n_s_Gtk); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 367; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_7, __pyx_n_s_main_quit); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 284; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_7, __pyx_n_s_main_quit); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 367; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_t_7 = NULL;
@@ -4456,7 +5159,7 @@ static PyObject *__pyx_pf_10openglTest_30create_popup_menu(CYTHON_UNUSED PyObjec
       __pyx_t_6 = 1;
     }
   }
-  __pyx_t_5 = PyTuple_New(2+__pyx_t_6); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 284; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = PyTuple_New(2+__pyx_t_6); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 367; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   if (__pyx_t_7) {
     PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_7); __Pyx_GIVEREF(__pyx_t_7); __pyx_t_7 = NULL;
@@ -4467,20 +5170,20 @@ static PyObject *__pyx_pf_10openglTest_30create_popup_menu(CYTHON_UNUSED PyObjec
   PyTuple_SET_ITEM(__pyx_t_5, 1+__pyx_t_6, __pyx_t_2);
   __Pyx_GIVEREF(__pyx_t_2);
   __pyx_t_2 = 0;
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 284; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 367; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "openglTest.pyx":285
+  /* "openglTest.pyx":368
  *     menu.append(menu_item)
  *     menu_item.connect("activate", Gtk.main_quit)
  *     menu_item.show()             # <<<<<<<<<<<<<<
  * 
  *     return menu
  */
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_menu_item, __pyx_n_s_show); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 285; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_menu_item, __pyx_n_s_show); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 368; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_5 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_3))) {
@@ -4493,16 +5196,16 @@ static PyObject *__pyx_pf_10openglTest_30create_popup_menu(CYTHON_UNUSED PyObjec
     }
   }
   if (__pyx_t_5) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_5); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 285; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_5); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 368; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   } else {
-    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_3); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 285; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_3); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 368; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "openglTest.pyx":287
+  /* "openglTest.pyx":370
  *     menu_item.show()
  * 
  *     return menu             # <<<<<<<<<<<<<<
@@ -4514,7 +5217,7 @@ static PyObject *__pyx_pf_10openglTest_30create_popup_menu(CYTHON_UNUSED PyObjec
   __pyx_r = __pyx_v_menu;
   goto __pyx_L0;
 
-  /* "openglTest.pyx":270
+  /* "openglTest.pyx":353
  * #
  * 
  * def create_popup_menu(drawing_area):             # <<<<<<<<<<<<<<
@@ -4539,7 +5242,7 @@ static PyObject *__pyx_pf_10openglTest_30create_popup_menu(CYTHON_UNUSED PyObjec
   return __pyx_r;
 }
 
-/* "openglTest.pyx":289
+/* "openglTest.pyx":372
  *     return menu
  * 
  * def create_window(glconfig):             # <<<<<<<<<<<<<<
@@ -4548,21 +5251,21 @@ static PyObject *__pyx_pf_10openglTest_30create_popup_menu(CYTHON_UNUSED PyObjec
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_10openglTest_33create_window(PyObject *__pyx_self, PyObject *__pyx_v_glconfig); /*proto*/
-static char __pyx_doc_10openglTest_32create_window[] = "Creates the simple application window with one\n    drawing area that has an OpenGL-capable visual.";
-static PyMethodDef __pyx_mdef_10openglTest_33create_window = {"create_window", (PyCFunction)__pyx_pw_10openglTest_33create_window, METH_O, __pyx_doc_10openglTest_32create_window};
-static PyObject *__pyx_pw_10openglTest_33create_window(PyObject *__pyx_self, PyObject *__pyx_v_glconfig) {
+static PyObject *__pyx_pw_10openglTest_35create_window(PyObject *__pyx_self, PyObject *__pyx_v_glconfig); /*proto*/
+static char __pyx_doc_10openglTest_34create_window[] = "Creates the simple application window with one\n    drawing area that has an OpenGL-capable visual.";
+static PyMethodDef __pyx_mdef_10openglTest_35create_window = {"create_window", (PyCFunction)__pyx_pw_10openglTest_35create_window, METH_O, __pyx_doc_10openglTest_34create_window};
+static PyObject *__pyx_pw_10openglTest_35create_window(PyObject *__pyx_self, PyObject *__pyx_v_glconfig) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("create_window (wrapper)", 0);
-  __pyx_r = __pyx_pf_10openglTest_32create_window(__pyx_self, ((PyObject *)__pyx_v_glconfig));
+  __pyx_r = __pyx_pf_10openglTest_34create_window(__pyx_self, ((PyObject *)__pyx_v_glconfig));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_10openglTest_32create_window(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_glconfig) {
+static PyObject *__pyx_pf_10openglTest_34create_window(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_glconfig) {
   PyObject *__pyx_v_window = NULL;
   PyObject *__pyx_v_vbox = NULL;
   PyObject *__pyx_v_drawing_area = NULL;
@@ -4582,24 +5285,24 @@ static PyObject *__pyx_pf_10openglTest_32create_window(CYTHON_UNUSED PyObject *_
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("create_window", 0);
 
-  /* "openglTest.pyx":295
+  /* "openglTest.pyx":378
  *     ## Top-level window.
  * 
  *     window = Gtk.Window(Gtk.WindowType.TOPLEVEL)             # <<<<<<<<<<<<<<
  *     window.set_title(DEFAULT_TITLE)
  * 
  */
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_Gtk); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 295; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_Gtk); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 378; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_Window); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 295; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_Window); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 378; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_Gtk); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 295; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_Gtk); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 378; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_WindowType); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 295; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_WindowType); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 378; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_TOPLEVEL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 295; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_TOPLEVEL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 378; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __pyx_t_4 = NULL;
@@ -4613,17 +5316,17 @@ static PyObject *__pyx_pf_10openglTest_32create_window(CYTHON_UNUSED PyObject *_
     }
   }
   if (!__pyx_t_4) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 295; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 378; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_GOTREF(__pyx_t_1);
   } else {
-    __pyx_t_5 = PyTuple_New(1+1); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 295; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_5 = PyTuple_New(1+1); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 378; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_5);
     PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_4); __Pyx_GIVEREF(__pyx_t_4); __pyx_t_4 = NULL;
     PyTuple_SET_ITEM(__pyx_t_5, 0+1, __pyx_t_2);
     __Pyx_GIVEREF(__pyx_t_2);
     __pyx_t_2 = 0;
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 295; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 378; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   }
@@ -4631,16 +5334,16 @@ static PyObject *__pyx_pf_10openglTest_32create_window(CYTHON_UNUSED PyObject *_
   __pyx_v_window = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "openglTest.pyx":296
+  /* "openglTest.pyx":379
  * 
  *     window = Gtk.Window(Gtk.WindowType.TOPLEVEL)
  *     window.set_title(DEFAULT_TITLE)             # <<<<<<<<<<<<<<
  * 
  *     # Get automatically redrawn if any of their children changed allocation.
  */
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_window, __pyx_n_s_set_title); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 296; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_window, __pyx_n_s_set_title); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 379; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_DEFAULT_TITLE); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 296; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_DEFAULT_TITLE); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 379; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   __pyx_t_2 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_3))) {
@@ -4653,49 +5356,49 @@ static PyObject *__pyx_pf_10openglTest_32create_window(CYTHON_UNUSED PyObject *_
     }
   }
   if (!__pyx_t_2) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_5); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 296; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_5); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 379; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_GOTREF(__pyx_t_1);
   } else {
-    __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 296; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 379; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
     PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_2); __Pyx_GIVEREF(__pyx_t_2); __pyx_t_2 = NULL;
     PyTuple_SET_ITEM(__pyx_t_4, 0+1, __pyx_t_5);
     __Pyx_GIVEREF(__pyx_t_5);
     __pyx_t_5 = 0;
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_4, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 296; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_4, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 379; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   }
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "openglTest.pyx":299
+  /* "openglTest.pyx":382
  * 
  *     # Get automatically redrawn if any of their children changed allocation.
  *     window.set_reallocate_redraws(True)             # <<<<<<<<<<<<<<
  * 
  *     # Connect signal handlers to the window
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_window, __pyx_n_s_set_reallocate_redraws); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 299; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_window, __pyx_n_s_set_reallocate_redraws); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 382; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__4, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 299; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__21, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 382; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "openglTest.pyx":302
+  /* "openglTest.pyx":385
  * 
  *     # Connect signal handlers to the window
  *     window.connect("delete_event", Gtk.main_quit)             # <<<<<<<<<<<<<<
  * 
  *     ## VBox.
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_window, __pyx_n_s_connect); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 302; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_window, __pyx_n_s_connect); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 385; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_Gtk); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 302; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_Gtk); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 385; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_main_quit); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 302; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_main_quit); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 385; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __pyx_t_4 = NULL;
@@ -4710,7 +5413,7 @@ static PyObject *__pyx_pf_10openglTest_32create_window(CYTHON_UNUSED PyObject *_
       __pyx_t_6 = 1;
     }
   }
-  __pyx_t_2 = PyTuple_New(2+__pyx_t_6); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 302; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyTuple_New(2+__pyx_t_6); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 385; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   if (__pyx_t_4) {
     PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_4); __Pyx_GIVEREF(__pyx_t_4); __pyx_t_4 = NULL;
@@ -4721,38 +5424,38 @@ static PyObject *__pyx_pf_10openglTest_32create_window(CYTHON_UNUSED PyObject *_
   PyTuple_SET_ITEM(__pyx_t_2, 1+__pyx_t_6, __pyx_t_5);
   __Pyx_GIVEREF(__pyx_t_5);
   __pyx_t_5 = 0;
-  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_2, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 302; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_2, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 385; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "openglTest.pyx":306
+  /* "openglTest.pyx":389
  *     ## VBox.
  * 
  *     vbox = Gtk.VBox(False, 0)             # <<<<<<<<<<<<<<
  *     window.add(vbox)
  *     vbox.show()
  */
-  __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_Gtk); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 306; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_Gtk); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 389; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_VBox); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 306; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_VBox); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 389; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__5, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 306; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__22, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 389; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_vbox = __pyx_t_3;
   __pyx_t_3 = 0;
 
-  /* "openglTest.pyx":307
+  /* "openglTest.pyx":390
  * 
  *     vbox = Gtk.VBox(False, 0)
  *     window.add(vbox)             # <<<<<<<<<<<<<<
  *     vbox.show()
  * 
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_window, __pyx_n_s_add); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 307; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_window, __pyx_n_s_add); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 390; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_t_2 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_1))) {
@@ -4765,30 +5468,30 @@ static PyObject *__pyx_pf_10openglTest_32create_window(CYTHON_UNUSED PyObject *_
     }
   }
   if (!__pyx_t_2) {
-    __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_v_vbox); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 307; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_v_vbox); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 390; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
   } else {
-    __pyx_t_5 = PyTuple_New(1+1); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 307; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_5 = PyTuple_New(1+1); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 390; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_5);
     PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_2); __Pyx_GIVEREF(__pyx_t_2); __pyx_t_2 = NULL;
     __Pyx_INCREF(__pyx_v_vbox);
     PyTuple_SET_ITEM(__pyx_t_5, 0+1, __pyx_v_vbox);
     __Pyx_GIVEREF(__pyx_v_vbox);
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_5, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 307; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_5, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 390; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "openglTest.pyx":308
+  /* "openglTest.pyx":391
  *     vbox = Gtk.VBox(False, 0)
  *     window.add(vbox)
  *     vbox.show()             # <<<<<<<<<<<<<<
  * 
  *     ## Drawing area to draw OpenGL scene.
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_vbox, __pyx_n_s_show); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 308; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_vbox, __pyx_n_s_show); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 391; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_t_5 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_1))) {
@@ -4801,25 +5504,25 @@ static PyObject *__pyx_pf_10openglTest_32create_window(CYTHON_UNUSED PyObject *_
     }
   }
   if (__pyx_t_5) {
-    __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_t_5); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 308; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_t_5); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 391; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   } else {
-    __pyx_t_3 = __Pyx_PyObject_CallNoArg(__pyx_t_1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 308; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyObject_CallNoArg(__pyx_t_1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 391; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "openglTest.pyx":312
+  /* "openglTest.pyx":395
  *     ## Drawing area to draw OpenGL scene.
  * 
  *     drawing_area = Gtk.DrawingArea()             # <<<<<<<<<<<<<<
  *     drawing_area.set_size_request(DEFAULT_WIDTH, DEFAULT_HEIGHT)
  * 
  */
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_Gtk); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 312; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_Gtk); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 395; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_DrawingArea); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 312; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_DrawingArea); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 395; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_1 = NULL;
@@ -4833,28 +5536,28 @@ static PyObject *__pyx_pf_10openglTest_32create_window(CYTHON_UNUSED PyObject *_
     }
   }
   if (__pyx_t_1) {
-    __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_t_1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 312; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_t_1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 395; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   } else {
-    __pyx_t_3 = __Pyx_PyObject_CallNoArg(__pyx_t_5); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 312; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyObject_CallNoArg(__pyx_t_5); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 395; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __pyx_v_drawing_area = __pyx_t_3;
   __pyx_t_3 = 0;
 
-  /* "openglTest.pyx":313
+  /* "openglTest.pyx":396
  * 
  *     drawing_area = Gtk.DrawingArea()
  *     drawing_area.set_size_request(DEFAULT_WIDTH, DEFAULT_HEIGHT)             # <<<<<<<<<<<<<<
  * 
  *     # Set OpenGL-capability to the widget
  */
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_drawing_area, __pyx_n_s_set_size_request); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 313; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_drawing_area, __pyx_n_s_set_size_request); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 396; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_DEFAULT_WIDTH); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 313; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_DEFAULT_WIDTH); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 396; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_DEFAULT_HEIGHT); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 313; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_DEFAULT_HEIGHT); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 396; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_4 = NULL;
   __pyx_t_6 = 0;
@@ -4868,7 +5571,7 @@ static PyObject *__pyx_pf_10openglTest_32create_window(CYTHON_UNUSED PyObject *_
       __pyx_t_6 = 1;
     }
   }
-  __pyx_t_7 = PyTuple_New(2+__pyx_t_6); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 313; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = PyTuple_New(2+__pyx_t_6); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 396; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_7);
   if (__pyx_t_4) {
     PyTuple_SET_ITEM(__pyx_t_7, 0, __pyx_t_4); __Pyx_GIVEREF(__pyx_t_4); __pyx_t_4 = NULL;
@@ -4879,38 +5582,38 @@ static PyObject *__pyx_pf_10openglTest_32create_window(CYTHON_UNUSED PyObject *_
   __Pyx_GIVEREF(__pyx_t_2);
   __pyx_t_1 = 0;
   __pyx_t_2 = 0;
-  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_7, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 313; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_7, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 396; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "openglTest.pyx":316
+  /* "openglTest.pyx":399
  * 
  *     # Set OpenGL-capability to the widget
  *     GtkGLExt.widget_set_gl_capability(drawing_area,             # <<<<<<<<<<<<<<
  *                   glconfig,
  *                   None,
  */
-  __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_GtkGLExt); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 316; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_GtkGLExt); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 399; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_widget_set_gl_capability); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 316; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_widget_set_gl_capability); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 399; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "openglTest.pyx":320
+  /* "openglTest.pyx":403
  *                   None,
  *                   True,
  *                   GdkGLExt.RenderType.RGBA_TYPE)             # <<<<<<<<<<<<<<
  *     drawing_area.add_events(
  *                Gdk.EventMask.BUTTON1_MOTION_MASK    |
  */
-  __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_GdkGLExt); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 320; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_GdkGLExt); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 403; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_RenderType); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 320; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_RenderType); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 403; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_RGBA_TYPE); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 320; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_RGBA_TYPE); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 403; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_2 = NULL;
@@ -4925,7 +5628,7 @@ static PyObject *__pyx_pf_10openglTest_32create_window(CYTHON_UNUSED PyObject *_
       __pyx_t_6 = 1;
     }
   }
-  __pyx_t_1 = PyTuple_New(5+__pyx_t_6); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 316; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = PyTuple_New(5+__pyx_t_6); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 399; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   if (__pyx_t_2) {
     PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_2); __Pyx_GIVEREF(__pyx_t_2); __pyx_t_2 = NULL;
@@ -4945,118 +5648,118 @@ static PyObject *__pyx_pf_10openglTest_32create_window(CYTHON_UNUSED PyObject *_
   PyTuple_SET_ITEM(__pyx_t_1, 4+__pyx_t_6, __pyx_t_5);
   __Pyx_GIVEREF(__pyx_t_5);
   __pyx_t_5 = 0;
-  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_t_1, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 316; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_t_1, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 399; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "openglTest.pyx":321
+  /* "openglTest.pyx":404
  *                   True,
  *                   GdkGLExt.RenderType.RGBA_TYPE)
  *     drawing_area.add_events(             # <<<<<<<<<<<<<<
  *                Gdk.EventMask.BUTTON1_MOTION_MASK    |
  *                Gdk.EventMask.BUTTON2_MOTION_MASK    |
  */
-  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_drawing_area, __pyx_n_s_add_events); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 321; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_drawing_area, __pyx_n_s_add_events); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 404; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_7);
 
-  /* "openglTest.pyx":322
+  /* "openglTest.pyx":405
  *                   GdkGLExt.RenderType.RGBA_TYPE)
  *     drawing_area.add_events(
  *                Gdk.EventMask.BUTTON1_MOTION_MASK    |             # <<<<<<<<<<<<<<
  *                Gdk.EventMask.BUTTON2_MOTION_MASK    |
  *                Gdk.EventMask.BUTTON_PRESS_MASK      |
  */
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_Gdk); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 322; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_Gdk); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 405; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_EventMask); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 322; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_EventMask); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 405; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_BUTTON1_MOTION_MASK); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 322; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_BUTTON1_MOTION_MASK); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 405; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "openglTest.pyx":323
+  /* "openglTest.pyx":406
  *     drawing_area.add_events(
  *                Gdk.EventMask.BUTTON1_MOTION_MASK    |
  *                Gdk.EventMask.BUTTON2_MOTION_MASK    |             # <<<<<<<<<<<<<<
  *                Gdk.EventMask.BUTTON_PRESS_MASK      |
  *                Gdk.EventMask.VISIBILITY_NOTIFY_MASK)
  */
-  __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_Gdk); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 323; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_Gdk); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 406; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_EventMask); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 323; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_EventMask); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 406; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_BUTTON2_MOTION_MASK); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 323; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_BUTTON2_MOTION_MASK); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 406; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "openglTest.pyx":322
+  /* "openglTest.pyx":405
  *                   GdkGLExt.RenderType.RGBA_TYPE)
  *     drawing_area.add_events(
  *                Gdk.EventMask.BUTTON1_MOTION_MASK    |             # <<<<<<<<<<<<<<
  *                Gdk.EventMask.BUTTON2_MOTION_MASK    |
  *                Gdk.EventMask.BUTTON_PRESS_MASK      |
  */
-  __pyx_t_2 = PyNumber_Or(__pyx_t_1, __pyx_t_5); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 322; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyNumber_Or(__pyx_t_1, __pyx_t_5); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 405; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "openglTest.pyx":324
+  /* "openglTest.pyx":407
  *                Gdk.EventMask.BUTTON1_MOTION_MASK    |
  *                Gdk.EventMask.BUTTON2_MOTION_MASK    |
  *                Gdk.EventMask.BUTTON_PRESS_MASK      |             # <<<<<<<<<<<<<<
  *                Gdk.EventMask.VISIBILITY_NOTIFY_MASK)
  * 
  */
-  __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_Gdk); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 324; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_Gdk); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 407; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_EventMask); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 324; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_EventMask); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 407; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_BUTTON_PRESS_MASK); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 324; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_BUTTON_PRESS_MASK); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 407; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "openglTest.pyx":323
+  /* "openglTest.pyx":406
  *     drawing_area.add_events(
  *                Gdk.EventMask.BUTTON1_MOTION_MASK    |
  *                Gdk.EventMask.BUTTON2_MOTION_MASK    |             # <<<<<<<<<<<<<<
  *                Gdk.EventMask.BUTTON_PRESS_MASK      |
  *                Gdk.EventMask.VISIBILITY_NOTIFY_MASK)
  */
-  __pyx_t_1 = PyNumber_Or(__pyx_t_2, __pyx_t_5); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 323; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = PyNumber_Or(__pyx_t_2, __pyx_t_5); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 406; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "openglTest.pyx":325
+  /* "openglTest.pyx":408
  *                Gdk.EventMask.BUTTON2_MOTION_MASK    |
  *                Gdk.EventMask.BUTTON_PRESS_MASK      |
  *                Gdk.EventMask.VISIBILITY_NOTIFY_MASK)             # <<<<<<<<<<<<<<
  * 
  *     # Connect signal handlers to the drawing area
  */
-  __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_Gdk); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 325; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_Gdk); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 408; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_EventMask); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 325; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_EventMask); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 408; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_VISIBILITY_NOTIFY_MASK); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 325; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_VISIBILITY_NOTIFY_MASK); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 408; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "openglTest.pyx":324
+  /* "openglTest.pyx":407
  *                Gdk.EventMask.BUTTON1_MOTION_MASK    |
  *                Gdk.EventMask.BUTTON2_MOTION_MASK    |
  *                Gdk.EventMask.BUTTON_PRESS_MASK      |             # <<<<<<<<<<<<<<
  *                Gdk.EventMask.VISIBILITY_NOTIFY_MASK)
  * 
  */
-  __pyx_t_2 = PyNumber_Or(__pyx_t_1, __pyx_t_5); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 324; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyNumber_Or(__pyx_t_1, __pyx_t_5); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 407; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -5071,33 +5774,33 @@ static PyObject *__pyx_pf_10openglTest_32create_window(CYTHON_UNUSED PyObject *_
     }
   }
   if (!__pyx_t_5) {
-    __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_t_7, __pyx_t_2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 321; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_t_7, __pyx_t_2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 404; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_GOTREF(__pyx_t_3);
   } else {
-    __pyx_t_1 = PyTuple_New(1+1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 321; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = PyTuple_New(1+1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 404; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
     PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_5); __Pyx_GIVEREF(__pyx_t_5); __pyx_t_5 = NULL;
     PyTuple_SET_ITEM(__pyx_t_1, 0+1, __pyx_t_2);
     __Pyx_GIVEREF(__pyx_t_2);
     __pyx_t_2 = 0;
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_t_1, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 321; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_t_1, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 404; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   }
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "openglTest.pyx":328
+  /* "openglTest.pyx":411
  * 
  *     # Connect signal handlers to the drawing area
  *     drawing_area.connect_after("realize", realize, None)             # <<<<<<<<<<<<<<
  *     drawing_area.connect("configure_event", configure_event, None)
  *     drawing_area.connect("draw", draw, None)
  */
-  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_drawing_area, __pyx_n_s_connect_after); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 328; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_drawing_area, __pyx_n_s_connect_after); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 411; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_realize); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 328; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_realize); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 411; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_t_2 = NULL;
   __pyx_t_6 = 0;
@@ -5111,7 +5814,7 @@ static PyObject *__pyx_pf_10openglTest_32create_window(CYTHON_UNUSED PyObject *_
       __pyx_t_6 = 1;
     }
   }
-  __pyx_t_5 = PyTuple_New(3+__pyx_t_6); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 328; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = PyTuple_New(3+__pyx_t_6); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 411; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   if (__pyx_t_2) {
     PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_2); __Pyx_GIVEREF(__pyx_t_2); __pyx_t_2 = NULL;
@@ -5125,22 +5828,22 @@ static PyObject *__pyx_pf_10openglTest_32create_window(CYTHON_UNUSED PyObject *_
   PyTuple_SET_ITEM(__pyx_t_5, 2+__pyx_t_6, Py_None);
   __Pyx_GIVEREF(Py_None);
   __pyx_t_1 = 0;
-  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_t_5, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 328; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_t_5, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 411; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "openglTest.pyx":329
+  /* "openglTest.pyx":412
  *     # Connect signal handlers to the drawing area
  *     drawing_area.connect_after("realize", realize, None)
  *     drawing_area.connect("configure_event", configure_event, None)             # <<<<<<<<<<<<<<
  *     drawing_area.connect("draw", draw, None)
  * 
  */
-  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_drawing_area, __pyx_n_s_connect); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 329; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_drawing_area, __pyx_n_s_connect); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 412; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_configure_event); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 329; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_configure_event); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 412; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   __pyx_t_1 = NULL;
   __pyx_t_6 = 0;
@@ -5154,7 +5857,7 @@ static PyObject *__pyx_pf_10openglTest_32create_window(CYTHON_UNUSED PyObject *_
       __pyx_t_6 = 1;
     }
   }
-  __pyx_t_2 = PyTuple_New(3+__pyx_t_6); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 329; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyTuple_New(3+__pyx_t_6); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 412; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   if (__pyx_t_1) {
     PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_1); __Pyx_GIVEREF(__pyx_t_1); __pyx_t_1 = NULL;
@@ -5168,22 +5871,22 @@ static PyObject *__pyx_pf_10openglTest_32create_window(CYTHON_UNUSED PyObject *_
   PyTuple_SET_ITEM(__pyx_t_2, 2+__pyx_t_6, Py_None);
   __Pyx_GIVEREF(Py_None);
   __pyx_t_5 = 0;
-  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_t_2, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 329; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_t_2, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 412; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "openglTest.pyx":330
+  /* "openglTest.pyx":413
  *     drawing_area.connect_after("realize", realize, None)
  *     drawing_area.connect("configure_event", configure_event, None)
  *     drawing_area.connect("draw", draw, None)             # <<<<<<<<<<<<<<
  * 
  *     drawing_area.connect("motion_notify_event", motion_notify_event, None)
  */
-  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_drawing_area, __pyx_n_s_connect); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 330; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_drawing_area, __pyx_n_s_connect); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 413; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_draw); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 330; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_draw); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 413; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_5 = NULL;
   __pyx_t_6 = 0;
@@ -5197,7 +5900,7 @@ static PyObject *__pyx_pf_10openglTest_32create_window(CYTHON_UNUSED PyObject *_
       __pyx_t_6 = 1;
     }
   }
-  __pyx_t_1 = PyTuple_New(3+__pyx_t_6); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 330; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = PyTuple_New(3+__pyx_t_6); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 413; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   if (__pyx_t_5) {
     PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_5); __Pyx_GIVEREF(__pyx_t_5); __pyx_t_5 = NULL;
@@ -5211,22 +5914,22 @@ static PyObject *__pyx_pf_10openglTest_32create_window(CYTHON_UNUSED PyObject *_
   PyTuple_SET_ITEM(__pyx_t_1, 2+__pyx_t_6, Py_None);
   __Pyx_GIVEREF(Py_None);
   __pyx_t_2 = 0;
-  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_t_1, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 330; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_t_1, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 413; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "openglTest.pyx":332
+  /* "openglTest.pyx":415
  *     drawing_area.connect("draw", draw, None)
  * 
  *     drawing_area.connect("motion_notify_event", motion_notify_event, None)             # <<<<<<<<<<<<<<
  *     drawing_area.connect("button_press_event", button_press_event, None)
  *     drawing_area.connect("unrealize", unrealize, None)
  */
-  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_drawing_area, __pyx_n_s_connect); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 332; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_drawing_area, __pyx_n_s_connect); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 415; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_motion_notify_event); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 332; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_motion_notify_event); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 415; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_t_2 = NULL;
   __pyx_t_6 = 0;
@@ -5240,7 +5943,7 @@ static PyObject *__pyx_pf_10openglTest_32create_window(CYTHON_UNUSED PyObject *_
       __pyx_t_6 = 1;
     }
   }
-  __pyx_t_5 = PyTuple_New(3+__pyx_t_6); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 332; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = PyTuple_New(3+__pyx_t_6); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 415; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   if (__pyx_t_2) {
     PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_2); __Pyx_GIVEREF(__pyx_t_2); __pyx_t_2 = NULL;
@@ -5254,22 +5957,22 @@ static PyObject *__pyx_pf_10openglTest_32create_window(CYTHON_UNUSED PyObject *_
   PyTuple_SET_ITEM(__pyx_t_5, 2+__pyx_t_6, Py_None);
   __Pyx_GIVEREF(Py_None);
   __pyx_t_1 = 0;
-  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_t_5, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 332; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_t_5, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 415; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "openglTest.pyx":333
+  /* "openglTest.pyx":416
  * 
  *     drawing_area.connect("motion_notify_event", motion_notify_event, None)
  *     drawing_area.connect("button_press_event", button_press_event, None)             # <<<<<<<<<<<<<<
  *     drawing_area.connect("unrealize", unrealize, None)
  * 
  */
-  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_drawing_area, __pyx_n_s_connect); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 333; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_drawing_area, __pyx_n_s_connect); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 416; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_button_press_event); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 333; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_button_press_event); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 416; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   __pyx_t_1 = NULL;
   __pyx_t_6 = 0;
@@ -5283,7 +5986,7 @@ static PyObject *__pyx_pf_10openglTest_32create_window(CYTHON_UNUSED PyObject *_
       __pyx_t_6 = 1;
     }
   }
-  __pyx_t_2 = PyTuple_New(3+__pyx_t_6); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 333; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyTuple_New(3+__pyx_t_6); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 416; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   if (__pyx_t_1) {
     PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_1); __Pyx_GIVEREF(__pyx_t_1); __pyx_t_1 = NULL;
@@ -5297,22 +6000,22 @@ static PyObject *__pyx_pf_10openglTest_32create_window(CYTHON_UNUSED PyObject *_
   PyTuple_SET_ITEM(__pyx_t_2, 2+__pyx_t_6, Py_None);
   __Pyx_GIVEREF(Py_None);
   __pyx_t_5 = 0;
-  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_t_2, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 333; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_t_2, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 416; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "openglTest.pyx":334
+  /* "openglTest.pyx":417
  *     drawing_area.connect("motion_notify_event", motion_notify_event, None)
  *     drawing_area.connect("button_press_event", button_press_event, None)
  *     drawing_area.connect("unrealize", unrealize, None)             # <<<<<<<<<<<<<<
  * 
  *     # key_press_event handler for top-level window
  */
-  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_drawing_area, __pyx_n_s_connect); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 334; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_drawing_area, __pyx_n_s_connect); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 417; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_unrealize); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 334; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_unrealize); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 417; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_5 = NULL;
   __pyx_t_6 = 0;
@@ -5326,7 +6029,7 @@ static PyObject *__pyx_pf_10openglTest_32create_window(CYTHON_UNUSED PyObject *_
       __pyx_t_6 = 1;
     }
   }
-  __pyx_t_1 = PyTuple_New(3+__pyx_t_6); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 334; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = PyTuple_New(3+__pyx_t_6); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 417; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   if (__pyx_t_5) {
     PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_5); __Pyx_GIVEREF(__pyx_t_5); __pyx_t_5 = NULL;
@@ -5340,22 +6043,22 @@ static PyObject *__pyx_pf_10openglTest_32create_window(CYTHON_UNUSED PyObject *_
   PyTuple_SET_ITEM(__pyx_t_1, 2+__pyx_t_6, Py_None);
   __Pyx_GIVEREF(Py_None);
   __pyx_t_2 = 0;
-  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_t_1, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 334; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_t_1, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 417; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "openglTest.pyx":337
+  /* "openglTest.pyx":420
  * 
  *     # key_press_event handler for top-level window
  *     window.connect_object("key_press_event", key_press_event, drawing_area)             # <<<<<<<<<<<<<<
  * 
  *     # For idle function.
  */
-  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_window, __pyx_n_s_connect_object); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 337; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_window, __pyx_n_s_connect_object); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 420; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_key_press_event); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 337; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_key_press_event); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 420; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_t_2 = NULL;
   __pyx_t_6 = 0;
@@ -5369,7 +6072,7 @@ static PyObject *__pyx_pf_10openglTest_32create_window(CYTHON_UNUSED PyObject *_
       __pyx_t_6 = 1;
     }
   }
-  __pyx_t_5 = PyTuple_New(3+__pyx_t_6); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 337; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = PyTuple_New(3+__pyx_t_6); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 420; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   if (__pyx_t_2) {
     PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_2); __Pyx_GIVEREF(__pyx_t_2); __pyx_t_2 = NULL;
@@ -5383,22 +6086,22 @@ static PyObject *__pyx_pf_10openglTest_32create_window(CYTHON_UNUSED PyObject *_
   PyTuple_SET_ITEM(__pyx_t_5, 2+__pyx_t_6, __pyx_v_drawing_area);
   __Pyx_GIVEREF(__pyx_v_drawing_area);
   __pyx_t_1 = 0;
-  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_t_5, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 337; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_t_5, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 420; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "openglTest.pyx":340
+  /* "openglTest.pyx":423
  * 
  *     # For idle function.
  *     drawing_area.connect("map_event", map_event, None)             # <<<<<<<<<<<<<<
  *     drawing_area.connect("unmap_event", unmap_event, None)
  *     drawing_area.connect("visibility_notify_event", visibility_notify_event, None)
  */
-  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_drawing_area, __pyx_n_s_connect); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 340; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_drawing_area, __pyx_n_s_connect); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 423; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_map_event); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 340; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_map_event); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 423; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   __pyx_t_1 = NULL;
   __pyx_t_6 = 0;
@@ -5412,7 +6115,7 @@ static PyObject *__pyx_pf_10openglTest_32create_window(CYTHON_UNUSED PyObject *_
       __pyx_t_6 = 1;
     }
   }
-  __pyx_t_2 = PyTuple_New(3+__pyx_t_6); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 340; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyTuple_New(3+__pyx_t_6); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 423; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   if (__pyx_t_1) {
     PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_1); __Pyx_GIVEREF(__pyx_t_1); __pyx_t_1 = NULL;
@@ -5426,22 +6129,22 @@ static PyObject *__pyx_pf_10openglTest_32create_window(CYTHON_UNUSED PyObject *_
   PyTuple_SET_ITEM(__pyx_t_2, 2+__pyx_t_6, Py_None);
   __Pyx_GIVEREF(Py_None);
   __pyx_t_5 = 0;
-  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_t_2, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 340; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_t_2, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 423; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "openglTest.pyx":341
+  /* "openglTest.pyx":424
  *     # For idle function.
  *     drawing_area.connect("map_event", map_event, None)
  *     drawing_area.connect("unmap_event", unmap_event, None)             # <<<<<<<<<<<<<<
  *     drawing_area.connect("visibility_notify_event", visibility_notify_event, None)
  * 
  */
-  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_drawing_area, __pyx_n_s_connect); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 341; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_drawing_area, __pyx_n_s_connect); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 424; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_unmap_event); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 341; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_unmap_event); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 424; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_5 = NULL;
   __pyx_t_6 = 0;
@@ -5455,7 +6158,7 @@ static PyObject *__pyx_pf_10openglTest_32create_window(CYTHON_UNUSED PyObject *_
       __pyx_t_6 = 1;
     }
   }
-  __pyx_t_1 = PyTuple_New(3+__pyx_t_6); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 341; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = PyTuple_New(3+__pyx_t_6); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 424; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   if (__pyx_t_5) {
     PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_5); __Pyx_GIVEREF(__pyx_t_5); __pyx_t_5 = NULL;
@@ -5469,22 +6172,22 @@ static PyObject *__pyx_pf_10openglTest_32create_window(CYTHON_UNUSED PyObject *_
   PyTuple_SET_ITEM(__pyx_t_1, 2+__pyx_t_6, Py_None);
   __Pyx_GIVEREF(Py_None);
   __pyx_t_2 = 0;
-  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_t_1, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 341; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_t_1, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 424; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "openglTest.pyx":342
+  /* "openglTest.pyx":425
  *     drawing_area.connect("map_event", map_event, None)
  *     drawing_area.connect("unmap_event", unmap_event, None)
  *     drawing_area.connect("visibility_notify_event", visibility_notify_event, None)             # <<<<<<<<<<<<<<
  * 
  *     vbox.pack_start(drawing_area, True, True, 0)
  */
-  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_drawing_area, __pyx_n_s_connect); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 342; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_drawing_area, __pyx_n_s_connect); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 425; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_visibility_notify_event); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 342; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_visibility_notify_event); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 425; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_t_2 = NULL;
   __pyx_t_6 = 0;
@@ -5498,7 +6201,7 @@ static PyObject *__pyx_pf_10openglTest_32create_window(CYTHON_UNUSED PyObject *_
       __pyx_t_6 = 1;
     }
   }
-  __pyx_t_5 = PyTuple_New(3+__pyx_t_6); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 342; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = PyTuple_New(3+__pyx_t_6); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 425; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   if (__pyx_t_2) {
     PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_2); __Pyx_GIVEREF(__pyx_t_2); __pyx_t_2 = NULL;
@@ -5512,20 +6215,20 @@ static PyObject *__pyx_pf_10openglTest_32create_window(CYTHON_UNUSED PyObject *_
   PyTuple_SET_ITEM(__pyx_t_5, 2+__pyx_t_6, Py_None);
   __Pyx_GIVEREF(Py_None);
   __pyx_t_1 = 0;
-  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_t_5, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 342; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_t_5, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 425; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "openglTest.pyx":344
+  /* "openglTest.pyx":427
  *     drawing_area.connect("visibility_notify_event", visibility_notify_event, None)
  * 
  *     vbox.pack_start(drawing_area, True, True, 0)             # <<<<<<<<<<<<<<
  *     drawing_area.show()
  * 
  */
-  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_vbox, __pyx_n_s_pack_start); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 344; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_vbox, __pyx_n_s_pack_start); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 427; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_7);
   __pyx_t_5 = NULL;
   __pyx_t_6 = 0;
@@ -5539,7 +6242,7 @@ static PyObject *__pyx_pf_10openglTest_32create_window(CYTHON_UNUSED PyObject *_
       __pyx_t_6 = 1;
     }
   }
-  __pyx_t_1 = PyTuple_New(4+__pyx_t_6); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 344; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = PyTuple_New(4+__pyx_t_6); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 427; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   if (__pyx_t_5) {
     PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_5); __Pyx_GIVEREF(__pyx_t_5); __pyx_t_5 = NULL;
@@ -5556,20 +6259,20 @@ static PyObject *__pyx_pf_10openglTest_32create_window(CYTHON_UNUSED PyObject *_
   __Pyx_INCREF(__pyx_int_0);
   PyTuple_SET_ITEM(__pyx_t_1, 3+__pyx_t_6, __pyx_int_0);
   __Pyx_GIVEREF(__pyx_int_0);
-  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_t_1, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 344; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_t_1, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 427; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "openglTest.pyx":345
+  /* "openglTest.pyx":428
  * 
  *     vbox.pack_start(drawing_area, True, True, 0)
  *     drawing_area.show()             # <<<<<<<<<<<<<<
  * 
  *     # Popup menu.
  */
-  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_drawing_area, __pyx_n_s_show); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 345; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_drawing_area, __pyx_n_s_show); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 428; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_7);
   __pyx_t_1 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_7))) {
@@ -5582,23 +6285,23 @@ static PyObject *__pyx_pf_10openglTest_32create_window(CYTHON_UNUSED PyObject *_
     }
   }
   if (__pyx_t_1) {
-    __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_t_7, __pyx_t_1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 345; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_t_7, __pyx_t_1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 428; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   } else {
-    __pyx_t_3 = __Pyx_PyObject_CallNoArg(__pyx_t_7); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 345; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyObject_CallNoArg(__pyx_t_7); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 428; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "openglTest.pyx":349
+  /* "openglTest.pyx":432
  *     # Popup menu.
  * 
  *     menu = create_popup_menu(drawing_area)             # <<<<<<<<<<<<<<
  *     drawing_area.connect_object("button_press_event", button_press_event_popup_menu, menu)
  * 
  */
-  __pyx_t_7 = __Pyx_GetModuleGlobalName(__pyx_n_s_create_popup_menu); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 349; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = __Pyx_GetModuleGlobalName(__pyx_n_s_create_popup_menu); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 432; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_7);
   __pyx_t_1 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_7))) {
@@ -5611,16 +6314,16 @@ static PyObject *__pyx_pf_10openglTest_32create_window(CYTHON_UNUSED PyObject *_
     }
   }
   if (!__pyx_t_1) {
-    __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_t_7, __pyx_v_drawing_area); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 349; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_t_7, __pyx_v_drawing_area); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 432; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
   } else {
-    __pyx_t_5 = PyTuple_New(1+1); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 349; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_5 = PyTuple_New(1+1); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 432; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_5);
     PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_1); __Pyx_GIVEREF(__pyx_t_1); __pyx_t_1 = NULL;
     __Pyx_INCREF(__pyx_v_drawing_area);
     PyTuple_SET_ITEM(__pyx_t_5, 0+1, __pyx_v_drawing_area);
     __Pyx_GIVEREF(__pyx_v_drawing_area);
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_t_5, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 349; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_t_5, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 432; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   }
@@ -5628,16 +6331,16 @@ static PyObject *__pyx_pf_10openglTest_32create_window(CYTHON_UNUSED PyObject *_
   __pyx_v_menu = __pyx_t_3;
   __pyx_t_3 = 0;
 
-  /* "openglTest.pyx":350
+  /* "openglTest.pyx":433
  * 
  *     menu = create_popup_menu(drawing_area)
  *     drawing_area.connect_object("button_press_event", button_press_event_popup_menu, menu)             # <<<<<<<<<<<<<<
  * 
  *     ## Simple quit button.
  */
-  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_drawing_area, __pyx_n_s_connect_object); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 350; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_drawing_area, __pyx_n_s_connect_object); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 433; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_button_press_event_popup_menu); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 350; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_button_press_event_popup_menu); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 433; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   __pyx_t_1 = NULL;
   __pyx_t_6 = 0;
@@ -5651,7 +6354,7 @@ static PyObject *__pyx_pf_10openglTest_32create_window(CYTHON_UNUSED PyObject *_
       __pyx_t_6 = 1;
     }
   }
-  __pyx_t_2 = PyTuple_New(3+__pyx_t_6); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 350; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyTuple_New(3+__pyx_t_6); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 433; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   if (__pyx_t_1) {
     PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_1); __Pyx_GIVEREF(__pyx_t_1); __pyx_t_1 = NULL;
@@ -5665,45 +6368,45 @@ static PyObject *__pyx_pf_10openglTest_32create_window(CYTHON_UNUSED PyObject *_
   PyTuple_SET_ITEM(__pyx_t_2, 2+__pyx_t_6, __pyx_v_menu);
   __Pyx_GIVEREF(__pyx_v_menu);
   __pyx_t_5 = 0;
-  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_t_2, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 350; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_t_2, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 433; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "openglTest.pyx":354
+  /* "openglTest.pyx":437
  *     ## Simple quit button.
  * 
  *     button = Gtk.Button.new_with_label("Quit")             # <<<<<<<<<<<<<<
  *     button.connect("clicked", Gtk.main_quit)
  *     vbox.pack_start(button, False, False, 0)
  */
-  __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_Gtk); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 354; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_Gtk); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 437; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_Button); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 354; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_Button); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 437; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_7, __pyx_n_s_new_with_label); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 354; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_7, __pyx_n_s_new_with_label); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 437; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__6, NULL); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 354; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__23, NULL); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 437; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_v_button = __pyx_t_7;
   __pyx_t_7 = 0;
 
-  /* "openglTest.pyx":355
+  /* "openglTest.pyx":438
  * 
  *     button = Gtk.Button.new_with_label("Quit")
  *     button.connect("clicked", Gtk.main_quit)             # <<<<<<<<<<<<<<
  *     vbox.pack_start(button, False, False, 0)
  *     button.show()
  */
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_button, __pyx_n_s_connect); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 355; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_button, __pyx_n_s_connect); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 438; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_Gtk); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 355; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_Gtk); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 438; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_main_quit); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 355; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_main_quit); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 438; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_2 = NULL;
@@ -5718,7 +6421,7 @@ static PyObject *__pyx_pf_10openglTest_32create_window(CYTHON_UNUSED PyObject *_
       __pyx_t_6 = 1;
     }
   }
-  __pyx_t_1 = PyTuple_New(2+__pyx_t_6); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 355; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = PyTuple_New(2+__pyx_t_6); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 438; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   if (__pyx_t_2) {
     PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_2); __Pyx_GIVEREF(__pyx_t_2); __pyx_t_2 = NULL;
@@ -5729,20 +6432,20 @@ static PyObject *__pyx_pf_10openglTest_32create_window(CYTHON_UNUSED PyObject *_
   PyTuple_SET_ITEM(__pyx_t_1, 1+__pyx_t_6, __pyx_t_5);
   __Pyx_GIVEREF(__pyx_t_5);
   __pyx_t_5 = 0;
-  __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_1, NULL); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 355; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_1, NULL); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 438; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "openglTest.pyx":356
+  /* "openglTest.pyx":439
  *     button = Gtk.Button.new_with_label("Quit")
  *     button.connect("clicked", Gtk.main_quit)
  *     vbox.pack_start(button, False, False, 0)             # <<<<<<<<<<<<<<
  *     button.show()
  * 
  */
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_vbox, __pyx_n_s_pack_start); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 356; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_vbox, __pyx_n_s_pack_start); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 439; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_1 = NULL;
   __pyx_t_6 = 0;
@@ -5756,7 +6459,7 @@ static PyObject *__pyx_pf_10openglTest_32create_window(CYTHON_UNUSED PyObject *_
       __pyx_t_6 = 1;
     }
   }
-  __pyx_t_5 = PyTuple_New(4+__pyx_t_6); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 356; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = PyTuple_New(4+__pyx_t_6); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 439; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   if (__pyx_t_1) {
     PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_1); __Pyx_GIVEREF(__pyx_t_1); __pyx_t_1 = NULL;
@@ -5773,20 +6476,20 @@ static PyObject *__pyx_pf_10openglTest_32create_window(CYTHON_UNUSED PyObject *_
   __Pyx_INCREF(__pyx_int_0);
   PyTuple_SET_ITEM(__pyx_t_5, 3+__pyx_t_6, __pyx_int_0);
   __Pyx_GIVEREF(__pyx_int_0);
-  __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_5, NULL); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 356; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_5, NULL); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 439; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "openglTest.pyx":357
+  /* "openglTest.pyx":440
  *     button.connect("clicked", Gtk.main_quit)
  *     vbox.pack_start(button, False, False, 0)
  *     button.show()             # <<<<<<<<<<<<<<
  * 
  *     return window
  */
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_button, __pyx_n_s_show); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 357; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_button, __pyx_n_s_show); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 440; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_5 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_3))) {
@@ -5799,16 +6502,16 @@ static PyObject *__pyx_pf_10openglTest_32create_window(CYTHON_UNUSED PyObject *_
     }
   }
   if (__pyx_t_5) {
-    __pyx_t_7 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_5); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 357; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_7 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_5); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 440; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   } else {
-    __pyx_t_7 = __Pyx_PyObject_CallNoArg(__pyx_t_3); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 357; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_7 = __Pyx_PyObject_CallNoArg(__pyx_t_3); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 440; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "openglTest.pyx":359
+  /* "openglTest.pyx":442
  *     button.show()
  * 
  *     return window             # <<<<<<<<<<<<<<
@@ -5820,7 +6523,7 @@ static PyObject *__pyx_pf_10openglTest_32create_window(CYTHON_UNUSED PyObject *_
   __pyx_r = __pyx_v_window;
   goto __pyx_L0;
 
-  /* "openglTest.pyx":289
+  /* "openglTest.pyx":372
  *     return menu
  * 
  * def create_window(glconfig):             # <<<<<<<<<<<<<<
@@ -5849,7 +6552,7 @@ static PyObject *__pyx_pf_10openglTest_32create_window(CYTHON_UNUSED PyObject *_
   return __pyx_r;
 }
 
-/* "openglTest.pyx":366
+/* "openglTest.pyx":449
  * #
  * 
  * def configure_gl():             # <<<<<<<<<<<<<<
@@ -5858,21 +6561,21 @@ static PyObject *__pyx_pf_10openglTest_32create_window(CYTHON_UNUSED PyObject *_
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_10openglTest_35configure_gl(PyObject *__pyx_self, CYTHON_UNUSED PyObject *unused); /*proto*/
-static char __pyx_doc_10openglTest_34configure_gl[] = "Configure the OpenGL framebuffer.";
-static PyMethodDef __pyx_mdef_10openglTest_35configure_gl = {"configure_gl", (PyCFunction)__pyx_pw_10openglTest_35configure_gl, METH_NOARGS, __pyx_doc_10openglTest_34configure_gl};
-static PyObject *__pyx_pw_10openglTest_35configure_gl(PyObject *__pyx_self, CYTHON_UNUSED PyObject *unused) {
+static PyObject *__pyx_pw_10openglTest_37configure_gl(PyObject *__pyx_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static char __pyx_doc_10openglTest_36configure_gl[] = "Configure the OpenGL framebuffer.";
+static PyMethodDef __pyx_mdef_10openglTest_37configure_gl = {"configure_gl", (PyCFunction)__pyx_pw_10openglTest_37configure_gl, METH_NOARGS, __pyx_doc_10openglTest_36configure_gl};
+static PyObject *__pyx_pw_10openglTest_37configure_gl(PyObject *__pyx_self, CYTHON_UNUSED PyObject *unused) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("configure_gl (wrapper)", 0);
-  __pyx_r = __pyx_pf_10openglTest_34configure_gl(__pyx_self);
+  __pyx_r = __pyx_pf_10openglTest_36configure_gl(__pyx_self);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_10openglTest_34configure_gl(CYTHON_UNUSED PyObject *__pyx_self) {
+static PyObject *__pyx_pf_10openglTest_36configure_gl(CYTHON_UNUSED PyObject *__pyx_self) {
   PyObject *__pyx_v_glconfig = NULL;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
@@ -5896,11 +6599,11 @@ static PyObject *__pyx_pf_10openglTest_34configure_gl(CYTHON_UNUSED PyObject *__
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("configure_gl", 0);
 
-  /* "openglTest.pyx":370
+  /* "openglTest.pyx":453
  * 
  *     # Try double-buffered visual
  *     try:             # <<<<<<<<<<<<<<
- *         glconfig = GdkGLExt.Config.new_by_mode(GdkGLExt.ConfigMode.RGB |
+ *         glconfig = GdkGLExt.Config.new_by_mode(GdkGLExt.ConfigMode.RGBA |
  *                                                GdkGLExt.ConfigMode.DEPTH |
  */
   {
@@ -5910,82 +6613,82 @@ static PyObject *__pyx_pf_10openglTest_34configure_gl(CYTHON_UNUSED PyObject *__
     __Pyx_XGOTREF(__pyx_t_3);
     /*try:*/ {
 
-      /* "openglTest.pyx":371
+      /* "openglTest.pyx":454
  *     # Try double-buffered visual
  *     try:
- *         glconfig = GdkGLExt.Config.new_by_mode(GdkGLExt.ConfigMode.RGB |             # <<<<<<<<<<<<<<
+ *         glconfig = GdkGLExt.Config.new_by_mode(GdkGLExt.ConfigMode.RGBA |             # <<<<<<<<<<<<<<
  *                                                GdkGLExt.ConfigMode.DEPTH |
  *                                                GdkGLExt.ConfigMode.DOUBLE)
  */
-      __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_GdkGLExt); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 371; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+      __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_GdkGLExt); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 454; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       __Pyx_GOTREF(__pyx_t_5);
-      __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_Config); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 371; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+      __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_Config); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 454; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-      __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_new_by_mode); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 371; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+      __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_new_by_mode); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 454; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-      __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_GdkGLExt); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 371; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+      __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_GdkGLExt); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 454; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       __Pyx_GOTREF(__pyx_t_6);
-      __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_ConfigMode); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 371; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+      __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_ConfigMode); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 454; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       __Pyx_GOTREF(__pyx_t_7);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-      __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_7, __pyx_n_s_RGB); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 371; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+      __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_7, __pyx_n_s_RGBA); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 454; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-      /* "openglTest.pyx":372
+      /* "openglTest.pyx":455
  *     try:
- *         glconfig = GdkGLExt.Config.new_by_mode(GdkGLExt.ConfigMode.RGB |
+ *         glconfig = GdkGLExt.Config.new_by_mode(GdkGLExt.ConfigMode.RGBA |
  *                                                GdkGLExt.ConfigMode.DEPTH |             # <<<<<<<<<<<<<<
  *                                                GdkGLExt.ConfigMode.DOUBLE)
  *     except TypeError:
  */
-      __pyx_t_7 = __Pyx_GetModuleGlobalName(__pyx_n_s_GdkGLExt); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 372; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+      __pyx_t_7 = __Pyx_GetModuleGlobalName(__pyx_n_s_GdkGLExt); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 455; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       __Pyx_GOTREF(__pyx_t_7);
-      __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_7, __pyx_n_s_ConfigMode); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 372; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+      __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_7, __pyx_n_s_ConfigMode); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 455; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       __Pyx_GOTREF(__pyx_t_8);
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-      __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_8, __pyx_n_s_DEPTH); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 372; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+      __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_8, __pyx_n_s_DEPTH); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 455; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       __Pyx_GOTREF(__pyx_t_7);
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
 
-      /* "openglTest.pyx":371
+      /* "openglTest.pyx":454
  *     # Try double-buffered visual
  *     try:
- *         glconfig = GdkGLExt.Config.new_by_mode(GdkGLExt.ConfigMode.RGB |             # <<<<<<<<<<<<<<
+ *         glconfig = GdkGLExt.Config.new_by_mode(GdkGLExt.ConfigMode.RGBA |             # <<<<<<<<<<<<<<
  *                                                GdkGLExt.ConfigMode.DEPTH |
  *                                                GdkGLExt.ConfigMode.DOUBLE)
  */
-      __pyx_t_8 = PyNumber_Or(__pyx_t_6, __pyx_t_7); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 371; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+      __pyx_t_8 = PyNumber_Or(__pyx_t_6, __pyx_t_7); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 454; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       __Pyx_GOTREF(__pyx_t_8);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-      /* "openglTest.pyx":373
- *         glconfig = GdkGLExt.Config.new_by_mode(GdkGLExt.ConfigMode.RGB |
+      /* "openglTest.pyx":456
+ *         glconfig = GdkGLExt.Config.new_by_mode(GdkGLExt.ConfigMode.RGBA |
  *                                                GdkGLExt.ConfigMode.DEPTH |
  *                                                GdkGLExt.ConfigMode.DOUBLE)             # <<<<<<<<<<<<<<
  *     except TypeError:
  *         print("*** Cannot find the double-buffered visual.")
  */
-      __pyx_t_7 = __Pyx_GetModuleGlobalName(__pyx_n_s_GdkGLExt); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 373; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+      __pyx_t_7 = __Pyx_GetModuleGlobalName(__pyx_n_s_GdkGLExt); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 456; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       __Pyx_GOTREF(__pyx_t_7);
-      __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_7, __pyx_n_s_ConfigMode); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 373; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+      __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_7, __pyx_n_s_ConfigMode); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 456; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-      __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_DOUBLE); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 373; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+      __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_DOUBLE); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 456; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       __Pyx_GOTREF(__pyx_t_7);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-      /* "openglTest.pyx":372
+      /* "openglTest.pyx":455
  *     try:
- *         glconfig = GdkGLExt.Config.new_by_mode(GdkGLExt.ConfigMode.RGB |
+ *         glconfig = GdkGLExt.Config.new_by_mode(GdkGLExt.ConfigMode.RGBA |
  *                                                GdkGLExt.ConfigMode.DEPTH |             # <<<<<<<<<<<<<<
  *                                                GdkGLExt.ConfigMode.DOUBLE)
  *     except TypeError:
  */
-      __pyx_t_6 = PyNumber_Or(__pyx_t_8, __pyx_t_7); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 372; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+      __pyx_t_6 = PyNumber_Or(__pyx_t_8, __pyx_t_7); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 455; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
@@ -6000,17 +6703,17 @@ static PyObject *__pyx_pf_10openglTest_34configure_gl(CYTHON_UNUSED PyObject *__
         }
       }
       if (!__pyx_t_7) {
-        __pyx_t_4 = __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_t_6); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 371; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        __pyx_t_4 = __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_t_6); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 454; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
         __Pyx_GOTREF(__pyx_t_4);
       } else {
-        __pyx_t_8 = PyTuple_New(1+1); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 371; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        __pyx_t_8 = PyTuple_New(1+1); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 454; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         __Pyx_GOTREF(__pyx_t_8);
         PyTuple_SET_ITEM(__pyx_t_8, 0, __pyx_t_7); __Pyx_GIVEREF(__pyx_t_7); __pyx_t_7 = NULL;
         PyTuple_SET_ITEM(__pyx_t_8, 0+1, __pyx_t_6);
         __Pyx_GIVEREF(__pyx_t_6);
         __pyx_t_6 = 0;
-        __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_8, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 371; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_8, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 454; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         __Pyx_GOTREF(__pyx_t_4);
         __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
       }
@@ -6029,7 +6732,7 @@ static PyObject *__pyx_pf_10openglTest_34configure_gl(CYTHON_UNUSED PyObject *__
     __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-    /* "openglTest.pyx":374
+    /* "openglTest.pyx":457
  *                                                GdkGLExt.ConfigMode.DEPTH |
  *                                                GdkGLExt.ConfigMode.DOUBLE)
  *     except TypeError:             # <<<<<<<<<<<<<<
@@ -6039,38 +6742,38 @@ static PyObject *__pyx_pf_10openglTest_34configure_gl(CYTHON_UNUSED PyObject *__
     __pyx_t_9 = PyErr_ExceptionMatches(__pyx_builtin_TypeError);
     if (__pyx_t_9) {
       __Pyx_AddTraceback("openglTest.configure_gl", __pyx_clineno, __pyx_lineno, __pyx_filename);
-      if (__Pyx_GetException(&__pyx_t_4, &__pyx_t_5, &__pyx_t_8) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 374; __pyx_clineno = __LINE__; goto __pyx_L5_except_error;}
+      if (__Pyx_GetException(&__pyx_t_4, &__pyx_t_5, &__pyx_t_8) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 457; __pyx_clineno = __LINE__; goto __pyx_L5_except_error;}
       __Pyx_GOTREF(__pyx_t_4);
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_GOTREF(__pyx_t_8);
 
-      /* "openglTest.pyx":375
+      /* "openglTest.pyx":458
  *                                                GdkGLExt.ConfigMode.DOUBLE)
  *     except TypeError:
  *         print("*** Cannot find the double-buffered visual.")             # <<<<<<<<<<<<<<
  *         print("*** Trying single-buffered visual.")
  * 
  */
-      __pyx_t_6 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__7, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 375; __pyx_clineno = __LINE__; goto __pyx_L5_except_error;}
+      __pyx_t_6 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__24, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 458; __pyx_clineno = __LINE__; goto __pyx_L5_except_error;}
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-      /* "openglTest.pyx":376
+      /* "openglTest.pyx":459
  *     except TypeError:
  *         print("*** Cannot find the double-buffered visual.")
  *         print("*** Trying single-buffered visual.")             # <<<<<<<<<<<<<<
  * 
  *         # Try single-buffered visual
  */
-      __pyx_t_6 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__8, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 376; __pyx_clineno = __LINE__; goto __pyx_L5_except_error;}
+      __pyx_t_6 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__25, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 459; __pyx_clineno = __LINE__; goto __pyx_L5_except_error;}
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-      /* "openglTest.pyx":379
+      /* "openglTest.pyx":462
  * 
  *         # Try single-buffered visual
  *         try:             # <<<<<<<<<<<<<<
- *             glconfig = GdkGLExt.Config.new_by_mode(GdkGLExt.ConfigMode.RGB |
+ *             glconfig = GdkGLExt.Config.new_by_mode(GdkGLExt.ConfigMode.RGBA |
  *                                                    GdkGLExt.ConfigMode.DEPTH)
  */
       {
@@ -6080,54 +6783,54 @@ static PyObject *__pyx_pf_10openglTest_34configure_gl(CYTHON_UNUSED PyObject *__
         __Pyx_XGOTREF(__pyx_t_12);
         /*try:*/ {
 
-          /* "openglTest.pyx":380
+          /* "openglTest.pyx":463
  *         # Try single-buffered visual
  *         try:
- *             glconfig = GdkGLExt.Config.new_by_mode(GdkGLExt.ConfigMode.RGB |             # <<<<<<<<<<<<<<
+ *             glconfig = GdkGLExt.Config.new_by_mode(GdkGLExt.ConfigMode.RGBA |             # <<<<<<<<<<<<<<
  *                                                    GdkGLExt.ConfigMode.DEPTH)
  *         except TypeError:
  */
-          __pyx_t_7 = __Pyx_GetModuleGlobalName(__pyx_n_s_GdkGLExt); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 380; __pyx_clineno = __LINE__; goto __pyx_L13_error;}
+          __pyx_t_7 = __Pyx_GetModuleGlobalName(__pyx_n_s_GdkGLExt); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 463; __pyx_clineno = __LINE__; goto __pyx_L13_error;}
           __Pyx_GOTREF(__pyx_t_7);
-          __pyx_t_13 = __Pyx_PyObject_GetAttrStr(__pyx_t_7, __pyx_n_s_Config); if (unlikely(!__pyx_t_13)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 380; __pyx_clineno = __LINE__; goto __pyx_L13_error;}
+          __pyx_t_13 = __Pyx_PyObject_GetAttrStr(__pyx_t_7, __pyx_n_s_Config); if (unlikely(!__pyx_t_13)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 463; __pyx_clineno = __LINE__; goto __pyx_L13_error;}
           __Pyx_GOTREF(__pyx_t_13);
           __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-          __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_13, __pyx_n_s_new_by_mode); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 380; __pyx_clineno = __LINE__; goto __pyx_L13_error;}
+          __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_13, __pyx_n_s_new_by_mode); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 463; __pyx_clineno = __LINE__; goto __pyx_L13_error;}
           __Pyx_GOTREF(__pyx_t_7);
           __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
-          __pyx_t_13 = __Pyx_GetModuleGlobalName(__pyx_n_s_GdkGLExt); if (unlikely(!__pyx_t_13)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 380; __pyx_clineno = __LINE__; goto __pyx_L13_error;}
+          __pyx_t_13 = __Pyx_GetModuleGlobalName(__pyx_n_s_GdkGLExt); if (unlikely(!__pyx_t_13)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 463; __pyx_clineno = __LINE__; goto __pyx_L13_error;}
           __Pyx_GOTREF(__pyx_t_13);
-          __pyx_t_14 = __Pyx_PyObject_GetAttrStr(__pyx_t_13, __pyx_n_s_ConfigMode); if (unlikely(!__pyx_t_14)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 380; __pyx_clineno = __LINE__; goto __pyx_L13_error;}
+          __pyx_t_14 = __Pyx_PyObject_GetAttrStr(__pyx_t_13, __pyx_n_s_ConfigMode); if (unlikely(!__pyx_t_14)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 463; __pyx_clineno = __LINE__; goto __pyx_L13_error;}
           __Pyx_GOTREF(__pyx_t_14);
           __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
-          __pyx_t_13 = __Pyx_PyObject_GetAttrStr(__pyx_t_14, __pyx_n_s_RGB); if (unlikely(!__pyx_t_13)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 380; __pyx_clineno = __LINE__; goto __pyx_L13_error;}
+          __pyx_t_13 = __Pyx_PyObject_GetAttrStr(__pyx_t_14, __pyx_n_s_RGBA); if (unlikely(!__pyx_t_13)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 463; __pyx_clineno = __LINE__; goto __pyx_L13_error;}
           __Pyx_GOTREF(__pyx_t_13);
           __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
 
-          /* "openglTest.pyx":381
+          /* "openglTest.pyx":464
  *         try:
- *             glconfig = GdkGLExt.Config.new_by_mode(GdkGLExt.ConfigMode.RGB |
+ *             glconfig = GdkGLExt.Config.new_by_mode(GdkGLExt.ConfigMode.RGBA |
  *                                                    GdkGLExt.ConfigMode.DEPTH)             # <<<<<<<<<<<<<<
  *         except TypeError:
  *             print("*** No appropriate OpenGL-capable visual found.")
  */
-          __pyx_t_14 = __Pyx_GetModuleGlobalName(__pyx_n_s_GdkGLExt); if (unlikely(!__pyx_t_14)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 381; __pyx_clineno = __LINE__; goto __pyx_L13_error;}
+          __pyx_t_14 = __Pyx_GetModuleGlobalName(__pyx_n_s_GdkGLExt); if (unlikely(!__pyx_t_14)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 464; __pyx_clineno = __LINE__; goto __pyx_L13_error;}
           __Pyx_GOTREF(__pyx_t_14);
-          __pyx_t_15 = __Pyx_PyObject_GetAttrStr(__pyx_t_14, __pyx_n_s_ConfigMode); if (unlikely(!__pyx_t_15)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 381; __pyx_clineno = __LINE__; goto __pyx_L13_error;}
+          __pyx_t_15 = __Pyx_PyObject_GetAttrStr(__pyx_t_14, __pyx_n_s_ConfigMode); if (unlikely(!__pyx_t_15)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 464; __pyx_clineno = __LINE__; goto __pyx_L13_error;}
           __Pyx_GOTREF(__pyx_t_15);
           __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
-          __pyx_t_14 = __Pyx_PyObject_GetAttrStr(__pyx_t_15, __pyx_n_s_DEPTH); if (unlikely(!__pyx_t_14)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 381; __pyx_clineno = __LINE__; goto __pyx_L13_error;}
+          __pyx_t_14 = __Pyx_PyObject_GetAttrStr(__pyx_t_15, __pyx_n_s_DEPTH); if (unlikely(!__pyx_t_14)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 464; __pyx_clineno = __LINE__; goto __pyx_L13_error;}
           __Pyx_GOTREF(__pyx_t_14);
           __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
 
-          /* "openglTest.pyx":380
+          /* "openglTest.pyx":463
  *         # Try single-buffered visual
  *         try:
- *             glconfig = GdkGLExt.Config.new_by_mode(GdkGLExt.ConfigMode.RGB |             # <<<<<<<<<<<<<<
+ *             glconfig = GdkGLExt.Config.new_by_mode(GdkGLExt.ConfigMode.RGBA |             # <<<<<<<<<<<<<<
  *                                                    GdkGLExt.ConfigMode.DEPTH)
  *         except TypeError:
  */
-          __pyx_t_15 = PyNumber_Or(__pyx_t_13, __pyx_t_14); if (unlikely(!__pyx_t_15)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 380; __pyx_clineno = __LINE__; goto __pyx_L13_error;}
+          __pyx_t_15 = PyNumber_Or(__pyx_t_13, __pyx_t_14); if (unlikely(!__pyx_t_15)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 463; __pyx_clineno = __LINE__; goto __pyx_L13_error;}
           __Pyx_GOTREF(__pyx_t_15);
           __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
           __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
@@ -6142,17 +6845,17 @@ static PyObject *__pyx_pf_10openglTest_34configure_gl(CYTHON_UNUSED PyObject *__
             }
           }
           if (!__pyx_t_14) {
-            __pyx_t_6 = __Pyx_PyObject_CallOneArg(__pyx_t_7, __pyx_t_15); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 380; __pyx_clineno = __LINE__; goto __pyx_L13_error;}
+            __pyx_t_6 = __Pyx_PyObject_CallOneArg(__pyx_t_7, __pyx_t_15); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 463; __pyx_clineno = __LINE__; goto __pyx_L13_error;}
             __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
             __Pyx_GOTREF(__pyx_t_6);
           } else {
-            __pyx_t_13 = PyTuple_New(1+1); if (unlikely(!__pyx_t_13)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 380; __pyx_clineno = __LINE__; goto __pyx_L13_error;}
+            __pyx_t_13 = PyTuple_New(1+1); if (unlikely(!__pyx_t_13)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 463; __pyx_clineno = __LINE__; goto __pyx_L13_error;}
             __Pyx_GOTREF(__pyx_t_13);
             PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_t_14); __Pyx_GIVEREF(__pyx_t_14); __pyx_t_14 = NULL;
             PyTuple_SET_ITEM(__pyx_t_13, 0+1, __pyx_t_15);
             __Pyx_GIVEREF(__pyx_t_15);
             __pyx_t_15 = 0;
-            __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_t_13, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 380; __pyx_clineno = __LINE__; goto __pyx_L13_error;}
+            __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_t_13, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 463; __pyx_clineno = __LINE__; goto __pyx_L13_error;}
             __Pyx_GOTREF(__pyx_t_6);
             __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
           }
@@ -6171,8 +6874,8 @@ static PyObject *__pyx_pf_10openglTest_34configure_gl(CYTHON_UNUSED PyObject *__
         __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
         __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-        /* "openglTest.pyx":382
- *             glconfig = GdkGLExt.Config.new_by_mode(GdkGLExt.ConfigMode.RGB |
+        /* "openglTest.pyx":465
+ *             glconfig = GdkGLExt.Config.new_by_mode(GdkGLExt.ConfigMode.RGBA |
  *                                                    GdkGLExt.ConfigMode.DEPTH)
  *         except TypeError:             # <<<<<<<<<<<<<<
  *             print("*** No appropriate OpenGL-capable visual found.")
@@ -6181,35 +6884,35 @@ static PyObject *__pyx_pf_10openglTest_34configure_gl(CYTHON_UNUSED PyObject *__
         __pyx_t_9 = PyErr_ExceptionMatches(__pyx_builtin_TypeError);
         if (__pyx_t_9) {
           __Pyx_AddTraceback("openglTest.configure_gl", __pyx_clineno, __pyx_lineno, __pyx_filename);
-          if (__Pyx_GetException(&__pyx_t_6, &__pyx_t_7, &__pyx_t_13) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 382; __pyx_clineno = __LINE__; goto __pyx_L15_except_error;}
+          if (__Pyx_GetException(&__pyx_t_6, &__pyx_t_7, &__pyx_t_13) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 465; __pyx_clineno = __LINE__; goto __pyx_L15_except_error;}
           __Pyx_GOTREF(__pyx_t_6);
           __Pyx_GOTREF(__pyx_t_7);
           __Pyx_GOTREF(__pyx_t_13);
 
-          /* "openglTest.pyx":383
+          /* "openglTest.pyx":466
  *                                                    GdkGLExt.ConfigMode.DEPTH)
  *         except TypeError:
  *             print("*** No appropriate OpenGL-capable visual found.")             # <<<<<<<<<<<<<<
  *             sys.exit(1)
  * 
  */
-          __pyx_t_15 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__9, NULL); if (unlikely(!__pyx_t_15)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 383; __pyx_clineno = __LINE__; goto __pyx_L15_except_error;}
+          __pyx_t_15 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__26, NULL); if (unlikely(!__pyx_t_15)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 466; __pyx_clineno = __LINE__; goto __pyx_L15_except_error;}
           __Pyx_GOTREF(__pyx_t_15);
           __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
 
-          /* "openglTest.pyx":384
+          /* "openglTest.pyx":467
  *         except TypeError:
  *             print("*** No appropriate OpenGL-capable visual found.")
  *             sys.exit(1)             # <<<<<<<<<<<<<<
  * 
  *     return glconfig
  */
-          __pyx_t_15 = __Pyx_GetModuleGlobalName(__pyx_n_s_sys); if (unlikely(!__pyx_t_15)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 384; __pyx_clineno = __LINE__; goto __pyx_L15_except_error;}
+          __pyx_t_15 = __Pyx_GetModuleGlobalName(__pyx_n_s_sys); if (unlikely(!__pyx_t_15)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 467; __pyx_clineno = __LINE__; goto __pyx_L15_except_error;}
           __Pyx_GOTREF(__pyx_t_15);
-          __pyx_t_14 = __Pyx_PyObject_GetAttrStr(__pyx_t_15, __pyx_n_s_exit); if (unlikely(!__pyx_t_14)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 384; __pyx_clineno = __LINE__; goto __pyx_L15_except_error;}
+          __pyx_t_14 = __Pyx_PyObject_GetAttrStr(__pyx_t_15, __pyx_n_s_exit); if (unlikely(!__pyx_t_14)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 467; __pyx_clineno = __LINE__; goto __pyx_L15_except_error;}
           __Pyx_GOTREF(__pyx_t_14);
           __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
-          __pyx_t_15 = __Pyx_PyObject_Call(__pyx_t_14, __pyx_tuple__10, NULL); if (unlikely(!__pyx_t_15)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 384; __pyx_clineno = __LINE__; goto __pyx_L15_except_error;}
+          __pyx_t_15 = __Pyx_PyObject_Call(__pyx_t_14, __pyx_tuple__27, NULL); if (unlikely(!__pyx_t_15)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 467; __pyx_clineno = __LINE__; goto __pyx_L15_except_error;}
           __Pyx_GOTREF(__pyx_t_15);
           __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
           __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
@@ -6252,7 +6955,7 @@ static PyObject *__pyx_pf_10openglTest_34configure_gl(CYTHON_UNUSED PyObject *__
     __pyx_L10_try_end:;
   }
 
-  /* "openglTest.pyx":386
+  /* "openglTest.pyx":469
  *             sys.exit(1)
  * 
  *     return glconfig             # <<<<<<<<<<<<<<
@@ -6260,12 +6963,12 @@ static PyObject *__pyx_pf_10openglTest_34configure_gl(CYTHON_UNUSED PyObject *__
  * 
  */
   __Pyx_XDECREF(__pyx_r);
-  if (unlikely(!__pyx_v_glconfig)) { __Pyx_RaiseUnboundLocalError("glconfig"); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 386; __pyx_clineno = __LINE__; goto __pyx_L1_error;} }
+  if (unlikely(!__pyx_v_glconfig)) { __Pyx_RaiseUnboundLocalError("glconfig"); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 469; __pyx_clineno = __LINE__; goto __pyx_L1_error;} }
   __Pyx_INCREF(__pyx_v_glconfig);
   __pyx_r = __pyx_v_glconfig;
   goto __pyx_L0;
 
-  /* "openglTest.pyx":366
+  /* "openglTest.pyx":449
  * #
  * 
  * def configure_gl():             # <<<<<<<<<<<<<<
@@ -6292,7 +6995,7 @@ static PyObject *__pyx_pf_10openglTest_34configure_gl(CYTHON_UNUSED PyObject *__
   return __pyx_r;
 }
 
-/* "openglTest.pyx":393
+/* "openglTest.pyx":476
  * #
  * 
  * def main():             # <<<<<<<<<<<<<<
@@ -6301,20 +7004,20 @@ static PyObject *__pyx_pf_10openglTest_34configure_gl(CYTHON_UNUSED PyObject *__
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_10openglTest_37main(PyObject *__pyx_self, CYTHON_UNUSED PyObject *unused); /*proto*/
-static PyMethodDef __pyx_mdef_10openglTest_37main = {"main", (PyCFunction)__pyx_pw_10openglTest_37main, METH_NOARGS, 0};
-static PyObject *__pyx_pw_10openglTest_37main(PyObject *__pyx_self, CYTHON_UNUSED PyObject *unused) {
+static PyObject *__pyx_pw_10openglTest_39main(PyObject *__pyx_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyMethodDef __pyx_mdef_10openglTest_39main = {"main", (PyCFunction)__pyx_pw_10openglTest_39main, METH_NOARGS, 0};
+static PyObject *__pyx_pw_10openglTest_39main(PyObject *__pyx_self, CYTHON_UNUSED PyObject *unused) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("main (wrapper)", 0);
-  __pyx_r = __pyx_pf_10openglTest_36main(__pyx_self);
+  __pyx_r = __pyx_pf_10openglTest_38main(__pyx_self);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_10openglTest_36main(CYTHON_UNUSED PyObject *__pyx_self) {
+static PyObject *__pyx_pf_10openglTest_38main(CYTHON_UNUSED PyObject *__pyx_self) {
   PyObject *__pyx_v_glconfig = NULL;
   PyObject *__pyx_v_window = NULL;
   PyObject *__pyx_r = NULL;
@@ -6328,14 +7031,14 @@ static PyObject *__pyx_pf_10openglTest_36main(CYTHON_UNUSED PyObject *__pyx_self
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("main", 0);
 
-  /* "openglTest.pyx":395
+  /* "openglTest.pyx":478
  * def main():
  *     # Configure OpenGL framebuffer.
  *     glconfig = configure_gl()             # <<<<<<<<<<<<<<
  * 
  *     # Create and show the application window.
  */
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_configure_gl); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 395; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_configure_gl); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 478; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_2))) {
@@ -6348,24 +7051,24 @@ static PyObject *__pyx_pf_10openglTest_36main(CYTHON_UNUSED PyObject *__pyx_self
     }
   }
   if (__pyx_t_3) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 395; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 478; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   } else {
-    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 395; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 478; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_glconfig = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "openglTest.pyx":398
+  /* "openglTest.pyx":481
  * 
  *     # Create and show the application window.
  *     window = create_window(glconfig)             # <<<<<<<<<<<<<<
  *     window.show()
  * 
  */
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_create_window); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 398; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_create_window); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 481; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_2))) {
@@ -6378,16 +7081,16 @@ static PyObject *__pyx_pf_10openglTest_36main(CYTHON_UNUSED PyObject *__pyx_self
     }
   }
   if (!__pyx_t_3) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_glconfig); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 398; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_glconfig); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 481; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
   } else {
-    __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 398; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 481; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
     PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_3); __Pyx_GIVEREF(__pyx_t_3); __pyx_t_3 = NULL;
     __Pyx_INCREF(__pyx_v_glconfig);
     PyTuple_SET_ITEM(__pyx_t_4, 0+1, __pyx_v_glconfig);
     __Pyx_GIVEREF(__pyx_v_glconfig);
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_4, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 398; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_4, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 481; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   }
@@ -6395,14 +7098,14 @@ static PyObject *__pyx_pf_10openglTest_36main(CYTHON_UNUSED PyObject *__pyx_self
   __pyx_v_window = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "openglTest.pyx":399
+  /* "openglTest.pyx":482
  *     # Create and show the application window.
  *     window = create_window(glconfig)
  *     window.show()             # <<<<<<<<<<<<<<
  * 
  *     Gtk.main()
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_window, __pyx_n_s_show); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 399; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_window, __pyx_n_s_show); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 482; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_4 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_2))) {
@@ -6415,25 +7118,25 @@ static PyObject *__pyx_pf_10openglTest_36main(CYTHON_UNUSED PyObject *__pyx_self
     }
   }
   if (__pyx_t_4) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_4); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 399; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_4); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 482; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   } else {
-    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 399; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 482; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "openglTest.pyx":401
+  /* "openglTest.pyx":484
  *     window.show()
  * 
  *     Gtk.main()             # <<<<<<<<<<<<<<
  *     return 0
  * 
  */
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_Gtk); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 401; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_Gtk); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 484; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_main); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 401; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_main); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 484; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_2 = NULL;
@@ -6447,16 +7150,16 @@ static PyObject *__pyx_pf_10openglTest_36main(CYTHON_UNUSED PyObject *__pyx_self
     }
   }
   if (__pyx_t_2) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 401; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 484; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   } else {
-    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_4); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 401; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_4); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 484; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "openglTest.pyx":402
+  /* "openglTest.pyx":485
  * 
  *     Gtk.main()
  *     return 0             # <<<<<<<<<<<<<<
@@ -6468,7 +7171,7 @@ static PyObject *__pyx_pf_10openglTest_36main(CYTHON_UNUSED PyObject *__pyx_self
   __pyx_r = __pyx_int_0;
   goto __pyx_L0;
 
-  /* "openglTest.pyx":393
+  /* "openglTest.pyx":476
  * #
  * 
  * def main():             # <<<<<<<<<<<<<<
@@ -6515,11 +7218,16 @@ static struct PyModuleDef __pyx_moduledef = {
 #endif
 
 static __Pyx_StringTabEntry __pyx_string_tab[] = {
+  {&__pyx_kp_u_Add_source_compile, __pyx_k_Add_source_compile, sizeof(__pyx_k_Add_source_compile), 0, 1, 0, 0},
+  {&__pyx_kp_u_Added_source, __pyx_k_Added_source, sizeof(__pyx_k_Added_source), 0, 1, 0, 0},
+  {&__pyx_kp_u_Attach_shaders, __pyx_k_Attach_shaders, sizeof(__pyx_k_Attach_shaders), 0, 1, 0, 0},
   {&__pyx_n_s_BUTTON1_MOTION_MASK, __pyx_k_BUTTON1_MOTION_MASK, sizeof(__pyx_k_BUTTON1_MOTION_MASK), 0, 0, 1, 1},
   {&__pyx_n_s_BUTTON2_MOTION_MASK, __pyx_k_BUTTON2_MOTION_MASK, sizeof(__pyx_k_BUTTON2_MOTION_MASK), 0, 0, 1, 1},
   {&__pyx_n_s_BUTTON_PRESS_MASK, __pyx_k_BUTTON_PRESS_MASK, sizeof(__pyx_k_BUTTON_PRESS_MASK), 0, 0, 1, 1},
+  {&__pyx_kp_u_Buffers, __pyx_k_Buffers, sizeof(__pyx_k_Buffers), 0, 1, 0, 0},
   {&__pyx_n_s_Button, __pyx_k_Button, sizeof(__pyx_k_Button), 0, 0, 1, 1},
   {&__pyx_kp_u_Cannot_find_the_double_buffered, __pyx_k_Cannot_find_the_double_buffered, sizeof(__pyx_k_Cannot_find_the_double_buffered), 0, 1, 0, 0},
+  {&__pyx_kp_u_Clean_memory, __pyx_k_Clean_memory, sizeof(__pyx_k_Clean_memory), 0, 1, 0, 0},
   {&__pyx_n_s_Config, __pyx_k_Config, sizeof(__pyx_k_Config), 0, 0, 1, 1},
   {&__pyx_n_s_ConfigMode, __pyx_k_ConfigMode, sizeof(__pyx_k_ConfigMode), 0, 0, 1, 1},
   {&__pyx_n_s_DEFAULT_HEIGHT, __pyx_k_DEFAULT_HEIGHT, sizeof(__pyx_k_DEFAULT_HEIGHT), 0, 0, 1, 1},
@@ -6528,30 +7236,40 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_DEPTH, __pyx_k_DEPTH, sizeof(__pyx_k_DEPTH), 0, 0, 1, 1},
   {&__pyx_n_s_DOUBLE, __pyx_k_DOUBLE, sizeof(__pyx_k_DOUBLE), 0, 0, 1, 1},
   {&__pyx_n_s_DrawingArea, __pyx_k_DrawingArea, sizeof(__pyx_k_DrawingArea), 0, 0, 1, 1},
+  {&__pyx_kp_u_Enable_attrib, __pyx_k_Enable_attrib, sizeof(__pyx_k_Enable_attrib), 0, 1, 0, 0},
   {&__pyx_n_s_EventMask, __pyx_k_EventMask, sizeof(__pyx_k_EventMask), 0, 0, 1, 1},
   {&__pyx_n_s_FULLY_OBSCURED, __pyx_k_FULLY_OBSCURED, sizeof(__pyx_k_FULLY_OBSCURED), 0, 0, 1, 1},
   {&__pyx_n_s_GL, __pyx_k_GL, sizeof(__pyx_k_GL), 0, 0, 1, 1},
   {&__pyx_n_s_GL_COLOR_BUFFER_BIT, __pyx_k_GL_COLOR_BUFFER_BIT, sizeof(__pyx_k_GL_COLOR_BUFFER_BIT), 0, 0, 1, 1},
-  {&__pyx_n_s_GL_FLAT, __pyx_k_GL_FLAT, sizeof(__pyx_k_GL_FLAT), 0, 0, 1, 1},
+  {&__pyx_n_s_GL_MODELVIEW, __pyx_k_GL_MODELVIEW, sizeof(__pyx_k_GL_MODELVIEW), 0, 0, 1, 1},
+  {&__pyx_n_s_GL_PROJECTION, __pyx_k_GL_PROJECTION, sizeof(__pyx_k_GL_PROJECTION), 0, 0, 1, 1},
   {&__pyx_n_s_GLib, __pyx_k_GLib, sizeof(__pyx_k_GLib), 0, 0, 1, 1},
   {&__pyx_n_s_Gdk, __pyx_k_Gdk, sizeof(__pyx_k_Gdk), 0, 0, 1, 1},
   {&__pyx_n_s_GdkGLExt, __pyx_k_GdkGLExt, sizeof(__pyx_k_GdkGLExt), 0, 0, 1, 1},
+  {&__pyx_kp_u_Gen_IDs, __pyx_k_Gen_IDs, sizeof(__pyx_k_Gen_IDs), 0, 1, 0, 0},
+  {&__pyx_kp_u_Glew_init, __pyx_k_Glew_init, sizeof(__pyx_k_Glew_init), 0, 1, 0, 0},
   {&__pyx_n_s_Gtk, __pyx_k_Gtk, sizeof(__pyx_k_Gtk), 0, 0, 1, 1},
   {&__pyx_n_s_GtkGLExt, __pyx_k_GtkGLExt, sizeof(__pyx_k_GtkGLExt), 0, 0, 1, 1},
+  {&__pyx_kp_u_It_begins, __pyx_k_It_begins, sizeof(__pyx_k_It_begins), 0, 1, 0, 0},
   {&__pyx_n_s_KEY_Escape, __pyx_k_KEY_Escape, sizeof(__pyx_k_KEY_Escape), 0, 0, 1, 1},
   {&__pyx_n_s_KEY_Left, __pyx_k_KEY_Left, sizeof(__pyx_k_KEY_Left), 0, 0, 1, 1},
   {&__pyx_n_s_KEY_Right, __pyx_k_KEY_Right, sizeof(__pyx_k_KEY_Right), 0, 0, 1, 1},
   {&__pyx_n_s_KEY_a, __pyx_k_KEY_a, sizeof(__pyx_k_KEY_a), 0, 0, 1, 1},
+  {&__pyx_n_u_Link, __pyx_k_Link, sizeof(__pyx_k_Link), 0, 1, 0, 1},
   {&__pyx_n_s_Menu, __pyx_k_Menu, sizeof(__pyx_k_Menu), 0, 0, 1, 1},
   {&__pyx_n_s_MenuItem, __pyx_k_MenuItem, sizeof(__pyx_k_MenuItem), 0, 0, 1, 1},
   {&__pyx_kp_u_No_appropriate_OpenGL_capable_v, __pyx_k_No_appropriate_OpenGL_capable_v, sizeof(__pyx_k_No_appropriate_OpenGL_capable_v), 0, 1, 0, 0},
+  {&__pyx_kp_u_One_done, __pyx_k_One_done, sizeof(__pyx_k_One_done), 0, 1, 0, 0},
   {&__pyx_n_s_OpenGL, __pyx_k_OpenGL, sizeof(__pyx_k_OpenGL), 0, 0, 1, 1},
   {&__pyx_n_s_PRIORITY_REDRAW, __pyx_k_PRIORITY_REDRAW, sizeof(__pyx_k_PRIORITY_REDRAW), 0, 0, 1, 1},
+  {&__pyx_kp_u_Passed_one, __pyx_k_Passed_one, sizeof(__pyx_k_Passed_one), 0, 1, 0, 0},
+  {&__pyx_kp_u_Prog_ids, __pyx_k_Prog_ids, sizeof(__pyx_k_Prog_ids), 0, 1, 0, 0},
   {&__pyx_n_u_Quit, __pyx_k_Quit, sizeof(__pyx_k_Quit), 0, 1, 0, 1},
-  {&__pyx_n_s_RGB, __pyx_k_RGB, sizeof(__pyx_k_RGB), 0, 0, 1, 1},
+  {&__pyx_n_s_RGBA, __pyx_k_RGBA, sizeof(__pyx_k_RGBA), 0, 0, 1, 1},
   {&__pyx_n_s_RGBA_TYPE, __pyx_k_RGBA_TYPE, sizeof(__pyx_k_RGBA_TYPE), 0, 0, 1, 1},
   {&__pyx_n_s_RenderType, __pyx_k_RenderType, sizeof(__pyx_k_RenderType), 0, 0, 1, 1},
   {&__pyx_kp_u_Rotating_Square, __pyx_k_Rotating_Square, sizeof(__pyx_k_Rotating_Square), 0, 1, 0, 0},
+  {&__pyx_kp_u_Shaders, __pyx_k_Shaders, sizeof(__pyx_k_Shaders), 0, 1, 0, 0},
   {&__pyx_n_s_TOPLEVEL, __pyx_k_TOPLEVEL, sizeof(__pyx_k_TOPLEVEL), 0, 0, 1, 1},
   {&__pyx_kp_u_Toggle_Animation, __pyx_k_Toggle_Animation, sizeof(__pyx_k_Toggle_Animation), 0, 1, 0, 0},
   {&__pyx_kp_u_Trying_single_buffered_visual, __pyx_k_Trying_single_buffered_visual, sizeof(__pyx_k_Trying_single_buffered_visual), 0, 1, 0, 0},
@@ -6570,6 +7288,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_button_press_event, __pyx_k_button_press_event, sizeof(__pyx_k_button_press_event), 0, 0, 1, 1},
   {&__pyx_n_u_button_press_event, __pyx_k_button_press_event, sizeof(__pyx_k_button_press_event), 0, 1, 0, 1},
   {&__pyx_n_s_button_press_event_popup_menu, __pyx_k_button_press_event_popup_menu, sizeof(__pyx_k_button_press_event_popup_menu), 0, 0, 1, 1},
+  {&__pyx_n_u_clearing, __pyx_k_clearing, sizeof(__pyx_k_clearing), 0, 1, 0, 1},
   {&__pyx_n_u_clicked, __pyx_k_clicked, sizeof(__pyx_k_clicked), 0, 1, 0, 1},
   {&__pyx_n_s_configure_event, __pyx_k_configure_event, sizeof(__pyx_k_configure_event), 0, 0, 1, 1},
   {&__pyx_n_u_configure_event, __pyx_k_configure_event, sizeof(__pyx_k_configure_event), 0, 1, 0, 1},
@@ -6587,9 +7306,14 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_drawing_area, __pyx_k_drawing_area, sizeof(__pyx_k_drawing_area), 0, 0, 1, 1},
   {&__pyx_n_s_event, __pyx_k_event, sizeof(__pyx_k_event), 0, 0, 1, 1},
   {&__pyx_n_s_exit, __pyx_k_exit, sizeof(__pyx_k_exit), 0, 0, 1, 1},
+  {&__pyx_n_s_fragmentShaderID, __pyx_k_fragmentShaderID, sizeof(__pyx_k_fragmentShaderID), 0, 0, 1, 1},
   {&__pyx_n_s_get_allocation, __pyx_k_get_allocation, sizeof(__pyx_k_get_allocation), 0, 0, 1, 1},
   {&__pyx_n_s_get_window, __pyx_k_get_window, sizeof(__pyx_k_get_window), 0, 0, 1, 1},
   {&__pyx_n_s_gi_repository, __pyx_k_gi_repository, sizeof(__pyx_k_gi_repository), 0, 0, 1, 1},
+  {&__pyx_n_s_glLoadIdentity, __pyx_k_glLoadIdentity, sizeof(__pyx_k_glLoadIdentity), 0, 0, 1, 1},
+  {&__pyx_n_s_glMatrixMode, __pyx_k_glMatrixMode, sizeof(__pyx_k_glMatrixMode), 0, 0, 1, 1},
+  {&__pyx_n_s_glOrtho, __pyx_k_glOrtho, sizeof(__pyx_k_glOrtho), 0, 0, 1, 1},
+  {&__pyx_n_s_glViewport, __pyx_k_glViewport, sizeof(__pyx_k_glViewport), 0, 0, 1, 1},
   {&__pyx_n_s_glconfig, __pyx_k_glconfig, sizeof(__pyx_k_glconfig), 0, 0, 1, 1},
   {&__pyx_n_s_h, __pyx_k_h, sizeof(__pyx_k_h), 0, 0, 1, 1},
   {&__pyx_n_s_height, __pyx_k_height, sizeof(__pyx_k_height), 0, 0, 1, 1},
@@ -6603,6 +7327,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_key_press_event, __pyx_k_key_press_event, sizeof(__pyx_k_key_press_event), 0, 0, 1, 1},
   {&__pyx_n_u_key_press_event, __pyx_k_key_press_event, sizeof(__pyx_k_key_press_event), 0, 1, 0, 1},
   {&__pyx_n_s_keyval, __pyx_k_keyval, sizeof(__pyx_k_keyval), 0, 0, 1, 1},
+  {&__pyx_n_s_loadShaders, __pyx_k_loadShaders, sizeof(__pyx_k_loadShaders), 0, 0, 1, 1},
   {&__pyx_n_s_main, __pyx_k_main, sizeof(__pyx_k_main), 0, 0, 1, 1},
   {&__pyx_n_s_main_2, __pyx_k_main_2, sizeof(__pyx_k_main_2), 0, 0, 1, 1},
   {&__pyx_n_s_main_quit, __pyx_k_main_quit, sizeof(__pyx_k_main_quit), 0, 0, 1, 1},
@@ -6620,8 +7345,10 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_print, __pyx_k_print, sizeof(__pyx_k_print), 0, 0, 1, 1},
   {&__pyx_n_s_priority, __pyx_k_priority, sizeof(__pyx_k_priority), 0, 0, 1, 1},
   {&__pyx_n_s_process_updates, __pyx_k_process_updates, sizeof(__pyx_k_process_updates), 0, 0, 1, 1},
+  {&__pyx_n_s_progID, __pyx_k_progID, sizeof(__pyx_k_progID), 0, 0, 1, 1},
   {&__pyx_n_s_realize, __pyx_k_realize, sizeof(__pyx_k_realize), 0, 0, 1, 1},
   {&__pyx_n_u_realize, __pyx_k_realize, sizeof(__pyx_k_realize), 0, 1, 0, 1},
+  {&__pyx_kp_u_set_prog, __pyx_k_set_prog, sizeof(__pyx_k_set_prog), 0, 1, 0, 0},
   {&__pyx_n_s_set_reallocate_redraws, __pyx_k_set_reallocate_redraws, sizeof(__pyx_k_set_reallocate_redraws), 0, 0, 1, 1},
   {&__pyx_n_s_set_size_request, __pyx_k_set_size_request, sizeof(__pyx_k_set_size_request), 0, 0, 1, 1},
   {&__pyx_n_s_set_title, __pyx_k_set_title, sizeof(__pyx_k_set_title), 0, 0, 1, 1},
@@ -6638,6 +7365,8 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_unrealize, __pyx_k_unrealize, sizeof(__pyx_k_unrealize), 0, 0, 1, 1},
   {&__pyx_n_u_unrealize, __pyx_k_unrealize, sizeof(__pyx_k_unrealize), 0, 1, 0, 1},
   {&__pyx_n_s_vbox, __pyx_k_vbox, sizeof(__pyx_k_vbox), 0, 0, 1, 1},
+  {&__pyx_n_s_vertexPositionModelspaceID, __pyx_k_vertexPositionModelspaceID, sizeof(__pyx_k_vertexPositionModelspaceID), 0, 0, 1, 1},
+  {&__pyx_n_s_vertexShaderID, __pyx_k_vertexShaderID, sizeof(__pyx_k_vertexShaderID), 0, 0, 1, 1},
   {&__pyx_n_s_visibility_notify_event, __pyx_k_visibility_notify_event, sizeof(__pyx_k_visibility_notify_event), 0, 0, 1, 1},
   {&__pyx_n_u_visibility_notify_event, __pyx_k_visibility_notify_event, sizeof(__pyx_k_visibility_notify_event), 0, 1, 0, 1},
   {&__pyx_n_s_w, __pyx_k_w, sizeof(__pyx_k_w), 0, 0, 1, 1},
@@ -6650,8 +7379,8 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {0, 0, 0, 0, 0, 0, 0}
 };
 static int __Pyx_InitCachedBuiltins(void) {
-  __pyx_builtin_TypeError = __Pyx_GetBuiltinName(__pyx_n_s_TypeError); if (!__pyx_builtin_TypeError) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 374; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_builtin_print = __Pyx_GetBuiltinName(__pyx_n_s_print); if (!__pyx_builtin_print) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 375; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_builtin_print = __Pyx_GetBuiltinName(__pyx_n_s_print); if (!__pyx_builtin_print) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 70; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_builtin_TypeError = __Pyx_GetBuiltinName(__pyx_n_s_TypeError); if (!__pyx_builtin_TypeError) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 457; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   return 0;
   __pyx_L1_error:;
   return -1;
@@ -6661,343 +7390,542 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "openglTest.pyx":126
+  /* "openglTest.pyx":70
+ * 
+ * def loadShaders ():
+ *     print("Gen IDs")             # <<<<<<<<<<<<<<
+ *     vertexShaderID = glCreateShader(GL_VERTEX_SHADER)
+ *     fragmentShaderID= glCreateShader(GL_FRAGMENT_SHADER)
+ */
+  __pyx_tuple_ = PyTuple_Pack(1, __pyx_kp_u_Gen_IDs); if (unlikely(!__pyx_tuple_)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 70; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple_);
+  __Pyx_GIVEREF(__pyx_tuple_);
+
+  /* "openglTest.pyx":73
+ *     vertexShaderID = glCreateShader(GL_VERTEX_SHADER)
+ *     fragmentShaderID= glCreateShader(GL_FRAGMENT_SHADER)
+ *     print("Add source/compile")             # <<<<<<<<<<<<<<
+ *     glShaderSource(vertexShaderID, 1, <const char **>&vertexShader, NULL)
+ *     print("Added source")
+ */
+  __pyx_tuple__2 = PyTuple_Pack(1, __pyx_kp_u_Add_source_compile); if (unlikely(!__pyx_tuple__2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 73; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__2);
+  __Pyx_GIVEREF(__pyx_tuple__2);
+
+  /* "openglTest.pyx":75
+ *     print("Add source/compile")
+ *     glShaderSource(vertexShaderID, 1, <const char **>&vertexShader, NULL)
+ *     print("Added source")             # <<<<<<<<<<<<<<
+ *     glCompileShader(vertexShaderID)
+ *     print("One done!")
+ */
+  __pyx_tuple__3 = PyTuple_Pack(1, __pyx_kp_u_Added_source); if (unlikely(!__pyx_tuple__3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 75; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__3);
+  __Pyx_GIVEREF(__pyx_tuple__3);
+
+  /* "openglTest.pyx":77
+ *     print("Added source")
+ *     glCompileShader(vertexShaderID)
+ *     print("One done!")             # <<<<<<<<<<<<<<
+ *     glShaderSource(fragmentShaderID, 1, <const char **>&fragmentShader, NULL)
+ *     glCompileShader(fragmentShaderID)
+ */
+  __pyx_tuple__4 = PyTuple_Pack(1, __pyx_kp_u_One_done); if (unlikely(!__pyx_tuple__4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 77; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__4);
+  __Pyx_GIVEREF(__pyx_tuple__4);
+
+  /* "openglTest.pyx":81
+ *     glCompileShader(fragmentShaderID)
+ * 
+ *     print("Prog ids")             # <<<<<<<<<<<<<<
+ *     progID = glCreateProgram()
+ *     print("Attach shaders")
+ */
+  __pyx_tuple__5 = PyTuple_Pack(1, __pyx_kp_u_Prog_ids); if (unlikely(!__pyx_tuple__5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 81; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__5);
+  __Pyx_GIVEREF(__pyx_tuple__5);
+
+  /* "openglTest.pyx":83
+ *     print("Prog ids")
+ *     progID = glCreateProgram()
+ *     print("Attach shaders")             # <<<<<<<<<<<<<<
+ *     glAttachShader(progID, vertexShaderID)
+ *     glAttachShader(progID, fragmentShaderID)
+ */
+  __pyx_tuple__6 = PyTuple_Pack(1, __pyx_kp_u_Attach_shaders); if (unlikely(!__pyx_tuple__6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 83; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__6);
+  __Pyx_GIVEREF(__pyx_tuple__6);
+
+  /* "openglTest.pyx":86
+ *     glAttachShader(progID, vertexShaderID)
+ *     glAttachShader(progID, fragmentShaderID)
+ *     print("Link")             # <<<<<<<<<<<<<<
+ *     glLinkProgram(progID)
+ * 
+ */
+  __pyx_tuple__7 = PyTuple_Pack(1, __pyx_n_u_Link); if (unlikely(!__pyx_tuple__7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 86; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__7);
+  __Pyx_GIVEREF(__pyx_tuple__7);
+
+  /* "openglTest.pyx":89
+ *     glLinkProgram(progID)
+ * 
+ *     print("Clean memory")             # <<<<<<<<<<<<<<
+ *     glDeleteShader(vertexShaderID)
+ *     glDeleteShader(fragmentShaderID)
+ */
+  __pyx_tuple__8 = PyTuple_Pack(1, __pyx_kp_u_Clean_memory); if (unlikely(!__pyx_tuple__8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 89; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__8);
+  __Pyx_GIVEREF(__pyx_tuple__8);
+
+  /* "openglTest.pyx":108
+ *         return
+ * 
+ *     print("Glew init!")             # <<<<<<<<<<<<<<
+ *     glewInit()
+ * 
+ */
+  __pyx_tuple__9 = PyTuple_Pack(1, __pyx_kp_u_Glew_init); if (unlikely(!__pyx_tuple__9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 108; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__9);
+  __Pyx_GIVEREF(__pyx_tuple__9);
+
+  /* "openglTest.pyx":111
+ *     glewInit()
+ * 
+ *     print("Shaders!")             # <<<<<<<<<<<<<<
+ *     progID = loadShaders()
+ *     vertexPositionModelspaceID = glGetAttribLocation(progID,
+ */
+  __pyx_tuple__10 = PyTuple_Pack(1, __pyx_kp_u_Shaders); if (unlikely(!__pyx_tuple__10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 111; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__10);
+  __Pyx_GIVEREF(__pyx_tuple__10);
+
+  /* "openglTest.pyx":117
+ * 
+ * 
+ *     print("Buffers!")             # <<<<<<<<<<<<<<
+ *     glGenBuffers(1, &vertexBuffer)
+ *     glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer)
+ */
+  __pyx_tuple__11 = PyTuple_Pack(1, __pyx_kp_u_Buffers); if (unlikely(!__pyx_tuple__11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 117; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__11);
+  __Pyx_GIVEREF(__pyx_tuple__11);
+
+  /* "openglTest.pyx":144
+ *     GL.glMatrixMode(GL.GL_PROJECTION)
+ *     GL.glLoadIdentity()
+ *     GL.glOrtho(-5., 5., -5., 5., -1., 1.)             # <<<<<<<<<<<<<<
+ *     GL.glMatrixMode(GL.GL_MODELVIEW)
+ *     GL.glLoadIdentity()
+ */
+  __pyx_tuple__12 = PyTuple_Pack(6, __pyx_float_neg_5_, __pyx_float_5_, __pyx_float_neg_5_, __pyx_float_5_, __pyx_float_neg_1_, __pyx_float_1_); if (unlikely(!__pyx_tuple__12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 144; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__12);
+  __Pyx_GIVEREF(__pyx_tuple__12);
+
+  /* "openglTest.pyx":160
+ * 
+ *     # OpenGL BEGIN
+ *     print("It begins!")             # <<<<<<<<<<<<<<
+ *     if not GtkGLExt.widget_begin_gl(widget):
+ *         return False
+ */
+  __pyx_tuple__13 = PyTuple_Pack(1, __pyx_kp_u_It_begins); if (unlikely(!__pyx_tuple__13)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 160; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__13);
+  __Pyx_GIVEREF(__pyx_tuple__13);
+
+  /* "openglTest.pyx":164
+ *         return False
+ * 
+ *     print("clearing")             # <<<<<<<<<<<<<<
+ *     glClear(GL.GL_COLOR_BUFFER_BIT) #*
+ * 
+ */
+  __pyx_tuple__14 = PyTuple_Pack(1, __pyx_n_u_clearing); if (unlikely(!__pyx_tuple__14)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 164; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__14);
+  __Pyx_GIVEREF(__pyx_tuple__14);
+
+  /* "openglTest.pyx":167
+ *     glClear(GL.GL_COLOR_BUFFER_BIT) #*
+ * 
+ *     print("set prog")             # <<<<<<<<<<<<<<
+ *     glUseProgram(progID)
+ * 
+ */
+  __pyx_tuple__15 = PyTuple_Pack(1, __pyx_kp_u_set_prog); if (unlikely(!__pyx_tuple__15)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 167; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__15);
+  __Pyx_GIVEREF(__pyx_tuple__15);
+
+  /* "openglTest.pyx":170
+ *     glUseProgram(progID)
+ * 
+ *     print("Enable attrib")             # <<<<<<<<<<<<<<
+ *     glEnableVertexAttribArray(vertexPositionModelspaceID)
+ *     print("Passed one")
+ */
+  __pyx_tuple__16 = PyTuple_Pack(1, __pyx_kp_u_Enable_attrib); if (unlikely(!__pyx_tuple__16)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 170; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__16);
+  __Pyx_GIVEREF(__pyx_tuple__16);
+
+  /* "openglTest.pyx":172
+ *     print("Enable attrib")
+ *     glEnableVertexAttribArray(vertexPositionModelspaceID)
+ *     print("Passed one")             # <<<<<<<<<<<<<<
+ *     glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer)
+ *     glVertexAttribPointer(
+ */
+  __pyx_tuple__17 = PyTuple_Pack(1, __pyx_kp_u_Passed_one); if (unlikely(!__pyx_tuple__17)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 172; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__17);
+  __Pyx_GIVEREF(__pyx_tuple__17);
+
+  /* "openglTest.pyx":208
  * 
  *     # Update synchronously.
  *     window.process_updates(False)             # <<<<<<<<<<<<<<
  * 
  *     return True
  */
-  __pyx_tuple_ = PyTuple_Pack(1, Py_False); if (unlikely(!__pyx_tuple_)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 126; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple_);
-  __Pyx_GIVEREF(__pyx_tuple_);
+  __pyx_tuple__18 = PyTuple_Pack(1, Py_False); if (unlikely(!__pyx_tuple__18)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 208; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__18);
+  __Pyx_GIVEREF(__pyx_tuple__18);
 
-  /* "openglTest.pyx":276
+  /* "openglTest.pyx":359
  * 
  *     # Toggle animation
  *     menu_item = Gtk.MenuItem.new_with_label("Toggle Animation")             # <<<<<<<<<<<<<<
  *     menu.append(menu_item)
  *     menu_item.connect_object("activate", toggle_animation, drawing_area)
  */
-  __pyx_tuple__2 = PyTuple_Pack(1, __pyx_kp_u_Toggle_Animation); if (unlikely(!__pyx_tuple__2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 276; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__2);
-  __Pyx_GIVEREF(__pyx_tuple__2);
+  __pyx_tuple__19 = PyTuple_Pack(1, __pyx_kp_u_Toggle_Animation); if (unlikely(!__pyx_tuple__19)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 359; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__19);
+  __Pyx_GIVEREF(__pyx_tuple__19);
 
-  /* "openglTest.pyx":282
+  /* "openglTest.pyx":365
  * 
  *     # Quit
  *     menu_item = Gtk.MenuItem.new_with_label("Quit")             # <<<<<<<<<<<<<<
  *     menu.append(menu_item)
  *     menu_item.connect("activate", Gtk.main_quit)
  */
-  __pyx_tuple__3 = PyTuple_Pack(1, __pyx_n_u_Quit); if (unlikely(!__pyx_tuple__3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 282; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__3);
-  __Pyx_GIVEREF(__pyx_tuple__3);
+  __pyx_tuple__20 = PyTuple_Pack(1, __pyx_n_u_Quit); if (unlikely(!__pyx_tuple__20)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 365; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__20);
+  __Pyx_GIVEREF(__pyx_tuple__20);
 
-  /* "openglTest.pyx":299
+  /* "openglTest.pyx":382
  * 
  *     # Get automatically redrawn if any of their children changed allocation.
  *     window.set_reallocate_redraws(True)             # <<<<<<<<<<<<<<
  * 
  *     # Connect signal handlers to the window
  */
-  __pyx_tuple__4 = PyTuple_Pack(1, Py_True); if (unlikely(!__pyx_tuple__4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 299; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__4);
-  __Pyx_GIVEREF(__pyx_tuple__4);
+  __pyx_tuple__21 = PyTuple_Pack(1, Py_True); if (unlikely(!__pyx_tuple__21)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 382; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__21);
+  __Pyx_GIVEREF(__pyx_tuple__21);
 
-  /* "openglTest.pyx":306
+  /* "openglTest.pyx":389
  *     ## VBox.
  * 
  *     vbox = Gtk.VBox(False, 0)             # <<<<<<<<<<<<<<
  *     window.add(vbox)
  *     vbox.show()
  */
-  __pyx_tuple__5 = PyTuple_Pack(2, Py_False, __pyx_int_0); if (unlikely(!__pyx_tuple__5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 306; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__5);
-  __Pyx_GIVEREF(__pyx_tuple__5);
+  __pyx_tuple__22 = PyTuple_Pack(2, Py_False, __pyx_int_0); if (unlikely(!__pyx_tuple__22)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 389; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__22);
+  __Pyx_GIVEREF(__pyx_tuple__22);
 
-  /* "openglTest.pyx":354
+  /* "openglTest.pyx":437
  *     ## Simple quit button.
  * 
  *     button = Gtk.Button.new_with_label("Quit")             # <<<<<<<<<<<<<<
  *     button.connect("clicked", Gtk.main_quit)
  *     vbox.pack_start(button, False, False, 0)
  */
-  __pyx_tuple__6 = PyTuple_Pack(1, __pyx_n_u_Quit); if (unlikely(!__pyx_tuple__6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 354; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__6);
-  __Pyx_GIVEREF(__pyx_tuple__6);
+  __pyx_tuple__23 = PyTuple_Pack(1, __pyx_n_u_Quit); if (unlikely(!__pyx_tuple__23)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 437; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__23);
+  __Pyx_GIVEREF(__pyx_tuple__23);
 
-  /* "openglTest.pyx":375
+  /* "openglTest.pyx":458
  *                                                GdkGLExt.ConfigMode.DOUBLE)
  *     except TypeError:
  *         print("*** Cannot find the double-buffered visual.")             # <<<<<<<<<<<<<<
  *         print("*** Trying single-buffered visual.")
  * 
  */
-  __pyx_tuple__7 = PyTuple_Pack(1, __pyx_kp_u_Cannot_find_the_double_buffered); if (unlikely(!__pyx_tuple__7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 375; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__7);
-  __Pyx_GIVEREF(__pyx_tuple__7);
+  __pyx_tuple__24 = PyTuple_Pack(1, __pyx_kp_u_Cannot_find_the_double_buffered); if (unlikely(!__pyx_tuple__24)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 458; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__24);
+  __Pyx_GIVEREF(__pyx_tuple__24);
 
-  /* "openglTest.pyx":376
+  /* "openglTest.pyx":459
  *     except TypeError:
  *         print("*** Cannot find the double-buffered visual.")
  *         print("*** Trying single-buffered visual.")             # <<<<<<<<<<<<<<
  * 
  *         # Try single-buffered visual
  */
-  __pyx_tuple__8 = PyTuple_Pack(1, __pyx_kp_u_Trying_single_buffered_visual); if (unlikely(!__pyx_tuple__8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 376; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__8);
-  __Pyx_GIVEREF(__pyx_tuple__8);
+  __pyx_tuple__25 = PyTuple_Pack(1, __pyx_kp_u_Trying_single_buffered_visual); if (unlikely(!__pyx_tuple__25)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 459; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__25);
+  __Pyx_GIVEREF(__pyx_tuple__25);
 
-  /* "openglTest.pyx":383
+  /* "openglTest.pyx":466
  *                                                    GdkGLExt.ConfigMode.DEPTH)
  *         except TypeError:
  *             print("*** No appropriate OpenGL-capable visual found.")             # <<<<<<<<<<<<<<
  *             sys.exit(1)
  * 
  */
-  __pyx_tuple__9 = PyTuple_Pack(1, __pyx_kp_u_No_appropriate_OpenGL_capable_v); if (unlikely(!__pyx_tuple__9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 383; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__9);
-  __Pyx_GIVEREF(__pyx_tuple__9);
+  __pyx_tuple__26 = PyTuple_Pack(1, __pyx_kp_u_No_appropriate_OpenGL_capable_v); if (unlikely(!__pyx_tuple__26)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 466; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__26);
+  __Pyx_GIVEREF(__pyx_tuple__26);
 
-  /* "openglTest.pyx":384
+  /* "openglTest.pyx":467
  *         except TypeError:
  *             print("*** No appropriate OpenGL-capable visual found.")
  *             sys.exit(1)             # <<<<<<<<<<<<<<
  * 
  *     return glconfig
  */
-  __pyx_tuple__10 = PyTuple_Pack(1, __pyx_int_1); if (unlikely(!__pyx_tuple__10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 384; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__10);
-  __Pyx_GIVEREF(__pyx_tuple__10);
+  __pyx_tuple__27 = PyTuple_Pack(1, __pyx_int_1); if (unlikely(!__pyx_tuple__27)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 467; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__27);
+  __Pyx_GIVEREF(__pyx_tuple__27);
 
-  /* "openglTest.pyx":45
+  /* "openglTest.pyx":69
+ * cdef GLuint vertexPositionModelspaceID
+ * 
+ * def loadShaders ():             # <<<<<<<<<<<<<<
+ *     print("Gen IDs")
+ *     vertexShaderID = glCreateShader(GL_VERTEX_SHADER)
+ */
+  __pyx_tuple__28 = PyTuple_Pack(3, __pyx_n_s_vertexShaderID, __pyx_n_s_fragmentShaderID, __pyx_n_s_progID); if (unlikely(!__pyx_tuple__28)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 69; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__28);
+  __Pyx_GIVEREF(__pyx_tuple__28);
+  __pyx_codeobj__29 = (PyObject*)__Pyx_PyCode_New(0, 0, 3, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__28, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_jay_scripts_hive_game_proo, __pyx_n_s_loadShaders, 69, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__29)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 69; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+
+  /* "openglTest.pyx":98
  * # The following section contains all the callback function definitions.
  * 
  * def realize(widget, data):             # <<<<<<<<<<<<<<
  *     '''The "realize" signal handler. All the OpenGL initialization
  *     should be performed here, such as default background colour,
  */
-  __pyx_tuple__12 = PyTuple_Pack(2, __pyx_n_s_widget, __pyx_n_s_data); if (unlikely(!__pyx_tuple__12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 45; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__12);
-  __Pyx_GIVEREF(__pyx_tuple__12);
-  __pyx_codeobj__13 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__12, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_jay_scripts_hive_game_proo, __pyx_n_s_realize, 45, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__13)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 45; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__30 = PyTuple_Pack(3, __pyx_n_s_widget, __pyx_n_s_data, __pyx_n_s_vertexPositionModelspaceID); if (unlikely(!__pyx_tuple__30)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 98; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__30);
+  __Pyx_GIVEREF(__pyx_tuple__30);
+  __pyx_codeobj__31 = (PyObject*)__Pyx_PyCode_New(2, 0, 3, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__30, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_jay_scripts_hive_game_proo, __pyx_n_s_realize, 98, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__31)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 98; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "openglTest.pyx":60
+  /* "openglTest.pyx":127
  *     # OpenGL END
  * 
  * def configure_event(widget, event, data):             # <<<<<<<<<<<<<<
  *     '''The "configure_event" signal handler. Any processing required when
  *     the OpenGL-capable drawing area is re-configured should be done here.
  */
-  __pyx_tuple__14 = PyTuple_Pack(6, __pyx_n_s_widget, __pyx_n_s_event, __pyx_n_s_data, __pyx_n_s_allocation, __pyx_n_s_w, __pyx_n_s_h); if (unlikely(!__pyx_tuple__14)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 60; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__14);
-  __Pyx_GIVEREF(__pyx_tuple__14);
-  __pyx_codeobj__15 = (PyObject*)__Pyx_PyCode_New(3, 0, 6, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__14, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_jay_scripts_hive_game_proo, __pyx_n_s_configure_event, 60, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__15)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 60; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__32 = PyTuple_Pack(6, __pyx_n_s_widget, __pyx_n_s_event, __pyx_n_s_data, __pyx_n_s_allocation, __pyx_n_s_w, __pyx_n_s_h); if (unlikely(!__pyx_tuple__32)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 127; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__32);
+  __Pyx_GIVEREF(__pyx_tuple__32);
+  __pyx_codeobj__33 = (PyObject*)__Pyx_PyCode_New(3, 0, 6, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__32, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_jay_scripts_hive_game_proo, __pyx_n_s_configure_event, 127, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__33)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 127; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "openglTest.pyx":86
+  /* "openglTest.pyx":154
  *     return True
  * 
  * def draw (widget, cr, data):             # <<<<<<<<<<<<<<
  *     '''The "draw" signal handler. All the OpenGL re-drawing should
  *     be done here. This is repeatedly called as the painting routine
  */
-  __pyx_tuple__16 = PyTuple_Pack(3, __pyx_n_s_widget, __pyx_n_s_cr, __pyx_n_s_data); if (unlikely(!__pyx_tuple__16)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 86; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__16);
-  __Pyx_GIVEREF(__pyx_tuple__16);
-  __pyx_codeobj__17 = (PyObject*)__Pyx_PyCode_New(3, 0, 3, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__16, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_jay_scripts_hive_game_proo, __pyx_n_s_draw, 86, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__17)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 86; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__34 = PyTuple_Pack(3, __pyx_n_s_widget, __pyx_n_s_cr, __pyx_n_s_data); if (unlikely(!__pyx_tuple__34)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 154; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__34);
+  __Pyx_GIVEREF(__pyx_tuple__34);
+  __pyx_codeobj__35 = (PyObject*)__Pyx_PyCode_New(3, 0, 3, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__34, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_jay_scripts_hive_game_proo, __pyx_n_s_draw, 154, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__35)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 154; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "openglTest.pyx":108
+  /* "openglTest.pyx":190
  *     return True
  * 
  * def idle(widget):             # <<<<<<<<<<<<<<
  *     '''The idle function. Often in animations,
  *     idle functions are suitable for continous
  */
-  __pyx_tuple__18 = PyTuple_Pack(3, __pyx_n_s_widget, __pyx_n_s_window, __pyx_n_s_allocation); if (unlikely(!__pyx_tuple__18)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 108; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__18);
-  __Pyx_GIVEREF(__pyx_tuple__18);
-  __pyx_codeobj__19 = (PyObject*)__Pyx_PyCode_New(1, 0, 3, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__18, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_jay_scripts_hive_game_proo, __pyx_n_s_idle, 108, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__19)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 108; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__36 = PyTuple_Pack(3, __pyx_n_s_widget, __pyx_n_s_window, __pyx_n_s_allocation); if (unlikely(!__pyx_tuple__36)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 190; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__36);
+  __Pyx_GIVEREF(__pyx_tuple__36);
+  __pyx_codeobj__37 = (PyObject*)__Pyx_PyCode_New(1, 0, 3, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__36, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_jay_scripts_hive_game_proo, __pyx_n_s_idle, 190, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__37)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 190; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "openglTest.pyx":130
+  /* "openglTest.pyx":212
  *     return True
  * 
  * def motion_notify_event(widget, event, data):             # <<<<<<<<<<<<<<
  *     '''The "motion_notify_event" signal handler. Any processing required when
  *     the OpenGL-capable drawing area is under drag motion should be done here.'''
  */
-  __pyx_tuple__20 = PyTuple_Pack(3, __pyx_n_s_widget, __pyx_n_s_event, __pyx_n_s_data); if (unlikely(!__pyx_tuple__20)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 130; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__20);
-  __Pyx_GIVEREF(__pyx_tuple__20);
-  __pyx_codeobj__21 = (PyObject*)__Pyx_PyCode_New(3, 0, 3, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__20, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_jay_scripts_hive_game_proo, __pyx_n_s_motion_notify_event, 130, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__21)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 130; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__38 = PyTuple_Pack(3, __pyx_n_s_widget, __pyx_n_s_event, __pyx_n_s_data); if (unlikely(!__pyx_tuple__38)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 212; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__38);
+  __Pyx_GIVEREF(__pyx_tuple__38);
+  __pyx_codeobj__39 = (PyObject*)__Pyx_PyCode_New(3, 0, 3, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__38, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_jay_scripts_hive_game_proo, __pyx_n_s_motion_notify_event, 212, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__39)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 212; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "openglTest.pyx":137
+  /* "openglTest.pyx":219
  *     return False
  * 
  * def button_press_event(widget, event, data):             # <<<<<<<<<<<<<<
  *     '''The "button_press_event" signal handler. Any processing required when
  *     mouse buttons (only left and middle buttons) are pressed on the OpenGL-
  */
-  __pyx_tuple__22 = PyTuple_Pack(3, __pyx_n_s_widget, __pyx_n_s_event, __pyx_n_s_data); if (unlikely(!__pyx_tuple__22)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 137; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__22);
-  __Pyx_GIVEREF(__pyx_tuple__22);
-  __pyx_codeobj__23 = (PyObject*)__Pyx_PyCode_New(3, 0, 3, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__22, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_jay_scripts_hive_game_proo, __pyx_n_s_button_press_event, 137, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__23)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 137; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__40 = PyTuple_Pack(3, __pyx_n_s_widget, __pyx_n_s_event, __pyx_n_s_data); if (unlikely(!__pyx_tuple__40)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 219; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__40);
+  __Pyx_GIVEREF(__pyx_tuple__40);
+  __pyx_codeobj__41 = (PyObject*)__Pyx_PyCode_New(3, 0, 3, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__40, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_jay_scripts_hive_game_proo, __pyx_n_s_button_press_event, 219, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__41)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 219; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "openglTest.pyx":149
+  /* "openglTest.pyx":231
  *     return False
  * 
  * def button_press_event_popup_menu(widget, event):             # <<<<<<<<<<<<<<
  *     '''For popup menu.'''
  * 
  */
-  __pyx_tuple__24 = PyTuple_Pack(2, __pyx_n_s_widget, __pyx_n_s_event); if (unlikely(!__pyx_tuple__24)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 149; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__24);
-  __Pyx_GIVEREF(__pyx_tuple__24);
-  __pyx_codeobj__25 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__24, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_jay_scripts_hive_game_proo, __pyx_n_s_button_press_event_popup_menu, 149, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__25)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 149; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__42 = PyTuple_Pack(2, __pyx_n_s_widget, __pyx_n_s_event); if (unlikely(!__pyx_tuple__42)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 231; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__42);
+  __Pyx_GIVEREF(__pyx_tuple__42);
+  __pyx_codeobj__43 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__42, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_jay_scripts_hive_game_proo, __pyx_n_s_button_press_event_popup_menu, 231, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__43)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 231; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "openglTest.pyx":158
+  /* "openglTest.pyx":240
  *     return False
  * 
  * def key_press_event(widget, event):             # <<<<<<<<<<<<<<
  *     '''The "key_press_event" signal handler. Any processing required when key
  *     presses occur should be done here.'''
  */
-  __pyx_tuple__26 = PyTuple_Pack(4, __pyx_n_s_widget, __pyx_n_s_event, __pyx_n_s_window, __pyx_n_s_allocation); if (unlikely(!__pyx_tuple__26)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 158; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__26);
-  __Pyx_GIVEREF(__pyx_tuple__26);
-  __pyx_codeobj__27 = (PyObject*)__Pyx_PyCode_New(2, 0, 4, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__26, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_jay_scripts_hive_game_proo, __pyx_n_s_key_press_event, 158, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__27)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 158; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__44 = PyTuple_Pack(4, __pyx_n_s_widget, __pyx_n_s_event, __pyx_n_s_window, __pyx_n_s_allocation); if (unlikely(!__pyx_tuple__44)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 240; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__44);
+  __Pyx_GIVEREF(__pyx_tuple__44);
+  __pyx_codeobj__45 = (PyObject*)__Pyx_PyCode_New(2, 0, 4, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__44, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_jay_scripts_hive_game_proo, __pyx_n_s_key_press_event, 240, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__45)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 240; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "openglTest.pyx":192
+  /* "openglTest.pyx":274
  *     return True
  * 
  * def unrealize(widget, data):             # <<<<<<<<<<<<<<
  *     '''The "unrealize" signal handler. Any processing required when
  *     the OpenGL-capable window is unrealized should be done here.'''
  */
-  __pyx_tuple__28 = PyTuple_Pack(2, __pyx_n_s_widget, __pyx_n_s_data); if (unlikely(!__pyx_tuple__28)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 192; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__28);
-  __Pyx_GIVEREF(__pyx_tuple__28);
-  __pyx_codeobj__29 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__28, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_jay_scripts_hive_game_proo, __pyx_n_s_unrealize, 192, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__29)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 192; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__46 = PyTuple_Pack(2, __pyx_n_s_widget, __pyx_n_s_data); if (unlikely(!__pyx_tuple__46)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 274; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__46);
+  __Pyx_GIVEREF(__pyx_tuple__46);
+  __pyx_codeobj__47 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__46, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_jay_scripts_hive_game_proo, __pyx_n_s_unrealize, 274, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__47)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 274; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "openglTest.pyx":208
+  /* "openglTest.pyx":291
  * idle_id = 0
  * 
  * def idle_add(widget):             # <<<<<<<<<<<<<<
  *     global idle_id
  *     if idle_id == 0:
  */
-  __pyx_tuple__30 = PyTuple_Pack(1, __pyx_n_s_widget); if (unlikely(!__pyx_tuple__30)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 208; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__30);
-  __Pyx_GIVEREF(__pyx_tuple__30);
-  __pyx_codeobj__31 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__30, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_jay_scripts_hive_game_proo, __pyx_n_s_idle_add, 208, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__31)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 208; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__48 = PyTuple_Pack(1, __pyx_n_s_widget); if (unlikely(!__pyx_tuple__48)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 291; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__48);
+  __Pyx_GIVEREF(__pyx_tuple__48);
+  __pyx_codeobj__49 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__48, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_jay_scripts_hive_game_proo, __pyx_n_s_idle_add, 291, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__49)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 291; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "openglTest.pyx":214
+  /* "openglTest.pyx":297
  *         idle_id = GLib.timeout_add(8, idle, widget, priority=Gdk.PRIORITY_REDRAW+100)
  * 
  * def idle_remove(widget):             # <<<<<<<<<<<<<<
  *     global idle_id
  *     if idle_id != 0:
  */
-  __pyx_tuple__32 = PyTuple_Pack(1, __pyx_n_s_widget); if (unlikely(!__pyx_tuple__32)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 214; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__32);
-  __Pyx_GIVEREF(__pyx_tuple__32);
-  __pyx_codeobj__33 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__32, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_jay_scripts_hive_game_proo, __pyx_n_s_idle_remove, 214, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__33)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 214; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__50 = PyTuple_Pack(1, __pyx_n_s_widget); if (unlikely(!__pyx_tuple__50)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 297; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__50);
+  __Pyx_GIVEREF(__pyx_tuple__50);
+  __pyx_codeobj__51 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__50, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_jay_scripts_hive_game_proo, __pyx_n_s_idle_remove, 297, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__51)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 297; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "openglTest.pyx":220
+  /* "openglTest.pyx":303
  *         idle_id = 0
  * 
  * def map_event(widget, event, data):             # <<<<<<<<<<<<<<
  *     '''The "map_event" signal handler. Any processing required when the
  *     OpenGL-capable drawing area is mapped should be done here.'''
  */
-  __pyx_tuple__34 = PyTuple_Pack(3, __pyx_n_s_widget, __pyx_n_s_event, __pyx_n_s_data); if (unlikely(!__pyx_tuple__34)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 220; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__34);
-  __Pyx_GIVEREF(__pyx_tuple__34);
-  __pyx_codeobj__35 = (PyObject*)__Pyx_PyCode_New(3, 0, 3, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__34, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_jay_scripts_hive_game_proo, __pyx_n_s_map_event, 220, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__35)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 220; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__52 = PyTuple_Pack(3, __pyx_n_s_widget, __pyx_n_s_event, __pyx_n_s_data); if (unlikely(!__pyx_tuple__52)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 303; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__52);
+  __Pyx_GIVEREF(__pyx_tuple__52);
+  __pyx_codeobj__53 = (PyObject*)__Pyx_PyCode_New(3, 0, 3, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__52, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_jay_scripts_hive_game_proo, __pyx_n_s_map_event, 303, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__53)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 303; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "openglTest.pyx":228
+  /* "openglTest.pyx":311
  *     return True
  * 
  * def unmap_event(widget, event, data):             # <<<<<<<<<<<<<<
  *     '''The "unmap_event" signal handler. Any processing required when the
  *     OpenGL-capable drawing area is unmapped should be done here.'''
  */
-  __pyx_tuple__36 = PyTuple_Pack(3, __pyx_n_s_widget, __pyx_n_s_event, __pyx_n_s_data); if (unlikely(!__pyx_tuple__36)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 228; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__36);
-  __Pyx_GIVEREF(__pyx_tuple__36);
-  __pyx_codeobj__37 = (PyObject*)__Pyx_PyCode_New(3, 0, 3, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__36, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_jay_scripts_hive_game_proo, __pyx_n_s_unmap_event, 228, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__37)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 228; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__54 = PyTuple_Pack(3, __pyx_n_s_widget, __pyx_n_s_event, __pyx_n_s_data); if (unlikely(!__pyx_tuple__54)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 311; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__54);
+  __Pyx_GIVEREF(__pyx_tuple__54);
+  __pyx_codeobj__55 = (PyObject*)__Pyx_PyCode_New(3, 0, 3, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__54, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_jay_scripts_hive_game_proo, __pyx_n_s_unmap_event, 311, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__55)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 311; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "openglTest.pyx":235
+  /* "openglTest.pyx":318
  *     return True
  * 
  * def visibility_notify_event(widget, event, data):             # <<<<<<<<<<<<<<
  *     '''The "visibility_notify_event" signal handler. Any processing required
  *     when the OpenGL-capable drawing area is visually obscured should be
  */
-  __pyx_tuple__38 = PyTuple_Pack(3, __pyx_n_s_widget, __pyx_n_s_event, __pyx_n_s_data); if (unlikely(!__pyx_tuple__38)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 235; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__38);
-  __Pyx_GIVEREF(__pyx_tuple__38);
-  __pyx_codeobj__39 = (PyObject*)__Pyx_PyCode_New(3, 0, 3, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__38, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_jay_scripts_hive_game_proo, __pyx_n_s_visibility_notify_event, 235, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__39)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 235; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__56 = PyTuple_Pack(3, __pyx_n_s_widget, __pyx_n_s_event, __pyx_n_s_data); if (unlikely(!__pyx_tuple__56)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 318; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__56);
+  __Pyx_GIVEREF(__pyx_tuple__56);
+  __pyx_codeobj__57 = (PyObject*)__Pyx_PyCode_New(3, 0, 3, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__56, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_jay_scripts_hive_game_proo, __pyx_n_s_visibility_notify_event, 318, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__57)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 318; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "openglTest.pyx":252
+  /* "openglTest.pyx":335
  * #
  * 
  * def toggle_animation(widget):             # <<<<<<<<<<<<<<
  *     '''Toggle animation.'''
  * 
  */
-  __pyx_tuple__40 = PyTuple_Pack(2, __pyx_n_s_widget, __pyx_n_s_allocation); if (unlikely(!__pyx_tuple__40)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 252; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__40);
-  __Pyx_GIVEREF(__pyx_tuple__40);
-  __pyx_codeobj__41 = (PyObject*)__Pyx_PyCode_New(1, 0, 2, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__40, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_jay_scripts_hive_game_proo, __pyx_n_s_toggle_animation, 252, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__41)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 252; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__58 = PyTuple_Pack(2, __pyx_n_s_widget, __pyx_n_s_allocation); if (unlikely(!__pyx_tuple__58)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 335; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__58);
+  __Pyx_GIVEREF(__pyx_tuple__58);
+  __pyx_codeobj__59 = (PyObject*)__Pyx_PyCode_New(1, 0, 2, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__58, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_jay_scripts_hive_game_proo, __pyx_n_s_toggle_animation, 335, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__59)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 335; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "openglTest.pyx":270
+  /* "openglTest.pyx":353
  * #
  * 
  * def create_popup_menu(drawing_area):             # <<<<<<<<<<<<<<
  *     '''Creates the popup menu to be displayed.'''
  * 
  */
-  __pyx_tuple__42 = PyTuple_Pack(3, __pyx_n_s_drawing_area, __pyx_n_s_menu, __pyx_n_s_menu_item); if (unlikely(!__pyx_tuple__42)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 270; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__42);
-  __Pyx_GIVEREF(__pyx_tuple__42);
-  __pyx_codeobj__43 = (PyObject*)__Pyx_PyCode_New(1, 0, 3, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__42, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_jay_scripts_hive_game_proo, __pyx_n_s_create_popup_menu, 270, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__43)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 270; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__60 = PyTuple_Pack(3, __pyx_n_s_drawing_area, __pyx_n_s_menu, __pyx_n_s_menu_item); if (unlikely(!__pyx_tuple__60)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 353; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__60);
+  __Pyx_GIVEREF(__pyx_tuple__60);
+  __pyx_codeobj__61 = (PyObject*)__Pyx_PyCode_New(1, 0, 3, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__60, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_jay_scripts_hive_game_proo, __pyx_n_s_create_popup_menu, 353, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__61)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 353; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "openglTest.pyx":289
+  /* "openglTest.pyx":372
  *     return menu
  * 
  * def create_window(glconfig):             # <<<<<<<<<<<<<<
  *     '''Creates the simple application window with one
  *     drawing area that has an OpenGL-capable visual.'''
  */
-  __pyx_tuple__44 = PyTuple_Pack(6, __pyx_n_s_glconfig, __pyx_n_s_window, __pyx_n_s_vbox, __pyx_n_s_drawing_area, __pyx_n_s_menu, __pyx_n_s_button); if (unlikely(!__pyx_tuple__44)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 289; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__44);
-  __Pyx_GIVEREF(__pyx_tuple__44);
-  __pyx_codeobj__45 = (PyObject*)__Pyx_PyCode_New(1, 0, 6, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__44, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_jay_scripts_hive_game_proo, __pyx_n_s_create_window, 289, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__45)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 289; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__62 = PyTuple_Pack(6, __pyx_n_s_glconfig, __pyx_n_s_window, __pyx_n_s_vbox, __pyx_n_s_drawing_area, __pyx_n_s_menu, __pyx_n_s_button); if (unlikely(!__pyx_tuple__62)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 372; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__62);
+  __Pyx_GIVEREF(__pyx_tuple__62);
+  __pyx_codeobj__63 = (PyObject*)__Pyx_PyCode_New(1, 0, 6, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__62, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_jay_scripts_hive_game_proo, __pyx_n_s_create_window, 372, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__63)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 372; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "openglTest.pyx":366
+  /* "openglTest.pyx":449
  * #
  * 
  * def configure_gl():             # <<<<<<<<<<<<<<
  *     '''Configure the OpenGL framebuffer.'''
  * 
  */
-  __pyx_tuple__46 = PyTuple_Pack(1, __pyx_n_s_glconfig); if (unlikely(!__pyx_tuple__46)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 366; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__46);
-  __Pyx_GIVEREF(__pyx_tuple__46);
-  __pyx_codeobj__47 = (PyObject*)__Pyx_PyCode_New(0, 0, 1, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__46, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_jay_scripts_hive_game_proo, __pyx_n_s_configure_gl, 366, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__47)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 366; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__64 = PyTuple_Pack(1, __pyx_n_s_glconfig); if (unlikely(!__pyx_tuple__64)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 449; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__64);
+  __Pyx_GIVEREF(__pyx_tuple__64);
+  __pyx_codeobj__65 = (PyObject*)__Pyx_PyCode_New(0, 0, 1, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__64, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_jay_scripts_hive_game_proo, __pyx_n_s_configure_gl, 449, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__65)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 449; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "openglTest.pyx":393
+  /* "openglTest.pyx":476
  * #
  * 
  * def main():             # <<<<<<<<<<<<<<
  *     # Configure OpenGL framebuffer.
  *     glconfig = configure_gl()
  */
-  __pyx_tuple__48 = PyTuple_Pack(2, __pyx_n_s_glconfig, __pyx_n_s_window); if (unlikely(!__pyx_tuple__48)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 393; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__48);
-  __Pyx_GIVEREF(__pyx_tuple__48);
-  __pyx_codeobj__49 = (PyObject*)__Pyx_PyCode_New(0, 0, 2, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__48, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_jay_scripts_hive_game_proo, __pyx_n_s_main, 393, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__49)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 393; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__66 = PyTuple_Pack(2, __pyx_n_s_glconfig, __pyx_n_s_window); if (unlikely(!__pyx_tuple__66)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 476; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__66);
+  __Pyx_GIVEREF(__pyx_tuple__66);
+  __pyx_codeobj__67 = (PyObject*)__Pyx_PyCode_New(0, 0, 2, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__66, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_jay_scripts_hive_game_proo, __pyx_n_s_main, 476, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__67)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 476; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -7007,6 +7935,10 @@ static int __Pyx_InitCachedConstants(void) {
 
 static int __Pyx_InitGlobals(void) {
   if (__Pyx_InitStrings(__pyx_string_tab) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_float_1_ = PyFloat_FromDouble(1.); if (unlikely(!__pyx_float_1_)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_float_5_ = PyFloat_FromDouble(5.); if (unlikely(!__pyx_float_5_)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_float_neg_1_ = PyFloat_FromDouble(-1.); if (unlikely(!__pyx_float_neg_1_)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_float_neg_5_ = PyFloat_FromDouble(-5.); if (unlikely(!__pyx_float_neg_5_)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_int_0 = PyInt_FromLong(0); if (unlikely(!__pyx_int_0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_int_1 = PyInt_FromLong(1); if (unlikely(!__pyx_int_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_int_3 = PyInt_FromLong(3); if (unlikely(!__pyx_int_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -7028,6 +7960,7 @@ PyMODINIT_FUNC PyInit_openglTest(void)
 {
   PyObject *__pyx_t_1 = NULL;
   PyObject *__pyx_t_2 = NULL;
+  static GLfloat __pyx_t_3[9];
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -7107,41 +8040,41 @@ PyMODINIT_FUNC PyInit_openglTest(void)
   /* "openglTest.pyx":19
  * cimport cython
  * 
- * cdef char* vertex_shader = """             # <<<<<<<<<<<<<<
+ * cdef char * vertexShader = """             # <<<<<<<<<<<<<<
+ * #version 120
  * 
- * """
  */
-  __pyx_v_10openglTest_vertex_shader = __pyx_k__11;
+  __pyx_v_10openglTest_vertexShader = __pyx_k_version_120_Input_vertex_data_d;
 
-  /* "openglTest.pyx":23
+  /* "openglTest.pyx":31
  * """
  * 
- * cdef char* fragment_shader = """             # <<<<<<<<<<<<<<
+ * cdef char * fragmentShader = """             # <<<<<<<<<<<<<<
  * 
- * """
+ * #version 120
  */
-  __pyx_v_10openglTest_fragment_shader = __pyx_k__11;
+  __pyx_v_10openglTest_fragmentShader = __pyx_k_version_120_void_main_Output_co;
 
-  /* "openglTest.pyx":28
- * 
+  /* "openglTest.pyx":44
+ * """
  * 
  * import sys             # <<<<<<<<<<<<<<
  * 
  * from gi.repository import Gtk, Gdk, GLib
  */
-  __pyx_t_1 = __Pyx_Import(__pyx_n_s_sys, 0, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 28; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_Import(__pyx_n_s_sys, 0, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 44; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_sys, __pyx_t_1) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 28; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_sys, __pyx_t_1) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 44; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "openglTest.pyx":30
+  /* "openglTest.pyx":46
  * import sys
  * 
  * from gi.repository import Gtk, Gdk, GLib             # <<<<<<<<<<<<<<
  * from gi.repository import GtkGLExt, GdkGLExt
  * from OpenGL import GL
  */
-  __pyx_t_1 = PyList_New(3); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 30; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = PyList_New(3); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 46; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_INCREF(__pyx_n_s_Gtk);
   PyList_SET_ITEM(__pyx_t_1, 0, __pyx_n_s_Gtk);
@@ -7152,31 +8085,31 @@ PyMODINIT_FUNC PyInit_openglTest(void)
   __Pyx_INCREF(__pyx_n_s_GLib);
   PyList_SET_ITEM(__pyx_t_1, 2, __pyx_n_s_GLib);
   __Pyx_GIVEREF(__pyx_n_s_GLib);
-  __pyx_t_2 = __Pyx_Import(__pyx_n_s_gi_repository, __pyx_t_1, 0); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 30; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_Import(__pyx_n_s_gi_repository, __pyx_t_1, 0); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 46; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_Gtk); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 30; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_Gtk); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 46; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_Gtk, __pyx_t_1) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 30; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_Gtk, __pyx_t_1) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 46; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_Gdk); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 30; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_Gdk); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 46; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_Gdk, __pyx_t_1) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 30; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_Gdk, __pyx_t_1) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 46; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_GLib); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 30; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_GLib); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 46; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_GLib, __pyx_t_1) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 30; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_GLib, __pyx_t_1) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 46; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "openglTest.pyx":31
+  /* "openglTest.pyx":47
  * 
  * from gi.repository import Gtk, Gdk, GLib
  * from gi.repository import GtkGLExt, GdkGLExt             # <<<<<<<<<<<<<<
  * from OpenGL import GL
  * 
  */
-  __pyx_t_2 = PyList_New(2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 31; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyList_New(2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 47; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_INCREF(__pyx_n_s_GtkGLExt);
   PyList_SET_ITEM(__pyx_t_2, 0, __pyx_n_s_GtkGLExt);
@@ -7184,68 +8117,68 @@ PyMODINIT_FUNC PyInit_openglTest(void)
   __Pyx_INCREF(__pyx_n_s_GdkGLExt);
   PyList_SET_ITEM(__pyx_t_2, 1, __pyx_n_s_GdkGLExt);
   __Pyx_GIVEREF(__pyx_n_s_GdkGLExt);
-  __pyx_t_1 = __Pyx_Import(__pyx_n_s_gi_repository, __pyx_t_2, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 31; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_Import(__pyx_n_s_gi_repository, __pyx_t_2, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 47; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_ImportFrom(__pyx_t_1, __pyx_n_s_GtkGLExt); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 31; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_ImportFrom(__pyx_t_1, __pyx_n_s_GtkGLExt); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 47; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_GtkGLExt, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 31; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_GtkGLExt, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 47; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_ImportFrom(__pyx_t_1, __pyx_n_s_GdkGLExt); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 31; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_ImportFrom(__pyx_t_1, __pyx_n_s_GdkGLExt); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 47; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_GdkGLExt, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 31; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_GdkGLExt, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 47; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "openglTest.pyx":32
+  /* "openglTest.pyx":48
  * from gi.repository import Gtk, Gdk, GLib
  * from gi.repository import GtkGLExt, GdkGLExt
  * from OpenGL import GL             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __pyx_t_1 = PyList_New(1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 32; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = PyList_New(1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 48; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_INCREF(__pyx_n_s_GL);
   PyList_SET_ITEM(__pyx_t_1, 0, __pyx_n_s_GL);
   __Pyx_GIVEREF(__pyx_n_s_GL);
-  __pyx_t_2 = __Pyx_Import(__pyx_n_s_OpenGL, __pyx_t_1, 0); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 32; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_Import(__pyx_n_s_OpenGL, __pyx_t_1, 0); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 48; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_GL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 32; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_GL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 48; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_GL, __pyx_t_1) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 32; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_GL, __pyx_t_1) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 48; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "openglTest.pyx":35
+  /* "openglTest.pyx":51
  * 
  * 
  * DEFAULT_WIDTH = 200             # <<<<<<<<<<<<<<
  * DEFAULT_HEIGHT = 200
  * DEFAULT_TITLE = "Rotating Square"
  */
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_DEFAULT_WIDTH, __pyx_int_200) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 35; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_DEFAULT_WIDTH, __pyx_int_200) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 51; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "openglTest.pyx":36
+  /* "openglTest.pyx":52
  * 
  * DEFAULT_WIDTH = 200
  * DEFAULT_HEIGHT = 200             # <<<<<<<<<<<<<<
  * DEFAULT_TITLE = "Rotating Square"
  * 
  */
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_DEFAULT_HEIGHT, __pyx_int_200) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 36; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_DEFAULT_HEIGHT, __pyx_int_200) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 52; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "openglTest.pyx":37
+  /* "openglTest.pyx":53
  * DEFAULT_WIDTH = 200
  * DEFAULT_HEIGHT = 200
  * DEFAULT_TITLE = "Rotating Square"             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_DEFAULT_TITLE, __pyx_kp_u_Rotating_Square) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 37; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_DEFAULT_TITLE, __pyx_kp_u_Rotating_Square) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 53; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "openglTest.pyx":40
+  /* "openglTest.pyx":56
  * 
  * 
  * cdef int animate = True             # <<<<<<<<<<<<<<
@@ -7254,250 +8187,280 @@ PyMODINIT_FUNC PyInit_openglTest(void)
  */
   __pyx_v_10openglTest_animate = 1;
 
-  /* "openglTest.pyx":41
+  /* "openglTest.pyx":57
  * 
  * cdef int animate = True
  * cdef float spin = 0.             # <<<<<<<<<<<<<<
  * 
- * # The following section contains all the callback function definitions.
+ * cdef GLuint vertexBuffer
  */
   __pyx_v_10openglTest_spin = 0.;
 
-  /* "openglTest.pyx":45
+  /* "openglTest.pyx":60
+ * 
+ * cdef GLuint vertexBuffer
+ * cdef GLfloat[9] vertexBufferData = [             # <<<<<<<<<<<<<<
+ *         -1, -1, 0,
+ *         1, -1, 0,
+ */
+  __pyx_t_3[0] = -1.0;
+  __pyx_t_3[1] = -1.0;
+  __pyx_t_3[2] = 0.0;
+  __pyx_t_3[3] = 1.0;
+  __pyx_t_3[4] = -1.0;
+  __pyx_t_3[5] = 0.0;
+  __pyx_t_3[6] = 0.0;
+  __pyx_t_3[7] = 1.0;
+  __pyx_t_3[8] = 0.0;
+  memcpy(&(__pyx_v_10openglTest_vertexBufferData[0]), __pyx_t_3, sizeof(__pyx_v_10openglTest_vertexBufferData[0]) * (9));
+
+  /* "openglTest.pyx":69
+ * cdef GLuint vertexPositionModelspaceID
+ * 
+ * def loadShaders ():             # <<<<<<<<<<<<<<
+ *     print("Gen IDs")
+ *     vertexShaderID = glCreateShader(GL_VERTEX_SHADER)
+ */
+  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_10openglTest_1loadShaders, NULL, __pyx_n_s_openglTest); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 69; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_2);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_loadShaders, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 69; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+
+  /* "openglTest.pyx":98
  * # The following section contains all the callback function definitions.
  * 
  * def realize(widget, data):             # <<<<<<<<<<<<<<
  *     '''The "realize" signal handler. All the OpenGL initialization
  *     should be performed here, such as default background colour,
  */
-  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_10openglTest_1realize, NULL, __pyx_n_s_openglTest); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 45; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_10openglTest_3realize, NULL, __pyx_n_s_openglTest); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 98; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_realize, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 45; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_realize, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 98; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "openglTest.pyx":60
+  /* "openglTest.pyx":127
  *     # OpenGL END
  * 
  * def configure_event(widget, event, data):             # <<<<<<<<<<<<<<
  *     '''The "configure_event" signal handler. Any processing required when
  *     the OpenGL-capable drawing area is re-configured should be done here.
  */
-  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_10openglTest_3configure_event, NULL, __pyx_n_s_openglTest); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 60; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_10openglTest_5configure_event, NULL, __pyx_n_s_openglTest); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 127; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_configure_event, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 60; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_configure_event, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 127; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "openglTest.pyx":86
+  /* "openglTest.pyx":154
  *     return True
  * 
  * def draw (widget, cr, data):             # <<<<<<<<<<<<<<
  *     '''The "draw" signal handler. All the OpenGL re-drawing should
  *     be done here. This is repeatedly called as the painting routine
  */
-  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_10openglTest_5draw, NULL, __pyx_n_s_openglTest); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 86; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_10openglTest_7draw, NULL, __pyx_n_s_openglTest); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 154; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_draw, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 86; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_draw, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 154; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "openglTest.pyx":108
+  /* "openglTest.pyx":190
  *     return True
  * 
  * def idle(widget):             # <<<<<<<<<<<<<<
  *     '''The idle function. Often in animations,
  *     idle functions are suitable for continous
  */
-  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_10openglTest_7idle, NULL, __pyx_n_s_openglTest); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 108; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_10openglTest_9idle, NULL, __pyx_n_s_openglTest); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 190; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_idle, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 108; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_idle, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 190; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "openglTest.pyx":130
+  /* "openglTest.pyx":212
  *     return True
  * 
  * def motion_notify_event(widget, event, data):             # <<<<<<<<<<<<<<
  *     '''The "motion_notify_event" signal handler. Any processing required when
  *     the OpenGL-capable drawing area is under drag motion should be done here.'''
  */
-  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_10openglTest_9motion_notify_event, NULL, __pyx_n_s_openglTest); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 130; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_10openglTest_11motion_notify_event, NULL, __pyx_n_s_openglTest); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 212; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_motion_notify_event, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 130; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_motion_notify_event, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 212; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "openglTest.pyx":137
+  /* "openglTest.pyx":219
  *     return False
  * 
  * def button_press_event(widget, event, data):             # <<<<<<<<<<<<<<
  *     '''The "button_press_event" signal handler. Any processing required when
  *     mouse buttons (only left and middle buttons) are pressed on the OpenGL-
  */
-  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_10openglTest_11button_press_event, NULL, __pyx_n_s_openglTest); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 137; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_10openglTest_13button_press_event, NULL, __pyx_n_s_openglTest); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 219; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_button_press_event, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 137; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_button_press_event, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 219; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "openglTest.pyx":149
+  /* "openglTest.pyx":231
  *     return False
  * 
  * def button_press_event_popup_menu(widget, event):             # <<<<<<<<<<<<<<
  *     '''For popup menu.'''
  * 
  */
-  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_10openglTest_13button_press_event_popup_menu, NULL, __pyx_n_s_openglTest); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 149; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_10openglTest_15button_press_event_popup_menu, NULL, __pyx_n_s_openglTest); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 231; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_button_press_event_popup_menu, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 149; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_button_press_event_popup_menu, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 231; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "openglTest.pyx":158
+  /* "openglTest.pyx":240
  *     return False
  * 
  * def key_press_event(widget, event):             # <<<<<<<<<<<<<<
  *     '''The "key_press_event" signal handler. Any processing required when key
  *     presses occur should be done here.'''
  */
-  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_10openglTest_15key_press_event, NULL, __pyx_n_s_openglTest); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 158; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_10openglTest_17key_press_event, NULL, __pyx_n_s_openglTest); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 240; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_key_press_event, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 158; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_key_press_event, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 240; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "openglTest.pyx":192
+  /* "openglTest.pyx":274
  *     return True
  * 
  * def unrealize(widget, data):             # <<<<<<<<<<<<<<
  *     '''The "unrealize" signal handler. Any processing required when
  *     the OpenGL-capable window is unrealized should be done here.'''
  */
-  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_10openglTest_17unrealize, NULL, __pyx_n_s_openglTest); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 192; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_10openglTest_19unrealize, NULL, __pyx_n_s_openglTest); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 274; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_unrealize, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 192; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_unrealize, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 274; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "openglTest.pyx":206
+  /* "openglTest.pyx":289
  * # Helper functions to add or remove the idle function.
  * 
  * idle_id = 0             # <<<<<<<<<<<<<<
  * 
  * def idle_add(widget):
  */
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_idle_id, __pyx_int_0) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 206; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_idle_id, __pyx_int_0) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 289; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "openglTest.pyx":208
+  /* "openglTest.pyx":291
  * idle_id = 0
  * 
  * def idle_add(widget):             # <<<<<<<<<<<<<<
  *     global idle_id
  *     if idle_id == 0:
  */
-  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_10openglTest_19idle_add, NULL, __pyx_n_s_openglTest); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 208; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_10openglTest_21idle_add, NULL, __pyx_n_s_openglTest); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 291; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_idle_add, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 208; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_idle_add, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 291; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "openglTest.pyx":214
+  /* "openglTest.pyx":297
  *         idle_id = GLib.timeout_add(8, idle, widget, priority=Gdk.PRIORITY_REDRAW+100)
  * 
  * def idle_remove(widget):             # <<<<<<<<<<<<<<
  *     global idle_id
  *     if idle_id != 0:
  */
-  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_10openglTest_21idle_remove, NULL, __pyx_n_s_openglTest); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 214; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_10openglTest_23idle_remove, NULL, __pyx_n_s_openglTest); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 297; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_idle_remove, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 214; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_idle_remove, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 297; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "openglTest.pyx":220
+  /* "openglTest.pyx":303
  *         idle_id = 0
  * 
  * def map_event(widget, event, data):             # <<<<<<<<<<<<<<
  *     '''The "map_event" signal handler. Any processing required when the
  *     OpenGL-capable drawing area is mapped should be done here.'''
  */
-  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_10openglTest_23map_event, NULL, __pyx_n_s_openglTest); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 220; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_10openglTest_25map_event, NULL, __pyx_n_s_openglTest); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 303; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_map_event, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 220; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_map_event, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 303; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "openglTest.pyx":228
+  /* "openglTest.pyx":311
  *     return True
  * 
  * def unmap_event(widget, event, data):             # <<<<<<<<<<<<<<
  *     '''The "unmap_event" signal handler. Any processing required when the
  *     OpenGL-capable drawing area is unmapped should be done here.'''
  */
-  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_10openglTest_25unmap_event, NULL, __pyx_n_s_openglTest); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 228; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_10openglTest_27unmap_event, NULL, __pyx_n_s_openglTest); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 311; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_unmap_event, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 228; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_unmap_event, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 311; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "openglTest.pyx":235
+  /* "openglTest.pyx":318
  *     return True
  * 
  * def visibility_notify_event(widget, event, data):             # <<<<<<<<<<<<<<
  *     '''The "visibility_notify_event" signal handler. Any processing required
  *     when the OpenGL-capable drawing area is visually obscured should be
  */
-  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_10openglTest_27visibility_notify_event, NULL, __pyx_n_s_openglTest); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 235; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_10openglTest_29visibility_notify_event, NULL, __pyx_n_s_openglTest); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 318; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_visibility_notify_event, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 235; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_visibility_notify_event, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 318; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "openglTest.pyx":252
+  /* "openglTest.pyx":335
  * #
  * 
  * def toggle_animation(widget):             # <<<<<<<<<<<<<<
  *     '''Toggle animation.'''
  * 
  */
-  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_10openglTest_29toggle_animation, NULL, __pyx_n_s_openglTest); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 252; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_10openglTest_31toggle_animation, NULL, __pyx_n_s_openglTest); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 335; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_toggle_animation, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 252; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_toggle_animation, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 335; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "openglTest.pyx":270
+  /* "openglTest.pyx":353
  * #
  * 
  * def create_popup_menu(drawing_area):             # <<<<<<<<<<<<<<
  *     '''Creates the popup menu to be displayed.'''
  * 
  */
-  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_10openglTest_31create_popup_menu, NULL, __pyx_n_s_openglTest); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 270; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_10openglTest_33create_popup_menu, NULL, __pyx_n_s_openglTest); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 353; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_create_popup_menu, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 270; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_create_popup_menu, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 353; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "openglTest.pyx":289
+  /* "openglTest.pyx":372
  *     return menu
  * 
  * def create_window(glconfig):             # <<<<<<<<<<<<<<
  *     '''Creates the simple application window with one
  *     drawing area that has an OpenGL-capable visual.'''
  */
-  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_10openglTest_33create_window, NULL, __pyx_n_s_openglTest); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 289; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_10openglTest_35create_window, NULL, __pyx_n_s_openglTest); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 372; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_create_window, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 289; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_create_window, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 372; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "openglTest.pyx":366
+  /* "openglTest.pyx":449
  * #
  * 
  * def configure_gl():             # <<<<<<<<<<<<<<
  *     '''Configure the OpenGL framebuffer.'''
  * 
  */
-  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_10openglTest_35configure_gl, NULL, __pyx_n_s_openglTest); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 366; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_10openglTest_37configure_gl, NULL, __pyx_n_s_openglTest); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 449; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_configure_gl, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 366; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_configure_gl, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 449; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "openglTest.pyx":393
+  /* "openglTest.pyx":476
  * #
  * 
  * def main():             # <<<<<<<<<<<<<<
  *     # Configure OpenGL framebuffer.
  *     glconfig = configure_gl()
  */
-  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_10openglTest_37main, NULL, __pyx_n_s_openglTest); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 393; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_10openglTest_39main, NULL, __pyx_n_s_openglTest); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 476; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_main, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 393; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_main, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 476; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "openglTest.pyx":1
@@ -7562,6 +8525,25 @@ static PyObject *__Pyx_GetBuiltinName(PyObject *name) {
     }
     return result;
 }
+
+#if CYTHON_COMPILING_IN_CPYTHON
+static CYTHON_INLINE PyObject* __Pyx_PyObject_Call(PyObject *func, PyObject *arg, PyObject *kw) {
+    PyObject *result;
+    ternaryfunc call = func->ob_type->tp_call;
+    if (unlikely(!call))
+        return PyObject_Call(func, arg, kw);
+    if (unlikely(Py_EnterRecursiveCall((char*)" while calling a Python object")))
+        return NULL;
+    result = (*call)(func, arg, kw);
+    Py_LeaveRecursiveCall();
+    if (unlikely(!result) && unlikely(!PyErr_Occurred())) {
+        PyErr_SetString(
+            PyExc_SystemError,
+            "NULL result without error in PyObject_Call");
+    }
+    return result;
+}
+#endif
 
 static void __Pyx_RaiseArgtupleInvalid(
     const char* func_name,
@@ -7718,25 +8700,6 @@ static CYTHON_INLINE PyObject *__Pyx_GetModuleGlobalName(PyObject *name) {
     }
     return result;
 }
-
-#if CYTHON_COMPILING_IN_CPYTHON
-static CYTHON_INLINE PyObject* __Pyx_PyObject_Call(PyObject *func, PyObject *arg, PyObject *kw) {
-    PyObject *result;
-    ternaryfunc call = func->ob_type->tp_call;
-    if (unlikely(!call))
-        return PyObject_Call(func, arg, kw);
-    if (unlikely(Py_EnterRecursiveCall((char*)" while calling a Python object")))
-        return NULL;
-    result = (*call)(func, arg, kw);
-    Py_LeaveRecursiveCall();
-    if (unlikely(!result) && unlikely(!PyErr_Occurred())) {
-        PyErr_SetString(
-            PyExc_SystemError,
-            "NULL result without error in PyObject_Call");
-    }
-    return result;
-}
-#endif
 
 #if CYTHON_COMPILING_IN_CPYTHON
 static CYTHON_INLINE PyObject* __Pyx_PyObject_CallMethO(PyObject *func, PyObject *arg) {
@@ -8182,6 +9145,32 @@ bad:
     return module;
 }
 
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From_int(int value) {
+    const int neg_one = (int) -1, const_zero = 0;
+    const int is_unsigned = neg_one > const_zero;
+    if (is_unsigned) {
+        if (sizeof(int) < sizeof(long)) {
+            return PyInt_FromLong((long) value);
+        } else if (sizeof(int) <= sizeof(unsigned long)) {
+            return PyLong_FromUnsignedLong((unsigned long) value);
+        } else if (sizeof(int) <= sizeof(unsigned long long)) {
+            return PyLong_FromUnsignedLongLong((unsigned long long) value);
+        }
+    } else {
+        if (sizeof(int) <= sizeof(long)) {
+            return PyInt_FromLong((long) value);
+        } else if (sizeof(int) <= sizeof(long long)) {
+            return PyLong_FromLongLong((long long) value);
+        }
+    }
+    {
+        int one = 1; int little = (int)*(unsigned char *)&one;
+        unsigned char *bytes = (unsigned char *)&value;
+        return _PyLong_FromByteArray(bytes, sizeof(int),
+                                     little, !is_unsigned);
+    }
+}
+
 #define __PYX_VERIFY_RETURN_INT(target_type, func_type, func_value)       \
     {                                                                     \
         func_type value = func_value;                                     \
@@ -8203,19 +9192,19 @@ bad:
  #endif
 #endif
 
-static CYTHON_INLINE GLenum __Pyx_PyInt_As_GLenum(PyObject *x) {
-    const GLenum neg_one = (GLenum) -1, const_zero = 0;
+static CYTHON_INLINE GLuint __Pyx_PyInt_As_GLuint(PyObject *x) {
+    const GLuint neg_one = (GLuint) -1, const_zero = 0;
     const int is_unsigned = neg_one > const_zero;
 #if PY_MAJOR_VERSION < 3
     if (likely(PyInt_Check(x))) {
-        if (sizeof(GLenum) < sizeof(long)) {
-            __PYX_VERIFY_RETURN_INT(GLenum, long, PyInt_AS_LONG(x))
+        if (sizeof(GLuint) < sizeof(long)) {
+            __PYX_VERIFY_RETURN_INT(GLuint, long, PyInt_AS_LONG(x))
         } else {
             long val = PyInt_AS_LONG(x);
             if (is_unsigned && unlikely(val < 0)) {
                 goto raise_neg_overflow;
             }
-            return (GLenum) val;
+            return (GLuint) val;
         }
     } else
 #endif
@@ -8225,32 +9214,32 @@ static CYTHON_INLINE GLenum __Pyx_PyInt_As_GLenum(PyObject *x) {
  #if CYTHON_USE_PYLONG_INTERNALS
             switch (Py_SIZE(x)) {
                 case  0: return 0;
-                case  1: __PYX_VERIFY_RETURN_INT(GLenum, digit, ((PyLongObject*)x)->ob_digit[0]);
+                case  1: __PYX_VERIFY_RETURN_INT(GLuint, digit, ((PyLongObject*)x)->ob_digit[0]);
             }
  #endif
 #endif
             if (unlikely(Py_SIZE(x) < 0)) {
                 goto raise_neg_overflow;
             }
-            if (sizeof(GLenum) <= sizeof(unsigned long)) {
-                __PYX_VERIFY_RETURN_INT(GLenum, unsigned long, PyLong_AsUnsignedLong(x))
-            } else if (sizeof(GLenum) <= sizeof(unsigned long long)) {
-                __PYX_VERIFY_RETURN_INT(GLenum, unsigned long long, PyLong_AsUnsignedLongLong(x))
+            if (sizeof(GLuint) <= sizeof(unsigned long)) {
+                __PYX_VERIFY_RETURN_INT(GLuint, unsigned long, PyLong_AsUnsignedLong(x))
+            } else if (sizeof(GLuint) <= sizeof(unsigned long long)) {
+                __PYX_VERIFY_RETURN_INT(GLuint, unsigned long long, PyLong_AsUnsignedLongLong(x))
             }
         } else {
 #if CYTHON_COMPILING_IN_CPYTHON && PY_MAJOR_VERSION >= 3
  #if CYTHON_USE_PYLONG_INTERNALS
             switch (Py_SIZE(x)) {
                 case  0: return 0;
-                case  1: __PYX_VERIFY_RETURN_INT(GLenum,  digit, +(((PyLongObject*)x)->ob_digit[0]));
-                case -1: __PYX_VERIFY_RETURN_INT(GLenum, sdigit, -(sdigit) ((PyLongObject*)x)->ob_digit[0]);
+                case  1: __PYX_VERIFY_RETURN_INT(GLuint,  digit, +(((PyLongObject*)x)->ob_digit[0]));
+                case -1: __PYX_VERIFY_RETURN_INT(GLuint, sdigit, -(sdigit) ((PyLongObject*)x)->ob_digit[0]);
             }
  #endif
 #endif
-            if (sizeof(GLenum) <= sizeof(long)) {
-                __PYX_VERIFY_RETURN_INT(GLenum, long, PyLong_AsLong(x))
-            } else if (sizeof(GLenum) <= sizeof(long long)) {
-                __PYX_VERIFY_RETURN_INT(GLenum, long long, PyLong_AsLongLong(x))
+            if (sizeof(GLuint) <= sizeof(long)) {
+                __PYX_VERIFY_RETURN_INT(GLuint, long, PyLong_AsLong(x))
+            } else if (sizeof(GLuint) <= sizeof(long long)) {
+                __PYX_VERIFY_RETURN_INT(GLuint, long long, PyLong_AsLongLong(x))
             }
         }
         {
@@ -8258,7 +9247,7 @@ static CYTHON_INLINE GLenum __Pyx_PyInt_As_GLenum(PyObject *x) {
             PyErr_SetString(PyExc_RuntimeError,
                             "_PyLong_AsByteArray() not available in PyPy, cannot convert large numbers");
 #else
-            GLenum val;
+            GLuint val;
             PyObject *v = __Pyx_PyNumber_Int(x);
  #if PY_MAJOR_VERSION < 3
             if (likely(v) && !PyLong_Check(v)) {
@@ -8278,24 +9267,24 @@ static CYTHON_INLINE GLenum __Pyx_PyInt_As_GLenum(PyObject *x) {
                     return val;
             }
 #endif
-            return (GLenum) -1;
+            return (GLuint) -1;
         }
     } else {
-        GLenum val;
+        GLuint val;
         PyObject *tmp = __Pyx_PyNumber_Int(x);
-        if (!tmp) return (GLenum) -1;
-        val = __Pyx_PyInt_As_GLenum(tmp);
+        if (!tmp) return (GLuint) -1;
+        val = __Pyx_PyInt_As_GLuint(tmp);
         Py_DECREF(tmp);
         return val;
     }
 raise_overflow:
     PyErr_SetString(PyExc_OverflowError,
-        "value too large to convert to GLenum");
-    return (GLenum) -1;
+        "value too large to convert to GLuint");
+    return (GLuint) -1;
 raise_neg_overflow:
     PyErr_SetString(PyExc_OverflowError,
-        "can't convert negative value to GLenum");
-    return (GLenum) -1;
+        "can't convert negative value to GLuint");
+    return (GLuint) -1;
 }
 
 static CYTHON_INLINE int __Pyx_PyInt_As_int(PyObject *x) {
