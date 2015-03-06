@@ -45,7 +45,6 @@ import sys
 
 from gi.repository import Gtk, Gdk, GLib
 from gi.repository import GtkGLExt, GdkGLExt
-from OpenGL import GL
 
 
 DEFAULT_WIDTH = 200
@@ -154,7 +153,7 @@ def draw (widget, cr, data):
         return False
 
     print("clearing")
-    glClear(GL.GL_COLOR_BUFFER_BIT) #*
+    glClear(GL_COLOR_BUFFER_BIT) #*
 
     print("set prog")
     glUseProgram(progID)
