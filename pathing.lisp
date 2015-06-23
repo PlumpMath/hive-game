@@ -1,4 +1,4 @@
-(defun path-map (obstacles goals updates)
+(defun path-map% (obstacles goals updates)
   (declare (type (array (mod 2)) obstacles goals updates))
   (destructuring-bind (sizex sizey) (array-dimensions obstacles)
     (let ((map (make-array (list sizex sizey) :element-type '(mod 255)))
@@ -43,4 +43,68 @@
                                        (setf update t
                                              (aref updates i j) 0)
                                        (update-neighbors i j)))))))))
+(defparameter *map-size* '(8 8))
+
+(defclass path ()
+  ((obstacles :initform (make-array *map-size* :element-type '(mod 2))
+              :initarg :obstacles
+              :type '(array (mod 2) 2))
+   (goals :initform (make-array *map-size* :element-type '(mod 2))
+          :initarg :goals
+          :type '(array (mod 2) 2))
+   (active :initform (make-array *map-size* :element-type '(mod 2))
+           :type '(array (mod 2) 2))
+   (map :initform (make-array *map-size* :element-type '(mod 256))
+        :type '(array (mod 255) 2))
+   (local-updates :type 'cons)
+   (global-updates :type 'cons)))
+
+(defun new-obstacle-p (path coords)
+  (with-slots (obstacles map) path
+    (destructuring-bind (x y) coords
+      (and (= 1 (aref obstacles x y))
+           (< 0 (aref map x y))))))
+(defun new-goal-p (path coords)
+  (with-slots (goals map) path
+    (destructuring-bind (x y) coords
+      (and (= 1 (aref goals x y))
+           (> 255 (aref map x y))))))
+
+(defun get-neighbors (coords)
+  (destructuring-bind (x y) coords
+    (destructuring-bind (i j) *map-size*
+      `((,(mod (+ x 1) i) ,y)
+        (,(mod (- x 1) i) ,y)
+        (,x ,(mod (+ y 1) j))
+        (,x ,(mod (- y 1) j))))))
+
+(defun path-map%% (path)
+  (declare (type path path))
+  (with-slots (obstacles goals active map local-updates global-updates) path
+    (destructuring-bind (i j) *map-size*
+      (if (cdr local-updates)
+          (loop for con = (cdr local-updates) then (cdr con)
+                do (let ((coords (car con))
+                         (x (caar con))
+                         (y (cadar con)))
+                     (cond
+                       ((new-obstacle-p path coords)
+                        (setf (aref map x y) 0)
+                        (nconc con (get-neighbors coords)))
+                       ((new-goal-p path coords)
+                        (setf (aref map x y) 255)
+                        (nconc con (get-neighbors coords)))
+                       (t
+                        (let ((new (- (apply #'max (mapcar (lambda (coords) (aref map
+                                                                                  (car coords)
+                                                                                  (cadr coords)))
+                                                           (get-neighbors coords))) 1)))
+                          (unless (or (= new (aref map x y))
+                                      (= 1 (aref obstacles x y))
+                                      (= 1 (aref goals x y)))
+                            (setf (aref map x y) new)
+                            (nconc con (get-neighbors coords)))))))
+                   (print map)
+                while (cdr con)
+                finally (setf local-updates con))))))
 
