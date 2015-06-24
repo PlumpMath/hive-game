@@ -83,8 +83,8 @@
   (with-slots (obstacles goals active map local-updates global-updates) path
     (destructuring-bind (i j) *map-size*
       (if (cdr local-updates)
-          (loop for con = (cdr local-updates) then (cdr con)
-                do (let ((coords (car con))
+          (loop :for con = (cdr local-updates) :then (cdr con)
+                :do (let ((coords (car con))
                          (x (caar con))
                          (y (cadar con)))
                      (cond
@@ -103,8 +103,15 @@
                                       (= 1 (aref obstacles x y))
                                       (= 1 (aref goals x y)))
                             (setf (aref map x y) new)
-                            (nconc con (get-neighbors coords)))))))
+                            (nconc con (get-neighbors coords))))))
+                     (setf (aref active x y) 1))
                    (print map)
-                while (cdr con)
-                finally (setf local-updates con))))))
+                :while (cdr con)
+                :finally (setf local-updates con))))))
 
+(defun print-array (array)
+  (destructuring-bind (x y) (array-dimensions array)
+    (loop :for i :below x :do
+      (loop :for j :below y :do
+        (format t "~3a" (aref array i j)))
+      (format t "~%"))))
