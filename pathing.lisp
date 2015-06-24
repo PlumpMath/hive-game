@@ -115,41 +115,52 @@
   (destructuring-bind (x y) (array-dimensions array)
     (loop :for i :below x :do
       (loop :for j :below y :do
-        (format t "~3a" (aref array i j)))
+        (format t "~3a " (aref array i j)))
       (format t "~%"))))
 
-(defun update-coord (path coord)
+(defun update-coord (path con coord)
   (with-slots (obstacles goals active map) path
     (destructuring-bind (x y) coord
       (cond
-        ((new-obstacle-p path coords)
+        ((new-obstacle-p path coord)
          (setf (aref map x y) 0)
-         (nconc con (get-neighbors coords)))
-        ((new-goal-p path coords)
+         (nconc con (get-neighbors coord)))
+        ((new-goal-p path coord)
          (setf (aref map x y) 255)
-         (nconc con (get-neighbors coords)))
+         (nconc con (get-neighbors coord)))
         (t
-         (let ((new (- (apply #'max (mapcar (lambda (coords) (aref map
-                                                                   (car coords)
-                                                                   (cadr coords)))
-                                            (get-neighbors coords))) 1)))
+         (let ((new (- (apply #'max (mapcar (lambda (coord) (aref map
+                                                                   (car coord)
+                                                                   (cadr coord)))
+                                            (get-neighbors coord))) 1)))
            (unless (or (= new (aref map x y))
                        (= 1 (aref obstacles x y))
                        (= 1 (aref goals x y)))
              (setf (aref map x y) new)
-             (nconc con (get-neighbors coords)))))))))
+             (nconc con (get-neighbors coord)))))))))
 
 (defun path-map%%% (path)
   (with-slots (active map local-updates global-updates) path
     (if (cdr global-updates)
         (loop :for con = (cdr global-updates) :then (cdr con)
-              :do (update-coord path (car con))
-                  (setf (aref active (car con) (cadr con)) 1)
+              :do (update-coord path local-updates (car con))
+                  (setf (aref active (caar con) (cadar con)) 1)
               :while (cdr con)
               :finally (setf global-updates con)))
     (if (cdr local-updates)
         (loop :for con = (cdr local-updates) :then (cdr con)
-              :do (update-coord path (car con))
-                  (setf (aref active (car con) (cadr con)) 1)
+              :do (update-coord path con (car con))
+                  (setf (aref active (caar con) (cadar con)) 1)
               :while (cdr con)
               :finally (setf local-updates con)))))
+
+(defun add-obstacle (path coord)
+  (with-slots (obstacles local-updates) path
+    (destructuring-bind (x y) coord
+      (setf (aref obstacles x y) 1)
+      (nconc local-updates (list coord)))))
+(defun add-goal (path coord)
+  (with-slots (goals local-updates) path
+    (destructuring-bind (x y) coord
+      (setf (aref goals x y) 1)
+      (nconc local-updates (list coord)))))
