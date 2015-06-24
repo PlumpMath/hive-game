@@ -56,8 +56,10 @@
            :type '(array (mod 2) 2))
    (map :initform (make-array *map-size* :element-type '(mod 256))
         :type '(array (mod 255) 2))
-   (local-updates :type 'cons)
-   (global-updates :type 'cons)))
+   (local-updates :initform '(:loc)
+                  :type 'cons)
+   (global-updates :initform '(:glob)
+                   :type 'cons)))
 
 (defun new-obstacle-p (path coords)
   (with-slots (obstacles map) path
@@ -115,3 +117,39 @@
       (loop :for j :below y :do
         (format t "~3a" (aref array i j)))
       (format t "~%"))))
+
+(defun update-coord (path coord)
+  (with-slots (obstacles goals active map) path
+    (destructuring-bind (x y) coord
+      (cond
+        ((new-obstacle-p path coords)
+         (setf (aref map x y) 0)
+         (nconc con (get-neighbors coords)))
+        ((new-goal-p path coords)
+         (setf (aref map x y) 255)
+         (nconc con (get-neighbors coords)))
+        (t
+         (let ((new (- (apply #'max (mapcar (lambda (coords) (aref map
+                                                                   (car coords)
+                                                                   (cadr coords)))
+                                            (get-neighbors coords))) 1)))
+           (unless (or (= new (aref map x y))
+                       (= 1 (aref obstacles x y))
+                       (= 1 (aref goals x y)))
+             (setf (aref map x y) new)
+             (nconc con (get-neighbors coords)))))))))
+
+(defun path-map%%% (path)
+  (with-slots (active map local-updates global-updates) path
+    (if (cdr global-updates)
+        (loop :for con = (cdr global-updates) :then (cdr con)
+              :do (update-coord path (car con))
+                  (setf (aref active (car con) (cadr con)) 1)
+              :while (cdr con)
+              :finally (setf global-updates con)))
+    (if (cdr local-updates)
+        (loop :for con = (cdr local-updates) :then (cdr con)
+              :do (update-coord path (car con))
+                  (setf (aref active (car con) (cadr con)) 1)
+              :while (cdr con)
+              :finally (setf local-updates con)))))
