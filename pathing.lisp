@@ -1,3 +1,5 @@
+(in-package #:hive-game.pathing)
+
 (defun path-map% (obstacles goals updates)
   (declare (type (array (mod 2)) obstacles goals updates))
   (destructuring-bind (sizex sizey) (array-dimensions obstacles)
@@ -56,9 +58,9 @@
            :type '(array (mod 2) 2))
    (map :initform (make-array *map-size* :element-type '(mod 256))
         :type '(array (mod 255) 2))
-   (local-updates :initform '(:loc)
+   (local-updates :initform (cons :loc nil)
                   :type 'cons)
-   (global-updates :initform '(:glob)
+   (global-updates :initform (cons :glob nil)
                    :type 'cons)))
 
 (defun new-obstacle-p (path coords)
@@ -135,7 +137,9 @@
                                             (get-neighbors coord))) 1)))
            (unless (or (= new (aref map x y))
                        (= 1 (aref obstacles x y))
-                       (= 1 (aref goals x y)))
+                       (= 1 (aref goals x y))
+                       (> 0 new))
+             (print new)
              (setf (aref map x y) new)
              (nconc con (get-neighbors coord)))))))))
 
@@ -164,3 +168,4 @@
     (destructuring-bind (x y) coord
       (setf (aref goals x y) 1)
       (nconc local-updates (list coord)))))
+
