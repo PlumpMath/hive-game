@@ -7,5 +7,7 @@
   :depends-on (#:lispbuilder-sdl #:bordeaux-threads)
   :serial t
   :components ((:file "package")
-               (:file "hive-game")))
+               (:file "hive-game")
+               (:file "pathing")
+               (:file "manager")))
 
