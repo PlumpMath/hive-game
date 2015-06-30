@@ -7,5 +7,6 @@
   :depends-on (#:lispbuilder-sdl)
   :serial t
   :components ((:file "package")
-               (:file "hive-game")))
+               (:file "hive-game")
+               (:file "pathing")))
 
