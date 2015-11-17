@@ -6,8 +6,6 @@
 (defun symb (&rest args)
   (values (intern (apply #'mkstr args))))
 
-
-
 (defun group (source n)
   (if (zerop n) (error "zero length"))
   (labels ((rec (source acc)
@@ -20,8 +18,6 @@
                      (cons source acc))))))
     (if source (rec source nil) nil)))
 
-
-
 (defun flatten (x)
   (labels ((rec (x acc)
              (cond ((null x) acc)
@@ -30,8 +26,6 @@
                         (car x)
                         (rec (cdr x) acc))))))
     (rec x nil)))
-
-
 
 (defun fact (x)
   (if (= x 0)
@@ -43,9 +37,6 @@
      (fact (- n r))
      (fact r)))
 
-
-
-
 (defun g!-symbol-p (s)
   (and (symbolp s)
        (> (length (symbol-name s)) 2)
@@ -53,8 +44,6 @@
                 "G!"
                 :start1 0
                 :end1 2)))
-
-
 
 (defmacro defmacro/g! (name args &rest body)
   (let ((syms (remove-duplicates
@@ -69,8 +58,6 @@
                syms)
          ,@body))))
 
-
-
 (defun o!-symbol-p (s)
   (and (symbolp s)
        (> (length (symbol-name s)) 2)
@@ -83,17 +70,12 @@
   (symb "G!"
         (subseq (symbol-name s) 2)))
 
-
-
 (defmacro defmacro! (name args &rest body)
   (let* ((os (remove-if-not #'o!-symbol-p args))
          (gs (mapcar #'o!-symbol-to-g!-symbol os)))
     `(defmacro/g! ,name ,args
        `(let ,(mapcar #'list (list ,@gs) (list ,@os))
           ,(progn ,@body)))))
-
-
-
 
 ;; Nestable suggestion from Daniel Herring
 
@@ -137,10 +119,6 @@
 (set-dispatch-macro-character
   #\# #\" #'|#"-reader|)
 
-
-
-
-
 ; This version is from Martin Dirichs
 
 (defun |#>-reader| (stream sub-char numarg)
@@ -173,8 +151,6 @@
 (set-dispatch-macro-character
   #\# #\> #'|#>-reader|)
 
-
-
 (defun segment-reader (stream ch n)
   (if (> n 0)
     (let ((chars))
@@ -184,8 +160,6 @@
         (push curr chars))
       (cons (coerce (nreverse chars) 'string)
             (segment-reader stream ch (- n 1))))))
-
-
 
 #+cl-ppcre
 (defmacro! match-mode-ppcre-lambda-form (o!args o!mods)
@@ -203,8 +177,6 @@
        ,(car ,g!args)
        ,',g!str
        ,(cadr ,g!args))))
-
-
 
 #+cl-ppcre
 (defun |#~-reader| (stream sub-char numarg)
@@ -231,12 +203,6 @@
 #+cl-ppcre
 (set-dispatch-macro-character #\# #\~ #'|#~-reader|)
 
-
-
-
-
-
-
 (defmacro! dlambda (&rest ds)
   `(lambda (&rest ,g!args)
      (case (car ,g!args)
@@ -251,21 +217,17 @@
                          `(cdr ,g!args)))))
            ds))))
 
-
-
 ;; Graham's alambda
 (defmacro alambda (parms &body body)
   `(labels ((self ,parms ,@body))
      #'self))
 
-
-
 ;; Graham's aif
 (defmacro aif (test then &optional else)
   `(let ((it ,test))
      (if it ,then ,else)))
-
-
+(defmacro awhen (test &body then)
+  `(aif ,test (progn ,@then)))
 
 (defun |#`-reader| (stream sub-char numarg)
   (declare (ignore sub-char))
@@ -278,15 +240,11 @@
 (set-dispatch-macro-character
   #\# #\` #'|#`-reader|)
 
-
-
 (defmacro alet% (letargs &rest body)
   `(let ((this) ,@letargs)
      (setq this ,@(last body))
      ,@(butlast body)
      this))
-
-
 
 (defmacro alet (letargs &rest body)
   `(let ((this) ,@letargs)
@@ -294,8 +252,6 @@
      ,@(butlast body)
      (lambda (&rest params)
        (apply this params))))
-
-
 
 (defun let-binding-transform (bs)
   (if bs
@@ -307,7 +263,6 @@
             (t
               (error "Bad let bindings")))
       (let-binding-transform (cdr bs)))))
-
 
 (defmacro pandoriclet (letargs &rest body)
   (let ((letargs (cons
@@ -324,8 +279,6 @@
            ,(pandoriclet-set letargs))
          (t (&rest args)
            (apply this args))))))
-
-
 
 (defun pandoriclet-get (letargs)
   `(case sym
@@ -344,8 +297,6 @@
           "Unknown pandoric set: ~a"
           sym))))
 
-
-
 (declaim (inline get-pandoric))
 
 (defun get-pandoric (box sym)
@@ -356,8 +307,6 @@
      (funcall ,box :pandoric-set ,sym ,val)
      ,val))
 
-
-
 (defmacro with-pandoric (syms box &rest body)
   (let ((g!box (gensym "box")))
     `(let ((,g!box ,box))
@@ -367,19 +316,13 @@
                     syms))
          ,@body))))
 
-
-
 (defun pandoric-hotpatch (box new)
   (with-pandoric (this) box
     (setq this new)))
 
-
-
 (defmacro pandoric-recode (vars box new)
   `(with-pandoric (this ,@vars) ,box
      (setq this ,new)))
-
-
 
 (defmacro plambda (largs pargs &rest body)
   (let ((pargs (mapcar #'list pargs)))
@@ -394,8 +337,6 @@
                 (t (&rest args)
                   (apply this args)))))))
 
-
-
 (defvar pandoric-eval-tunnel)
 
 (defmacro pandoric-eval (vars expr)
@@ -404,3 +345,25 @@
      (eval `(with-pandoric
               ,',vars pandoric-eval-tunnel
               ,,expr))))
+
+(defmacro weak-push (object place)
+  `(push (tg:make-weak-pointer object) ))
+
+(defun weak-car (place)
+  (tg:weak-pointer-value (car place)))
+
+(defun weak-cdr (place)
+  (awhen (cdr place)
+    (if (tg:weak-pointer-value (car it))
+        it
+        (setf (cdr place) (weak-cdr it)))))
+
+(defun make-weak-list ()
+  '())
+
+(defun weak-find (item weak-list &key (key #'identity))
+  (aif (weak-car weak-list)
+       (if (eql item (funcall key it))
+           it
+           (weak-find item (weak-cdr weak-list) :key key))
+       (weak-find item (weak-cdr weak-list) :key key)))
